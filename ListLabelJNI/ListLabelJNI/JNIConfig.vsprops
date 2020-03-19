@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="JNIConfig"
+	>
+	<UserMacro
+		Name="JNIPath"
+		Value="c:\Program Files (x86)\Java\jdk1.5.0_19"
+	/>
+</VisualStudioPropertySheet>

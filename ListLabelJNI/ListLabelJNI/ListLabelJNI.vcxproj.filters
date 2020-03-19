@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="_Java">
+      <UniqueIdentifier>{1f77e79d-d011-46b4-a19d-dec18da271f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Java\combit">
+      <UniqueIdentifier>{0fc77455-7191-4242-bd43-ce0579d486e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Java\combit\callbacks">
+      <UniqueIdentifier>{267f34f6-e29f-413a-8868-bfb2a9e429ec}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="callbacks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cmbtlibs\include\cmLL_jni.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cmbtlibs\include\cmLS_jni.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ListLabelJNI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WinHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ListLabelJNI.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="res\ListLabelJNI.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Java\combit\CmbtLL25.java">
+      <Filter>_Java\combit</Filter>
+    </None>
+    <None Include="..\..\Java\combit\CmbtLS25.java">
+      <Filter>_Java\combit</Filter>
+    </None>
+    <None Include="..\..\Java\combit\WinHelper.java">
+      <Filter>_Java\combit</Filter>
+    </None>
+    <None Include="..\..\Java\combit\callbacks\EvaluateCallback.java">
+      <Filter>_Java\combit\callbacks</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="callbacks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cmbtlibs\include\cmLL_jni.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cmbtlibs\include\cmLS_jni.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListLabelJNI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WinHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ListLabelJNI.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\Java\combit\callbacks\Callback.java">
+      <Filter>_Java\combit\callbacks</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Java\combit\callbacks\CallbackInfo.java">
+      <Filter>_Java\combit\callbacks</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Java\combit\callbacks\EnableMenuCallback.java">
+      <Filter>_Java\combit\callbacks</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Java\combit\callbacks\GetViewerButtonStateCallback.java">
+      <Filter>_Java\combit\callbacks</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Java\combit\callbacks\ObjectCallback.java">
+      <Filter>_Java\combit\callbacks</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Java\combit\callbacks\PageCallback.java">
+      <Filter>_Java\combit\callbacks</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Java\combit\callbacks\ProjectCallback.java">
+      <Filter>_Java\combit\callbacks</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Java\combit\callbacks\SaveFileNameCallback.java">
+      <Filter>_Java\combit\callbacks</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Java\combit\callbacks\SelectMenuCallback.java">
+      <Filter>_Java\combit\callbacks</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Java\combit\callbacks\TableFieldCallback.java">
+      <Filter>_Java\combit\callbacks</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Java\combit\callbacks\TableLineCallback.java">
+      <Filter>_Java\combit\callbacks</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Java\combit\callbacks\VarHelpTextCallback.java">
+      <Filter>_Java\combit\callbacks</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Java\combit\callbacks\ViewerBtnClickedCallback.java">
+      <Filter>_Java\combit\callbacks</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>
