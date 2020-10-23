@@ -44,7 +44,7 @@ public:
 	T get(jint hjob)
 	{
 		CSingleLock CL(&m_oCriticalSection, TRUE); // make it thread-safe
-		const_iterator it = lower_bound(hjob);
+		const_iterator it = find(hjob);
 		if (it == end())
 			return T(0);
 		else
@@ -54,7 +54,7 @@ public:
 	T rem(jint hjob)
 	{
 		CSingleLock CL(&m_oCriticalSection, TRUE); // make it thread-safe
-		iterator it = lower_bound(hjob);
+		iterator it = find(hjob);
 		if (it == end())
 		{
 			return T(0);
@@ -70,11 +70,11 @@ public:
 
 
 // Environment registry: any LL method that potentially may have callbacks
-// should register itself (see: Java_combit_CmbtLL25_LlPrint)
+// should register itself (see: Java_combit_CmbtLL26_LlPrint)
 extern Registry<JNIEnv*> jni_env_registry;
 
 // Callback registry: holds callback objects provided by user
-// (see Java_combit_CmbtLL25_LlSetNotificationCallback).
+// (see Java_combit_CmbtLL26_LlSetNotificationCallback).
 extern Registry<jobject> jni_callback_registry;
 
 

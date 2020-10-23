@@ -3,13 +3,13 @@
 package combit.callbacks;
 
 // imports
-import combit.CmbtLL25;
+import combit.CmbtLL26;
 
 /**
 * Description: Assigns a context help string for a variable or field. This string is displayed if the variable/field is selected in the expression wizard.
 *
 * @author Copyright (c) combit Software GmbH
-* @version 25.0
+* @version 26.0
 */
 
 public class VarHelpTextCallback extends CallbackInfo
@@ -28,7 +28,7 @@ public class VarHelpTextCallback extends CallbackInfo
   */
   public VarHelpTextCallback(int hLlJob, String description)
   {
-     super(hLlJob, CmbtLL25.LL_CMND_VARHELPTEXT);
+     super(hLlJob, CmbtLL26.LL_CMND_VARHELPTEXT);
      description_ = description;
   }
 

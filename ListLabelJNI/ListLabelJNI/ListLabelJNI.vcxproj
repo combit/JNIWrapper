@@ -26,27 +26,27 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -77,25 +77,25 @@
     <OutDir>.\..\bin\Deb32\</OutDir>
     <IntDir>.\..\bin\Deb32\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>ListLabel25JNI_x86</TargetName>
+    <TargetName>ListLabel26JNI_x86</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>.\..\bin\Deb64\</OutDir>
     <IntDir>.\..\bin\Deb64\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>ListLabel25JNI_x64</TargetName>
+    <TargetName>ListLabel26JNI_x64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>.\..\bin\Rel32\</OutDir>
     <IntDir>.\..\bin\Rel32\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>ListLabel25JNI_x86</TargetName>
+    <TargetName>ListLabel26JNI_x86</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>.\..\bin\Rel64\</OutDir>
     <IntDir>.\..\bin\Rel64\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>ListLabel25JNI_x64</TargetName>
+    <TargetName>ListLabel26JNI_x64</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -126,9 +126,9 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>cmLL25.lib;cmLS25.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cmLL26.lib;cmLS26.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
-      <OutputFile>$(OutDir)ListLabel25JNI_x86.dll</OutputFile>
+      <OutputFile>$(OutDir)ListLabel26JNI_x86.dll</OutputFile>
       <AdditionalLibraryDirectories>..\cmbtlibs\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\ListLabelJNI.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -174,9 +174,9 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>cxLL25.lib;cxLS25.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cxLL26.lib;cxLS26.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
-      <OutputFile>$(OutDir)ListLabel25JNI_x64.dll</OutputFile>
+      <OutputFile>$(OutDir)ListLabel26JNI_x64.dll</OutputFile>
       <AdditionalLibraryDirectories>..\cmbtlibs\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\ListLabelJNI.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -220,8 +220,8 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>cmLL25.lib;cmLS25.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)ListLabel25JNI_x86.dll</OutputFile>
+      <AdditionalDependencies>cmLL26.lib;cmLS26.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)ListLabel26JNI_x86.dll</OutputFile>
       <AdditionalLibraryDirectories>..\cmbtlibs\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\ListLabelJNI.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -267,8 +267,8 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>cxLL25.lib;cxLS25.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)ListLabel25JNI_x64.dll</OutputFile>
+      <AdditionalDependencies>cxLL26.lib;cxLS26.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)ListLabel26JNI_x64.dll</OutputFile>
       <AdditionalLibraryDirectories>..\cmbtlibs\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\ListLabelJNI.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -299,10 +299,16 @@
     <ClCompile Include="WinHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Java\combit\x64\CmbtLL2664.java" />
+    <None Include="..\..\Java\combit\x64\CmbtLS2664.java" />
+    <None Include="..\..\Java\combit\x64\WinHelper64.java" />
+    <None Include="..\..\Java\combit\x86\CmbtLL2632.java" />
+    <None Include="..\..\Java\combit\x86\CmbtLS2632.java" />
+    <None Include="..\..\Java\combit\x86\WinHelper32.java" />
     <None Include="ListLabelJNI.def" />
     <None Include="res\ListLabelJNI.rc2" />
-    <None Include="..\..\Java\combit\CmbtLL25.java" />
-    <None Include="..\..\Java\combit\CmbtLS25.java" />
+    <None Include="..\..\Java\combit\CmbtLL26.java" />
+    <None Include="..\..\Java\combit\CmbtLS26.java" />
     <None Include="..\..\Java\combit\WinHelper.java" />
     <CustomBuild Include="..\..\Java\combit\callbacks\Callback.java">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

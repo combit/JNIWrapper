@@ -22,6 +22,12 @@
     <Filter Include="_Java\combit\callbacks">
       <UniqueIdentifier>{267f34f6-e29f-413a-8868-bfb2a9e429ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_Java\combit\x64">
+      <UniqueIdentifier>{6371abcb-18a3-4df1-8cce-0400fb0112eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Java\combit\x86">
+      <UniqueIdentifier>{14710852-0877-4eb3-9f1c-bd883966d093}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="callbacks.cpp">
@@ -50,10 +56,10 @@
     <None Include="res\ListLabelJNI.rc2">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\Java\combit\CmbtLL25.java">
+    <None Include="..\..\Java\combit\CmbtLL26.java">
       <Filter>_Java\combit</Filter>
     </None>
-    <None Include="..\..\Java\combit\CmbtLS25.java">
+    <None Include="..\..\Java\combit\CmbtLS26.java">
       <Filter>_Java\combit</Filter>
     </None>
     <None Include="..\..\Java\combit\WinHelper.java">
@@ -61,6 +67,24 @@
     </None>
     <None Include="..\..\Java\combit\callbacks\EvaluateCallback.java">
       <Filter>_Java\combit\callbacks</Filter>
+    </None>
+    <None Include="..\..\Java\combit\x64\CmbtLL2664.java">
+      <Filter>_Java\combit\x64</Filter>
+    </None>
+    <None Include="..\..\Java\combit\x64\CmbtLS2664.java">
+      <Filter>_Java\combit\x64</Filter>
+    </None>
+    <None Include="..\..\Java\combit\x64\WinHelper64.java">
+      <Filter>_Java\combit\x64</Filter>
+    </None>
+    <None Include="..\..\Java\combit\x86\CmbtLL2632.java">
+      <Filter>_Java\combit\x86</Filter>
+    </None>
+    <None Include="..\..\Java\combit\x86\CmbtLS2632.java">
+      <Filter>_Java\combit\x86</Filter>
+    </None>
+    <None Include="..\..\Java\combit\x86\WinHelper32.java">
+      <Filter>_Java\combit\x86</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

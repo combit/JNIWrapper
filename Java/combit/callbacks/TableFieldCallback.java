@@ -3,7 +3,7 @@
 package combit.callbacks;
 
 // imports
-import combit.CmbtLL25;
+import combit.CmbtLL26;
 import java.awt.*; // important for the Rectangle in rcPaint
 
 /**
@@ -16,7 +16,7 @@ import java.awt.*; // important for the Rectangle in rcPaint
 * </p>
 *
 * @author Copyright (c) combit Software GmbH
-* @version 25.0
+* @version 26.0
 */
 
 public class TableFieldCallback extends CallbackInfo
@@ -83,7 +83,7 @@ public class TableFieldCallback extends CallbackInfo
   */
   public TableFieldCallback(int hLlJob, int type, int paintDC, int refDC, Rectangle paint, int lineDef, int index, String content, Rectangle spacing)
   {
-    super(hLlJob, CmbtLL25.LL_CMND_TABLEFIELD);
+    super(hLlJob, CmbtLL26.LL_CMND_TABLEFIELD);
     type_ = type;
     paintDC_ = paintDC;
     refDC_ = refDC;

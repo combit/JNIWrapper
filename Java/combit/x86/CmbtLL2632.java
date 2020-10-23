@@ -1,13 +1,13 @@
 //
 // Java Declaration File
-// constants and function definitions for combit List & Label 25
+// constants and function definitions for combit List & Label 26
 // Copyright (c) combit Software GmbH, Konstanz, Germany
-// Version: 25.000
+// Version: 26.000
 //
 
 package combit.x86;
 
-public final class CmbtLL2532
+public final class CmbtLL2632
   {
 	
   public native int LlJobOpen
@@ -1142,6 +1142,6 @@ public final class CmbtLL2532
 
   static
   {
-	  System.loadLibrary("ListLabel25JNI_x86"); // use List & Label JNI x86
+	  System.loadLibrary("ListLabel26JNI_x86"); // use List & Label JNI x86
   }
 };
