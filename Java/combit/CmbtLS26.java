@@ -56,6 +56,11 @@ public final class CmbtLS26
   public final static int CMBTLANG_THAI        = 39;
   public final static int CMBTLANG_TURKISH     = 40;
   public final static int CMBTLANG_UKRAINIAN   = 41;
+  public final static int CMBTLANG_SERBIAN_LATIN = 42;
+  public final static int CMBTLANG_CHINESE_TRADITIONAL = 48;
+  public final static int CMBTLANG_PORTUGUESE_BRAZILIAN = 129;
+  public final static int CMBTLANG_SPANISH_COLOMBIA = 130;
+  public final static int CMBTLANG_UNSPECIFIED = 255;
 
   // other constant declarations
   public final static int WM_USER			   	 = 1024;
@@ -79,6 +84,7 @@ public final class CmbtLS26
   public final static int LL_ERR_STG_CANNOTCREATEFILE              = -1017; //
   public final static int LL_ERR_STG_UNKNOWN_CONVERTER             = -1018; //
   public final static int LL_ERR_STG_INET_ERROR                    = -1019; //
+  public final static int LL_ERR_STG_NOTFOUND 						= -1020;
   public final static int LL_WRN_STG_UNFAXED_PAGES                 = -1100; //
   public final static int LS_OPTION_HAS16BITPAGES                  = 200; // has job 16 bit pages?
   public final static int LS_OPTION_BOXTYPE                        = 201; // wait meter box type
@@ -93,6 +99,7 @@ public final class CmbtLS26
   public final static int LS_OPTION_HASFORCEDINPUTOBJECTS          = 211; //
   public final static int LS_OPTION_INPUTOBJECTSFINISHED           = 212; //
   public final static int LS_OPTION_HASHYPERLINKS                  = 213; //
+  public final static int LS_OPTION_USED_PRINTERCOUNT 			= 214; // count of printers actually used (compares DEVMODEs etc)
   public final static int LS_OPTION_PAGENUMBER                     = 0; // page number of current page
   public final static int LS_OPTION_COPIES                         = 1; // number of copies (same for all pages at the moment)
   public final static int LS_OPTION_PRN_ORIENTATION                = 2; // orientation (DMORIENT_LANDSCAPE, DMORIENT_PORTRAIT)
@@ -134,6 +141,9 @@ public final class CmbtLS26
   public final static int LS_OPTION_PRTDEVMODE                     = 120; // r/o, DEVMODEW structure, to be used with the LlConvertXxxx API
   public final static int LS_OPTION_USED_PRTDEVICE                 = 121; // r/o, printer name that would actually be used
   public final static int LS_OPTION_USED_PRTDEVMODE                = 122; // r/o, DEVMODEW structure, to be used with the LlConvertXxxx API
+  public final static int LS_OPTION_REGIONNAME 						= 123; // r/o
+  public final static int LS_OPTION_CONBINATIONPRINT_PROJECT = 126; // r/o
+  public final static int LS_OPTION_CONBINATIONPRINT_DESCRIPTION = 127; // r/o
   public final static int LS_PRINTFLAG_FIT                         = 0x00000001; //
   public final static int LS_PRINTFLAG_STACKEDCOPIES               = 0x00000002; // n times page1, n times page2, ... (else n times (page 1...x))
   public final static int LS_PRINTFLAG_TRYPRINTERCOPIES            = 0x00000004; // first try printer copies, then simulated ones...
@@ -143,6 +153,13 @@ public final class CmbtLS26
   public final static int LS_PRINTFLAG_METERMASK                   = 0x00000070; // allows 7 styles of abort boxes...
   public final static int LS_PRINTFLAG_USEDEFPRINTERIFNULL         = 0x00000080; //
   public final static int LS_PRINTFLAG_FAX                         = 0x00000100; //
+  public final static int LS_PRINTFLAG_OVERRIDEPROJECTCOPYCOUNT = 0x00000200;
+  public final static int LS_PRINTFLAG_IGNORE_PROJECT_TRAY = 0x00010000;
+  public final static int LS_PRINTFLAG_IGNORE_PROJECT_DUPLEX = 0x00020000;
+  public final static int LS_PRINTFLAG_IGNORE_PROJECT_COLLATION = 0x00040000;
+  public final static int LS_PRINTFLAG_IGNORE_PROJECT_EXTRADATA = 0x00080000;
+  public final static int LS_PRINTFLAG_IGNORE_JOBMARKER = 0x00100000; 
+  public final static int LS_VIEWERCONTROL_QUERY_CHARWIDTH = 1; //sent in wParam using LsGetViewerControlDefaultMessage() (return: 1 for SBCS, 2 for Unicode)
   public final static int LS_VIEWERCONTROL_CLEAR                   = WM_USER+1; //
   public final static int LS_VIEWERCONTROL_SET_HANDLE_EX           = WM_USER+2; // wParam = HANDLE (NULL for RELEASE), lParam = internal struct handle;
   public final static int LS_VIEWERCONTROL_SET_HANDLE              = WM_USER+3; // wParam = HANDLE (NULL for RELEASE)
@@ -193,6 +210,30 @@ public final class CmbtLS26
   public final static int LS_OPTION_TABBARSTYLE_OFFICEXP           = 1; //
   public final static int LS_OPTION_TABBARSTYLE_OFFICE2003         = 2; //
   public final static int LS_OPTION_DESIGNERPREVIEW                = 25; //
+  public final static int LS_OPTION_MOUSEMODE = 26;
+  public final static int LS_OPTION_MOUSEMODE_MOVE = 1;
+  public final static int LS_OPTION_MOUSEMODE_ZOOM = 2;
+  public final static int LS_OPTION_MOUSEMODE_SELECT = 3;
+  public final static int LS_OPTION_MOUSEMODE_WAIT = 4;
+  public final static int LS_OPTION_ALLOW_RBUTTONUSAGE = 27; // default: true
+  public final static int LS_OPTION_TOOLBGCOLOR = 28;
+  public final static int LS_OPTION_PAGEITEM_SELECTED_ITEM_FRAME_TYPE = 29;
+  public final static int LS_OPTION_PAGEITEM_SELECTED_ITEM_FRAME_TYPE_AREAFILL_SYSTEM = 0; // system theming (fixed colors, fixed rounding)
+  public final static int LS_OPTION_PAGEITEM_SELECTED_ITEM_FRAME_TYPE_AREAFILL_WIN7ALIKE = 1; // like Windows 7 theming (fixed colors, fixed rounding)
+  public final static int LS_OPTION_PAGEITEM_SELECTED_ITEM_FRAME_TYPE_AREAFILL = 2;
+  public final static int LS_OPTION_PAGEITEM_SELECTED_ITEM_FRAME_TYPE_FRAME = 3;
+  public final static int LS_OPTION_PAGEITEM_SELECTED_ITEM_FRAME_HEIGHT_PX = 30; // default: 5
+  public final static int LS_OPTION_PAGEITEM_SELECTED_ITEM_FRAME_WIDTH_PX = 31; // default: 5
+  public final static int LS_OPTION_PAGEITEM_SELECTED_ITEM_FRAME_FILLCOLOR_ARGB = 32;
+  public final static int LS_OPTION_PAGEITEM_SELECTED_ITEM_FRAME_FILLCOLORHIGHLIGHTED_ARGB = 33;
+  public final static int LS_OPTION_PAGEITEM_SELECTED_ITEM_FRAME_FRAMECOLOR_ARGB = 34;
+  public final static int LS_OPTION_PAGEITEM_SELECTED_ITEM_FRAME_FRAMECOLORHIGHLIGHTED_ARGB = 35;
+  public final static int LS_OPTION_PAGEITEM_SELECTED_ITEM_FRAME_ROUNDED_CORNER_PX = 36; // default: 5
+  public final static int LS_OPTION_PAGEITEM_DROPSHADOW = 37;
+  public final static int LS_OPTION_PAGEITEM_DROPSHADOW_NONE = 0;
+  public final static int LS_OPTION_PAGEITEM_DROPSHADOW_ONLY_NONSELECTED = 1;
+  public final static int LS_OPTION_PAGEITEM_PAGENUMBER = 38; // default: true (>=LS24)
+  public final static int LS_OPTION_SKETCHBAR_BGCOLOR = 39; // default: ::GetSysColor(COLOR_WINDOW)
   public final static int LS_VIEWERCONTROL_GET_OPTION              = WM_USER+7; //
   public final static int LS_VIEWERCONTROL_QUERY_ENDSESSION        = WM_USER+8; //
   public final static int LS_VIEWERCONTROL_GET_ZOOM                = WM_USER+9; //
@@ -223,6 +264,14 @@ public final class CmbtLS26
   public final static int LS_VCITEM_THEATERMODE                    = 10; //
   public final static int LS_VCITEM_PREVSTG                        = 11; //
   public final static int LS_VCITEM_NEXTSTG                        = 12; //
+  public final static int LS_VCITEM_SEARCH_DONE = 13;
+  public final static int LS_VCITEM_FIRSTPAGE = 14;
+  public final static int LS_VCITEM_NEXTPAGE = 15;
+  public final static int LS_VCITEM_PREVIOUSPAGE = 16;
+  public final static int LS_VCITEM_LASTPAGE = 17;
+  public final static int LS_VCITEM_MOUSEMODE_MOVE = 18;
+  public final static int LS_VCITEM_MOUSEMODE_ZOOM = 19;
+  public final static int LS_VCITEM_MOUSEMODE_SELECT = 20;
   public final static int LS_VIEWERCONTROL_GET_SEARCHSTATE         = WM_USER+28; // returns TRUE if search in progress
   public final static int LS_VIEWERCONTROL_SEARCH                  = WM_USER+29; // wParam = BOOL(bCaseSens), lParam=SearchText (NULL to stop)
   public final static int LS_VIEWERCONTROL_GET_ENABLED_SEARCHPREV  = WM_USER+30; //
@@ -264,41 +313,87 @@ public final class CmbtLS26
   public final static int LS_VIEWERCONTROL_SET_LLNTFYSINK          = WM_USER+61; // internal use
   public final static int LS_VIEWERCONTROL_OPEN_PREVSTG            = WM_USER+62; //
   public final static int LS_VIEWERCONTROL_OPEN_NEXTSTG            = WM_USER+63; //
-  public final static int LS_VIEWERCONTROL_NTFY_PAGELOADED         = 1; // lParam = page#
-  public final static int LS_VIEWERCONTROL_NTFY_UPDATETOOLBAR      = 2; // called when control does NOT have an own toolbar. lParam = 1 if count of pages did change
-  public final static int LS_VIEWERCONTROL_NTFY_PRINT_START        = 3; // lParam = &scViewerControlPrintData, return 1 to abort print
-  public final static int LS_VIEWERCONTROL_NTFY_PRINT_PAGE         = 4; // lParam = &scViewerControlPrintData, return 1 to abort loop
-  public final static int LS_VIEWERCONTROL_NTFY_PRINT_END          = 5; // lParam = &scViewerControlPrintData
-  public final static int LS_VIEWERCONTROL_NTFY_TOOLBARUPDATE      = 6; // lParam = toolbar handle, called when control has an own toolbar
-  public final static int LS_VIEWERCONTROL_NTFY_EXITBTNPRESSED     = 7; //
-  public final static int LS_VIEWERCONTROL_NTFY_BTNPRESSED         = 8; // lParam = control ID
-  public final static int LS_VIEWERCONTROL_QUEST_BTNSTATE          = 9; // lParam = control ID, -1 to hide, 1 to show, 2 to disable (0 to use default)
-  public final static int LS_VIEWERCONTROL_NTFY_ERROR              = 10; // lParam = &scVCError. Return != 0 to suppress error mbox from control.
-  public final static int LS_VIEWERCONTROL_NTFY_MAIL_SENT          = 11; // lParam = Stream* of EML mail contents
-  public final static int LS_VIEWERCONTROL_NTFY_DOWNLOADFINISHED   = 12; // lParam = 0 (failed), 1 (ok)
-  public final static int LS_VIEWERCONTROL_NTFY_KEYBOARDMESSAGE    = 13; // lParam = const MSG*. Return TRUE if message should be taken out of the input queue
-  public final static int LS_VIEWERCONTROL_NTFY_VIEWCHANGED        = 14; // lParam = const scViewChangedInfo
-  public final static int LS_VIEWERCONTROL_CMND_SAVEDATA           = 15; // return: 0 = OK, -1 = failure, 1 = save in LL file too [event used only if AUTOSAVE is TRUE]
-  public final static int LS_VIEWERCONTROL_NTFY_DATACHANGED        = 16; //
-  public final static int LS_VIEWERCONTROL_NTFY_PROGRESS           = 17; // lParam = percentage (-1=finished). return: 1 if internal progress bar shall be suppressed
+  public final static int LS_VIEWERCONTROL_GET_THEATERSTATE = WM_USER+64; // returns TRUE if in theater mode
+  public final static int LS_VIEWERCONTROL_SET_PROGRESSINFO_INTERNAL = WM_USER+65;
+  public final static int LS_VIEWERCONTROL_GET_THIS = WM_USER+67; // internal
+  public final static int LS_VIEWERCONTROL_SEARCH_LINK = WM_USER+68; // wParam = LS_VCITEM_GOTO_LINK_ enum, lParam=SearchText in control's charset flavour (ANSI/UNICODE) (NULL or empty to stop)
+  public final static int LS_SEARCH_LINK_HYPERLINK = 0;
+  public final static int LS_VIEWERCONTROL_QUERY_DRILLDOWN_ACTIVE = WM_USER+69; // count of active drilldown jobs of visible storage - negative if error
+  public final static int LS_VIEWERCONTROL_CMND_ABORT_DRILLDOWN_JOBS = WM_USER+70;
+  public final static int LS_VIEWERCONTROL_STORAGE_CONTAINS_EXPORTFILE = WM_USER+71; // lParam = (LPCTSTR)format, returns 1 if yes, 0 if no, negative if error
+  public final static int LS_VIEWERCONTROL_SELECTION_COPY = WM_USER+72; // lParam == &scLSSelectionOptions (null, or _pvText == null -> to clipboard)
+  public final static int LS_VIEWERCONTROL_GET_HAS_SELECTION = WM_USER+73;
+  public final static int LS_VIEWERCONTROL_SELECTION_SELECT = WM_USER+74; // wParam = page index#, -1 for all; lParam = 0 (select only this), 1 (add to selection)
+  public final static int LS_VIEWERCONTROL_NTFY_PAGELOADED = 1; // lParam = page#
+  public final static int LS_VIEWERCONTROL_NTFY_UPDATETOOLBAR = 2; // called when control does NOT have an own toolbar. lParam points to an ILSViewerToolbarInfoProxy interface
+  public final static int LS_VIEWERCONTROL_NTFY_PRINT_START = 3; // lParam = &scViewerControlPrintData, return 1 to abort print
+  public final static int LS_VIEWERCONTROL_NTFY_PRINT_PAGE = 4; // lParam = &scViewerControlPrintData, return 1 to abort loop
+  public final static int LS_VIEWERCONTROL_NTFY_PRINT_END = 5; // lParam = &scViewerControlPrintData
+  public final static int LS_VIEWERCONTROL_NTFY_TOOLBARUPDATE = 6; // lParam = toolbar handle, called when control has an own toolbar
+  public final static int LS_VIEWERCONTROL_NTFY_EXITBTNPRESSED = 7;
+  public final static int LS_VIEWERCONTROL_NTFY_BTNPRESSED = 8; // lParam = control ID
+  public final static int LS_VIEWERCONTROL_QUEST_BTNSTATE = 9; // lParam = control ID, -1 to hide, 1 to show, 2 to disable (0 to use default)
+  public final static int LS_VIEWERCONTROL_NTFY_ERROR = 10; // lParam = &scVCError. Return != 0 to suppress error mbox from control.
+  public final static int LS_VIEWERCONTROL_NTFY_MAIL_SENT = 11; // lParam = Stream* of EML mail contents
+  public final static int LS_VIEWERCONTROL_NTFY_DOWNLOADFINISHED = 12; // lParam = 0 (failed), 1 (ok)
+  public final static int LS_VIEWERCONTROL_NTFY_KEYBOARDMESSAGE = 13; // lParam = const MSG*. Return TRUE if message should be taken out of the input queue
+  public final static int LS_VIEWERCONTROL_NTFY_VIEWCHANGED = 14;
+  public final static int LS_VIEWERCONTROL_CMND_SAVEDATA = 15; // return: 0 = OK, -1 = failure, 1 = save in LL file too [event used only if AUTOSAVE is TRUE]
+  public final static int LS_VIEWERCONTROL_NTFY_DATACHANGED = 16;
+  public final static int LS_VIEWERCONTROL_NTFY_PROGRESS = 17; // lParam = percentage (-1=finished). return: 1 if internal progress bar shall be suppressed
   public final static int LS_VIEWERCONTROL_QUEST_SUPPORTCONTINUATION = 18; // return: 1 if continuation button () should be displayed
-  public final static int LS_VIEWERCONTROL_CMND_CONTINUE           = 19; // continue report!
-  public final static int LS_VIEWERCONTROL_NTFY_VIEWERDRILLDOWN    = 20; // lParam:
-  public final static int LS_VIEWERCONTROL_QUEST_DRILLDOWNDENIED   = 21; // 0 to allow (default), 1 to deny (if provider cannot handle multiple threads or so)
-  public final static int LS_MAILCONFIG_GLOBAL                     = 0x0001; //
-  public final static int LS_MAILCONFIG_USER                       = 0x0002; //
-  public final static int LS_MAILCONFIG_PROVIDER                   = 0x0004; //
-  public final static int LS_DIO_CHECKBOX                          = 0; //
-  public final static int LS_DIO_PUSHBUTTON                        = 1; //
-  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_NONE          = 0x0000; //
-  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_NEW_WINDOW    = 0x0001; //
-  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_NAVIGATION    = 0x0002; //
-  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_JAVA          = 0x0004; //
-  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_SCRIPTING     = 0x0008; //
-  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_ACTIVEX       = 0x0010; //
-  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_ONLINE        = 0x0020; //
-  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_BROWSERCONTEXTMENU = 0x0040; //
-  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_PRINT         = 0x0080; //
+  public final static int LS_VIEWERCONTROL_CMND_CONTINUE = 19; // continue report!
+  public final static int LS_VIEWERCONTROL_NTFY_VIEWERDRILLDOWN = 20;
+  public final static int LS_VIEWERCONTROL_QUEST_DRILLDOWNSUPPORT = 21; // 1 to allow (default), 0 to deny (if provider cannot handle multiple threads or so)
+  public final static int LS_VIEWERCONTROL_QUEST_HOST_WANTS_KEY = 22; // lParam: MSG-structure (message = WM_KEYDOWN, WM_KEYUP, WM_SYSKEYDOWN, WM_SYSKEYUP, WM_CHAR), wParam = key code, lParam = snoop (0), action (1)
+  public final static int LS_VIEWERCONTROL_INTERNALSYNC = 23; // reserved, internal
+  public final static int LS_VIEWERCONTROL_NTFY_RP_REALDATAJOB = 24;
+  public final static int LS_VIEWERCONTROL_QUEST_RP_REALDATAJOBSUPPORT = 25; // 1 to allow (default), 0 to deny (if provider cannot handle multiple threads or so)
+  public final static int LS_VIEWERCONTROL_QUEST_PROJECTFILENAME = 26; // reserved, internal
+  public final static int LS_VIEWERCONTROL_QUEST_ORGPROJECTFILENAME = 27; // reserved, internal
+  public final static int LS_VIEWERCONTROL_NTFY_EXPANDABLEREGIONSJOB = 28;
+  public final static int LS_VIEWERCONTROL_NTFY_INTERACTIVESORTINGJOB = 30;
+  public final static int LS_VIEWERCONTROL_QUEST_ANYREALDATAJOBSUPPORT = 32; // 1 to allow (default), 0 to deny (if provider cannot handle multiple threads or so)
+  public final static int LS_VIEWERCONTROL_NTFY_HYPERLINK = 33; // 1 to tell viewer it has been processed
+  public final static int LS_VIEWERCONTROL_NTFY_ZOOMCHANGED = 34; // triggered whenever the zoom factor was updated
+  public final static int LS_VIEWERCONTROL_NTFY_ACTIONRESULT = 35; // lParam = &scLSNtfyActionResult
+  public final static int LS_VIEWERCONTROL_NTFY_RESETSEARCHSTATE = 36; //reserved, internal
+  public final static int LS_VIEWERCONTROL_NTFY_SELECTION_CHANGED = 37;
+  public final static int LS_VIEWERCONTROL_OPEN_STORAGE_IN_NEW_WINDOW = 32; // lParam = &scOpenStorageInNewWindow. Reply with 1 if done.
+  public final static int LL_NTFY_VIEWERDRILLDOWN = 67; // defined in LL !!! reserved constant!
+  public final static int LS_MAILCONFIG_GLOBAL = 0x0001;
+  public final static int LS_MAILCONFIG_USER = 0x0002;
+  public final static int LS_MAILCONFIG_PROVIDER = 0x0004;
+  public final static int LS_DIO_CHECKBOX = 0;
+  public final static int LS_DIO_PUSHBUTTON = 1;
+  public final static int LS_DIO_FLAG_READONLY = 0x0001;
+  public final static int LS_GOTFG_FLAG_REORDER = 0x00000001;
+  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_NONE = 0x0000;
+  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_NEW_WINDOW = 0x0001;
+  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_NAVIGATION = 0x0002;
+  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_JAVA = 0x0004;
+  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_SCRIPTING = 0x0008;
+  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_ACTIVEX = 0x0010;
+  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_ONLINE = 0x0020;
+  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_BROWSERCONTEXTMENU = 0x0040;
+  public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_PRINT = 0x0080;
+  public final static int LS_CONVERT_IS_TO_JPEGFILE = 0;
+  public final static int LS_CONVERT_IS_TO_DIBFILE  = 1;
+  public final static int LS_CONVERT_IS_TO_EMRSTRETCHDIBITS = 2;
+  public final static int LS_CONVERT_IS_TO_PNGFILE = 3;
+  public final static int LS_CONVERT_IS_TO_PNG_OR_JPEG_FILE = 4;
+  public final static int LS_CONVERT_IS_TO_EMRSTRETCHDIBITS_OPTIMIZED = 5;
+  public final static int LS_CONVERT_IS_TYPEMASK = 0x0000000f;
+  public final static int LS_CONVERT_IS_NOPERPIXELALPHA = 0x00000010;
+  public final static int LS_CONVERT_IS_SRCCOPY = 0x00000020;
+  public final static int LS_CONVERT_IS_NO_JPEGCONVERSION = 0x00000040; // for PDF Conversion (PDF export handles these itself)
+  public final static int LS_STGPRINTEX_OPTION_FORCE_SIMPLEX = 0x00000001;
+  public final static int LS_STGPRINTEX_OPTION_FORCE_DUPLEX_VERT = 0x00000002;
+  public final static int LS_STGPRINTEX_OPTION_FORCE_DUPLEX_HORZ = 0x00000003;
+  public final static int LS_STGPRINTEX_OPTIONMASK_DUPLEX = 0x00000003;
+  public final static int LS_STGPRINTEX_OPTION_FORCE_PHYSPAGE = 0x00000004;
+  public final static int LS_STGPRINTEX_OPTION_FORCE_LOGPAGE = 0x00000008;
+  public final static int LS_STGPRINTEX_OPTIONMASK_PAGEAREA = 0x0000000C;
   
   private CmbtLS2632 LS26_32 = null;
   private CmbtLS2664 LS26_64 = null;

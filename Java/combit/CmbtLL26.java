@@ -56,6 +56,11 @@ public final class CmbtLL26
   public final static int CMBTLANG_THAI        = 39;
   public final static int CMBTLANG_TURKISH     = 40;
   public final static int CMBTLANG_UKRAINIAN   = 41;
+  public final static int CMBTLANG_SERBIAN_LATIN = 42;
+  public final static int CMBTLANG_CHINESE_TRADITIONAL = 48;
+  public final static int CMBTLANG_PORTUGUESE_BRAZILIAN = 129;
+  public final static int CMBTLANG_SPANISH_COLOMBIA = 130;
+  public final static int CMBTLANG_UNSPECIFIED = 255;
 
   // other constant declarations
   public final static int WM_USER			   	 = 1024;
@@ -90,30 +95,33 @@ public final class CmbtLL26
   public final static int LL_DESIGNERPRINTTHREAD_STATE_STOPPED     = 0; //
   public final static int LL_DESIGNERPRINTTHREAD_STATE_SUSPENDED   = 1; //
   public final static int LL_DESIGNERPRINTTHREAD_STATE_RUNNING     = 2; //
+  public final static int LL_INVOKEACTION_FLAG_SAVE_NO_PROJECTDESCRIPTIONCHECK = 0x0001; // in HIWORD in LlDesignerInvokeAction
   public final static int LL_DRILLDOWN_START                       = 1; //
   public final static int LL_DRILLDOWN_FINALIZE                    = 2; //
+  public final static int LL_PRINTJOB_FINALIZE = 3;
   public final static int LL_JOBOPENFLAG_NOLLXPRELOAD              = 0x00001000; //
   public final static int LL_JOBOPENFLAG_ONLYEXACTLANGUAGE         = 0x00002000; // do not look for '@@' LNG file
   public final static int LL_DEBUG_CMBTLL                          = 0x0001; // debug CMBTLLnn.DLL
   public final static int LL_DEBUG_CMBTDWG                         = 0x0002; // debug CMBTDWnn.DLL
-  public final static int LL_DEBUG_CMBTLS                          = 0x0080; // debug CMBTLSnn.DLL
   public final static int LL_DEBUG_CMBTLL_NOCALLBACKS              = 0x0004; //
   public final static int LL_DEBUG_CMBTLL_NOSTORAGE                = 0x0008; //
   public final static int LL_DEBUG_CMBTLL_NOWAITDLG                = 0x0010; //
   public final static int LL_DEBUG_CMBTLL_NOSYSINFO                = 0x0020; //
   public final static int LL_DEBUG_CMBTLL_LOGTOFILE                = 0x0040; //
-  public final static int LL_VERSION_MAJOR                         = 1; // direct return of major version (f.ex. 1)
-  public final static int LL_VERSION_MINOR                         = 2; // direct return of minor version (f.ex. 13)
-  public final static int LL_VERSION_SERNO_LO                      = 3; // LOWORD(serial number)
-  public final static int LL_VERSION_SERNO_HI                      = 4; // HIWORD(serial number)
-  public final static int LL_VERSION_OEMNO                         = 5; // OEM number
-  public final static int LL_VERSION_RESMAJOR                      = 11; // internal, for LlRCGetVersion: resource version
-  public final static int LL_VERSION_RESMINOR                      = 12; // internal, for LlRCGetVersion: resource version
-  public final static int LL_VERSION_RESLANGUAGE                   = 14; // internal, for LlRCGetVersion: resource language
+  public final static int LL_DEBUG_CMBTLS                          = 0x0080; // debug CMBTLSnn.DLL
+  public final static int LL_DEBUG_PRNINFO							= 0x0100; // issue basic printer operations
+  public final static int LL_DEBUG_CMBTLL_OBJECTSTATES = 0x0400; // issue object states after drawing = realdata printing only)
+  public final static int LL_DEBUG_NOPRIVACYDATA = 0x0800; // suppress field contents = useful if they might contain private data)
+  public final static int LL_DEBUG_FORCE_SYSINFO = 0x1000; // issue sysinfo even though it has been issued once already
+  public final static int LL_DEBUG_EVAL2HOSTEXPRESSION = 0x2000; // debug Eval2HostExpr processing
+  public final static int LL_DEBUG_EXTENDED_DEBWINFLAGS = 0x80000000; // internal usage
+  public final static int LL_VERSION_MAJOR                         = 1; // direct return of major version = f.ex. 1)
+  public final static int LL_VERSION_MINOR                         = 2; // direct return of minor version = f.ex. 13)
   public final static int LL_CMND_DRAW_USEROBJ                     = 0; // callback for LL_DRAWING_USEROBJ
   public final static int LL_CMND_EDIT_USEROBJ                     = 1; // callback for LL_DRAWING_USEROBJ_DLG
   public final static int LL_CMND_GETSIZE_USEROBJ                  = 2; //
   public final static int LL_CMND_GETSIZE_USEROBJ_SCM              = 3; //
+  public final static int LL_CMND_GETSIZE_USEROBJ_PIXEL = 4; 
   public final static int LL_CMND_TABLELINE                        = 10; // callback for LL_CB_TABLELINE
   public final static int LL_TABLE_LINE_HEADER                     = 0; //
   public final static int LL_TABLE_LINE_BODY                       = 1; //
@@ -142,7 +150,7 @@ public final class CmbtLL26
   public final static int LL_CMND_HELP                             = 30; // lParam: HIWORD=HELP_xxx, LOWORD=Context #
   public final static int LL_CMND_ENABLEMENU                       = 31; // undoc: lParam/LOWORD(lParam) = HMENU
   public final static int LL_CMND_MODIFYMENU                       = 32; // undoc: lParam/LOWORD(lParam) = HMENU
-  public final static int LL_CMND_SELECTMENU                       = 33; // undoc: lParam=ID (return TRUE if processed)
+  public final static int LL_CMND_SELECTMENU                       = 33; // undoc: lParam=ID = return TRUE if processed)
   public final static int LL_CMND_GETVIEWERBUTTONSTATE             = 34; // HIWORD(lParam)=ID, LOWORD(lParam)=state
   public final static int LL_CMND_VARHELPTEXT                      = 35; // lParam=LPSTR(Name), returns LPSTR(Helptext)
   public final static int LL_INFO_METER                            = 37; // lParam = addr(scLlMeterInfo)
@@ -152,7 +160,7 @@ public final class CmbtLL26
   public final static int LL_METERJOB_PASS2                        = 4; //
   public final static int LL_METERJOB_PASS3                        = 5; //
   public final static int LL_NTFY_FAILSFILTER                      = 1000; // data set fails filter expression
-  public final static int LL_NTFY_VIEWERBTNCLICKED                 = 38; // user presses a preview button (action will be done). lParam=ID. result: 0=allowed, 1=not allowed
+  public final static int LL_NTFY_VIEWERBTNCLICKED                 = 38; // user presses a preview button = action will be done). lParam=ID. result: 0=allowed, 1=not allowed
   public final static int LL_CMND_DLGEXPR_VARBTN                   = 39; // lParam: @scLlDlgExprVarExt, return: IDOK for ok
   public final static int LL_CMND_HOSTPRINTER                      = 40; // lParam: scLlPrinter
   public final static int LL_PRN_CREATE_DC                         = 1; // scLlPrinter._nCmd values
@@ -176,7 +184,7 @@ public final class CmbtLL26
   public final static int LL_CMND_CHANGE_DCPROPERTIES_DOC          = 53; // lParam = addr(scLlPrinter), _hDC is valid
   public final static int LL_CMND_CHANGE_DCPROPERTIES_PAGE         = 54; // lParam = addr(scLlPrinter), _hDC is valid
   public final static int LL_CMND_CHANGE_DCPROPERTIES_PREPAGE      = 56; // lParam = addr(scLlPrinter), _hDC and _pszBuffer( DEVMODE* ) are valid
-  public final static int LL_CMND_MODIFY_METAFILE                  = 57; // lParam = handle of metafile (32 bit: enh. metafile)
+  public final static int LL_CMND_MODIFY_METAFILE                  = 57; // lParam = handle of metafile = 32 bit: enh. metafile)
   public final static int LL_INFO_PRINTJOBSUPERVISION              = 58; // lParam = addr(scLlPrintJobInfo)
   public final static int LL_CMND_DELAYEDVALUE                     = 59; // lParam = addr(scLlDelayedValue)
   public final static int LL_CMND_SUPPLY_USERDATA                  = 60; // lParam = addr(scLlProjectUserData)
@@ -188,12 +196,55 @@ public final class CmbtLL26
   public final static int LL_NTFY_DESIGNERPRINTJOB                 = 66; //
   public final static int LL_NTFY_VIEWERDRILLDOWN                  = 67; //
   public final static int LL_NTFY_QUEST_DRILLDOWNDENIED            = 68; // see LS_VIEWERCONTROL_QUEST_DRILLDOWNDENIED
+  public final static int LL_QUERY_DRILLDOWN_ADDITIONAL_BASETABLES_FOR_VARIABLES = 69; // lParam = scLlDDFilterInfo*
+  public final static int LL_QUERY_DRILLDOWN_ADDITIONAL_TABLES = 70; // lParam = scLlDDFilterInfo*
+  public final static int LL_NTFY_DRILLDOWN_DESIGNERACTION = 71; // lParam = scLlDDDesignerActionW*
+  public final static int LL_NTFY_INPLACEDESIGNER_START = 72;
+  public final static int LL_NTFY_INPLACEDESIGNER_END = 73;
+  public final static int LL_QUERY_OWN_MENU = 74; // lParam = HMENU -> return 1 if uses own menu
+  public final static int LL_CMND_UPDATE_MENU = 75;
+  public final static int LL_NTFY_FRAMEHANDLE = 76; // lParam -> handle of layout window = "L&LFrame")
+  public final static int LL_QUERY_DEFAULTPROJECTSTREAM = 77; // lParam -> IStream**. Return NONZERO when stream contains data
+  public final static int LL_NTFY_QUEST_RP_REALDATAJOBDENIED = 78;
+  public final static int LL_NTFY_QUEST_EXPANDABLEREGIONSJOBDENIED = 79;
+  public final static int LL_NTFY_QUEST_INTERACTIVESORTINGJOBDENIED = 80;
+  public final static int LL_QUERY_EXPR2HOSTEXPRESSION = 81; // lParam = LLEXPR2HOSTEXPR*, return 0 for FAIL, 1 for OPTIMAL, 2 for INEXACT
+  public final static int LL_NTFY_REPORTPARAMETERS_COLLECTED = 82; // lParam = &scNtfyReportparametersCollected, return LL_ERR_USER_ABORTED to abort, 0x01 to get RP stream, 0x02 to get RP contents, 0 to leave processing
+  public final static int LL_NTFY_EXPORTERPAGEFINISHED = 83; // lParam = &scNtfyExporterPageFinished
+  public final static int LL_NTFY_HYPERLINK = 84; // lParam = &scNtfyHyperlink
+  public final static int LL_NTFY_SAVEREPORTSTATEITEM = 85; // lParam = &scLLNtfyReportStateItem
+  public final static int LL_NTFY_RESTOREREPORTSTATEITEM = 86; // lParam = &scLLNtfyReportStateItem
+  public final static int LL_NTFY_PROGRESS = 87; // lParam -> percentage of current progress
+  public final static int LL_NTFY_TRIGGEREDJOBINUITHREAD = 88; // lParam -> user data
+  public final static int LL_NTFY_PLEASE_TRANSLATE = 89; // lParam=BSTR*
+  public final static int LL_NTFY_PREVIEW_PRINT_START = 99; // lParam = &scViewerControlPrintData, return 1 to abort print
+  public final static int LL_NTFY_PREVIEW_PRINT_PAGE = 100; // lParam = &scViewerControlPrintData, return 1 to abort loop
+  public final static int LL_NTFY_PREVIEW_PRINT_END = 101; // lParam = &scViewerControlPrintData
+  public final static int LL_NTFY_EMF_PAGE = 102; // lParam = &scLLNtfyEMF
+  public final static int LL_QUERY_FILENAME_FOR_EXPORTJOB = 103; // lParam = VARIANT* = in: old filename, out:new filename)
+  public final static int LL_QUERY_OBJECT_NOT_SUPPORTED = 104; // lParam = &scLLQueryObjectAllowed
+  public final static int LL_QUERY_REPLACE_FILESYSTEMITEM = 105; // lParam = &scLLQueryFilenameReplacement -> return 1 if replaced
+  public final static int LL_QUERY_HOSTIMPORT = 106; // lParam = &scLlNtfyHostImport -> return 1 if LL's internal routine is superseded
+  public final static int LL_NTFY_PREVIEW_ACTIONRESULT = 107; // see LS_VIEWERCONTROL_NTFY_ACTIONRESULT - for RealDataPreview
+  public final static int LL_NTFY_DATA_LOSS = 108; // lParam = LL_NTFYDATALOSS_XXX
+  public final static int LL_NTFYDATALOSS_RTFDETECTION_NOT_ENOUGH_SPACE = 1;
+  public final static int LL_NTFY_REPORTPARAMETERS_COLLECTION_FINISHED = 109; // lParam and result: see LL_NTFY_REPORTPARAMETERS_COLLECTED
+  public final static int LL_NTFY_EXPRERROR_EX = 110; // lParam = @scLlNtfyExprErrorEx
+  public final static int LL_NTFY_EXPORTERPAGECOUNT = 111; // lParam = &scLLNtfyExporterPageCount
+  public final static int LL_NTFY_FIND_AND_REPLACE = 112; // lParam = &scLLNtfyFindAndReplace, returns: 0 to replace, 1 to skip, 2 to cancel search globally
+  public final static int LL_NTFY_PROJECTLOAD_EX = 113; // lParam = &scLLNtfyProjectLoadEx, called before a project is loaded. SetErrortext to abort loading.
+  public final static int LL_NTFY_JOBWILLCHANGE = 114; // internal
+  public final static int LL_NTFY_COMBINATIONPRINTSTEP = 115; // lParam = &scLlCombinationPrintStep, return 0 on OK, error code on error
   public final static int OBJECT_LABEL                             = 1; // old - please do not use any more
   public final static int OBJECT_LIST                              = 2; //
   public final static int OBJECT_CARD                              = 3; //
   public final static int LL_PROJECT_LABEL                         = 1; // new names...
   public final static int LL_PROJECT_LIST                          = 2; //
   public final static int LL_PROJECT_CARD                          = 3; //
+  public final static int LL_PROJECT_TOC                 			= 4;
+  public final static int LL_PROJECT_IDX                 			= 5;
+  public final static int LL_PROJECT_GTC                 			= 6;
+  public final static int LL_PROJECT_LAST 							= 6;
   public final static int LL_PROJECT_MASK                          = 0x000f; //
   public final static int LL_OBJ_MARKER                            = 0; // internal use only
   public final static int LL_OBJ_TEXT                              = 1; // the following are used in the object callback
@@ -208,20 +259,33 @@ public final class CmbtLL26
   public final static int LL_OBJ_RTF                               = 10; //
   public final static int LL_OBJ_LLX                               = 11; //
   public final static int LL_OBJ_INPUT                             = 12; //
-  public final static int LL_OBJ_LAST                              = 12; // last object type (for loops as upper bound) - if this is changed, change the contants in object.c too!
+  public final static int LL_OBJ_LAST                              = 12; // last object type = for loops as upper bound) - if this is changed, change the contants in object.c too!
+  public final static int LL_OBJ_REPORTCONTAINER 		= 253; // for exporter
   public final static int LL_OBJ_PROJECT                           = 254; // for exporter
   public final static int LL_OBJ_PAGE                              = 255; // for exporter
   public final static int LL_DELAYEDVALUE                          = 0x80000000; //
   public final static int LL_TYPEMASK                              = 0x7ff00000; //
-  public final static int LL_TABLE_FOOTERFIELD                     = 0x00008000; // 'or'ed for footline-only fields // reserved also for Variables (see "$$xx$$")!!!!
+  public final static int LL_TABLE_FIELDTYPEMASK = 0x0000f800;// internal use
+  public final static int LL_SUBTYPEMASK = 0x000003ff;
+  public final static int LL_TYPEFLAGS = 0x8000f800;
+  public final static int LL_HANDLESTREAM_TYPE_MASK = 0x00000400;
+  public final static int LL_HANDLESTREAM_BLOB = 0x00000000; // binary data = images only)
+  public final static int LL_HANDLESTREAM_UTF8 = 0x00000000; // UTF8-encoded string = non-images only)
+  public final static int LL_HANDLESTREAM_UTF16 = 0x00000400; // UTF16-encoded string = non-images only)
+  public final static int LL_TABLE_FOOTERFIELD                     = 0x00008000; // 'or'ed for footline-only fields // reserved also for Variables = see "$$xx$$")!!!!
   public final static int LL_TABLE_GROUPFIELD                      = 0x00004000; // 'or'ed for groupline-only fields
   public final static int LL_TABLE_HEADERFIELD                     = 0x00002000; // 'or'ed for headline-only fields
   public final static int LL_TABLE_BODYFIELD                       = 0x00001000; // 'or'ed for headline-only fields
   public final static int LL_TABLE_GROUPFOOTERFIELD                = 0x00000800; // 'or'ed for group-footer-line-only fields
-  public final static int LL_TABLE_FIELDTYPEMASK                   = 0x0000f800; // internal use
   public final static int LL_BARCODE                               = 0x40000000; //
+  public final static int LL_BARCODE_METHODMASK = 0x000000ff;
+  public final static int LL_BARCODE_WITHTEXT = 0x00000100;
+  public final static int LL_BARCODE_WITHOUTTEXT = 0x00000200;
+  public final static int LL_BARCODE_TEXTDONTCARE = 0x00000000;
   public final static int LL_BARCODE_EAN13                         = 0x40000000; //
   public final static int LL_BARCODE_EAN8                          = 0x40000001; //
+  public final static int LL_BARCODE_GTIN13 = 0x40000000;
+  public final static int LL_BARCODE_GTIN8 = 0x40000001;
   public final static int LL_BARCODE_UPCA                          = 0x40000002; //
   public final static int LL_BARCODE_UPCE                          = 0x40000003; //
   public final static int LL_BARCODE_3OF9                          = 0x40000004; //
@@ -233,6 +297,7 @@ public final class CmbtLL26
   public final static int LL_BARCODE_FIM                           = 0x4000000A; //
   public final static int LL_BARCODE_CODABAR                       = 0x4000000B; //
   public final static int LL_BARCODE_EAN128                        = 0x4000000C; //
+  public final static int LL_BARCODE_GS1_128 						= 0x4000000C;
   public final static int LL_BARCODE_CODE128                       = 0x4000000D; //
   public final static int LL_BARCODE_DP_LEITCODE                   = 0x4000000E; //
   public final static int LL_BARCODE_DP_IDENTCODE                  = 0x4000000F; //
@@ -245,6 +310,7 @@ public final class CmbtLL26
   public final static int LL_BARCODE_MSI_11_10                     = 0x40000016; //
   public final static int LL_BARCODE_MSI_PLAIN                     = 0x40000017; //
   public final static int LL_BARCODE_EAN14                         = 0x40000018; //
+  public final static int LL_BARCODE_GTIN14						 = 0x40000018;
   public final static int LL_BARCODE_UCC14                         = 0x40000019; //
   public final static int LL_BARCODE_CODE39                        = 0x4000001A; //
   public final static int LL_BARCODE_CODE39_CRC43                  = 0x4000001B; //
@@ -255,6 +321,17 @@ public final class CmbtLL26
   public final static int LL_BARCODE_RM4SCC_CRC                    = 0x40000020; //
   public final static int LL_BARCODE_SSCC                          = 0x40000021; //
   public final static int LL_BARCODE_ISBN                          = 0x40000022; //
+  public final static int LL_BARCODE_GS1 = 0x40000023;
+  public final static int LL_BARCODE_GS1_TRUNCATED = 0x40000024;
+  public final static int LL_BARCODE_GS1_STACKED = 0x40000025;
+  public final static int LL_BARCODE_GS1_STACKED_OMNI = 0x40000026;
+  public final static int LL_BARCODE_GS1_LIMITED = 0x40000027;
+  public final static int LL_BARCODE_GS1_EXPANDED = 0x40000028;
+  public final static int LL_BARCODE_INTELLIGENT_MAIL = 0x40000029;
+  public final static int LL_BARCODE_PZN8 = 0x4000002A;
+  public final static int LL_BARCODE_CODE128_FULL = 0x4000002B;
+  public final static int LL_BARCODE_EAN128_FULL = 0x4000002C;
+  public final static int LL_BARCODE_CODABLOCK_F = 0x4000002D;
   public final static int LL_BARCODE_LLXSTART                      = 0x40000040; //
   public final static int LL_BARCODE_PDF417                        = 0x40000040; //
   public final static int LL_BARCODE_MAXICODE                      = 0x40000041; //
@@ -262,10 +339,8 @@ public final class CmbtLL26
   public final static int LL_BARCODE_DATAMATRIX                    = 0x40000044; //
   public final static int LL_BARCODE_AZTEC                         = 0x40000045; //
   public final static int LL_BARCODE_QRCODE                        = 0x40000046; //
-  public final static int LL_BARCODE_METHODMASK                    = 0x000000ff; //
-  public final static int LL_BARCODE_WITHTEXT                      = 0x00000100; //
-  public final static int LL_BARCODE_WITHOUTTEXT                   = 0x00000200; //
-  public final static int LL_BARCODE_TEXTDONTCARE                  = 0x00000000; //
+  public final static int LL_BARCODE_DATAMATRIX_PREMIUMADRESS = 0x40000047;
+  public final static int LL_BARCODE_MICROPDF417 = 0x40000048;
   public final static int LL_DRAWING                               = 0x20000000; //
   public final static int LL_DRAWING_HMETA                         = 0x20000001; //
   public final static int LL_DRAWING_USEROBJ                       = 0x20000002; //
@@ -294,17 +369,22 @@ public final class CmbtLL26
   public final static int LL_DATE_MDY                              = 0x04000005; // <m><sep><d><sep><yyyy>. Year MUST be 4 digits!
   public final static int LL_DATE_YMD                              = 0x04000006; // <yyyy><sep><m><sep><d>. Year MUST be 4 digits!
   public final static int LL_DATE_YYYYMMDD                         = 0x04000007; // <yyyymmdd>
-  public final static int LL_DATE_LOCALIZED                        = 0x04000008; // localized (automatic VariantConversion)
+  public final static int LL_DATE_LOCALIZED                        = 0x04000008; // localized = automatic VariantConversion)
   public final static int LL_DATE_JULIAN                           = 0x04000009; // variant 'date' is a julian date
-  public final static int LL_DATE_CLARION                          = 0x0400000a; // days since 1800-12-28 (what's so special about that day?)
+  public final static int LL_DATE_CLARION                          = 0x0400000a; // days since 1800-12-28 = what's so special about that day?)
   public final static int LL_DATE_YMD_AUTO                         = 0x04000010; // wither DMY, MDY or YMD, automatically detected
   public final static int LL_DATE_METHODMASK                       = 0x000000ff; //
   public final static int LL_BOOLEAN                               = 0x02000000; //
   public final static int LL_RTF                                   = 0x01000000; //
   public final static int LL_HTML                                  = 0x00800000; //
+  public final static int LL_PDF 										= 0x00400000;
+  public final static int LL_INPUTOBJECT 						= 0x00200000; // internal use only
   public final static int LL_LLXOBJECT                             = 0x00100000; // internal use only
+  public final static int LL_SUBTABLELIST = 0x00080000; // internal use only
+  public final static int LL_RETURN_ERROR_IF_FILE_NOT_FOUND = 0x00010000;
   public final static int LL_FIXEDNAME                             = 0x8000; //
   public final static int LL_NOSAVEAS                              = 0x4000; //
+  public final static int LL_DESIGNER_OVER_CHILD 			= 0x00002000;
   public final static int LL_EXPRCONVERTQUIET                      = 0x1000; // convert to new expressions without warning box
   public final static int LL_NONAMEINTITLE                         = 0x0800; // no file name appended to title
   public final static int LL_PRVOPT_PRN_USEDEFAULT                 = 0x00000000; //
@@ -312,6 +392,7 @@ public final class CmbtLL26
   public final static int LL_PRVOPT_PRN_ASKPRINTERALWAYS           = 0x00000002; //
   public final static int LL_PRVOPT_PRN_ALWAYSUSEDEFAULT           = 0x00000003; //
   public final static int LL_PRVOPT_PRN_ASSIGNMASK                 = 0x00000003; // used by L&L
+  public final static int LL_PRVOPT_FLAG_STANDALONEVIEWER = 0x00000010;
   public final static int LL_OPTION_COPIES                         = 0; // compatibility only, please use LL_PRNOPT_...
   public final static int LL_OPTION_STARTPAGE                      = 1; // compatibility only, please use LL_PRNOPT_PAGE
   public final static int LL_OPTION_PAGE                           = 1; // compatibility only, please use LL_PRNOPT_...
@@ -332,11 +413,11 @@ public final class CmbtLL26
   public final static int LL_UNITS_MM_DIV_10                       = 0; // for LL_PRNOPT_UNITS, LL_OPTION_UNITS and LL_OPTION_UNITS_DEFAULT
   public final static int LL_UNITS_INCH_DIV_100                    = 1; //
   public final static int LL_UNITS_INCH_DIV_1000                   = 2; //
-  public final static int LL_UNITS_SYSDEFAULT_LORES                = 3; // mm/10, in/100 (depending on regional settings of the system)
-  public final static int LL_UNITS_SYSDEFAULT                      = 4; // mm/100, in/1000 (depending on regional settings of the system)
+  public final static int LL_UNITS_SYSDEFAULT_LORES                = 3; // mm/10, in/100 = depending on regional settings of the system)
+  public final static int LL_UNITS_SYSDEFAULT                      = 4; // mm/100, in/1000 = depending on regional settings of the system)
   public final static int LL_UNITS_MM_DIV_100                      = 5; //
   public final static int LL_UNITS_MM_DIV_1000                     = 6; //
-  public final static int LL_UNITS_SYSDEFAULT_HIRES                = 7; // mm/100, in/1000 (depending on regional settings of the system)
+  public final static int LL_UNITS_SYSDEFAULT_HIRES                = 7; // mm/100, in/1000 = depending on regional settings of the system)
   public final static int LL_PRNOPT_FIRSTPAGE                      = 5; //
   public final static int LL_PRNOPT_LASTPAGE                       = 6; //
   public final static int LL_PRNOPT_JOBPAGES                       = 7; //
@@ -360,10 +441,16 @@ public final class CmbtLL26
   public final static int LL_PRNOPT_PAGERANGE_USES_ABSOLUTENUMBER  = 20; // default: FALSE
   public final static int LL_PRNOPT_USEMEMORYMETAFILE              = 22; // default: false
   public final static int LL_PRNOPT_PARTIALPREVIEW                 = 23; // default: false
-  public final static int LL_PRNOPTSTR_PRINTDST_FILENAME           = 0; // print to file: default filename (LlGet/SetPrintOptionString)
+  public final static int LL_PRNOPT_ADDITIONALPAGES_FOR_TOTAL = 24; // internal
+  public final static int LL_PRNOPT_HAS_TOTALPAGES = 25; // internal
+  public final static int LL_PRNOPT_COUNT_OF_ITEMS = 26; // labels/cards
+  public final static int LL_PRNOPT_IS_PREPROCESSING = 27;
+  public final static int LL_PRNOPT_PRINTDLG_ALLOW_NUMBER_OF_FIRST_PAGE = 28;
+  public final static int LL_PRNOPT_NEXT_INDEX = 29;
+  public final static int LL_PRNOPTSTR_PRINTDST_FILENAME           = 0; // print to file: default filename = LlGet/SetPrintOptionString)
   public final static int LL_PRNOPTSTR_EXPORTDESCR                 = 1; // r/o, returns the description of the export chosen
   public final static int LL_PRNOPTSTR_EXPORT                      = 2; // sets default exporter to use / returns the name of the export chosen
-  public final static int LL_PRNOPTSTR_PRINTJOBNAME                = 3; // set name to be given to StartDoc() (lpszMessage of LlPrintWithBoxStart()
+  public final static int LL_PRNOPTSTR_PRINTJOBNAME                = 3; // set name to be given to StartDoc() = lpszMessage of LlPrintWithBoxStart()
   public final static int LL_PRNOPTSTR_PRESTARTDOCESCSTRING        = 4; // sent before StartDoc()
   public final static int LL_PRNOPTSTR_POSTENDDOCESCSTRING         = 5; // sent after EndDoc()
   public final static int LL_PRNOPTSTR_PRESTARTPAGEESCSTRING       = 6; // sent before StartPage()
@@ -371,6 +458,9 @@ public final class CmbtLL26
   public final static int LL_PRNOPTSTR_PRESTARTPROJECTESCSTRING    = 8; // sent before first StartPage() of project
   public final static int LL_PRNOPTSTR_POSTENDPROJECTESCSTRING     = 9; // sent after last EndPage() of project
   public final static int LL_PRNOPTSTR_PAGERANGES                  = 10; //
+  public final static int LL_PRNOPTSTR_ISSUERANGES = 11;
+  public final static int LL_PRNOPTSTR_PREVIEWTITLE = 12; // default: language dependent
+  public final static int LL_PRNOPTSTR_NEXT_INDEX = 13;
   public final static int LL_PRINT_V1POINTX                        = 0x00000000; //
   public final static int LL_PRINT_NORMAL                          = 0x00000100; //
   public final static int LL_PRINT_PREVIEW                         = 0x00000200; //
@@ -383,8 +473,12 @@ public final class CmbtLL26
   public final static int LL_PRINT_KEEPJOB                         = 0x00002000; //
   public final static int LL_PRINT_IS_DOM_CALLER                   = 0x00004000; // internal
   public final static int LL_PRINT_DOM_NOCREATEDC                  = 0x00010000; // internal
+  public final static int LL_PRINT_DOM_NOOBJECTLOAD = 0x00020000; // internal
   public final static int LL_PRINT_REMOVE_UNUSED_VARS              = 0x00008000; // optimization flag
+  public final static int LL_BOXTYPE_BOXTYPEMASK = 0x000000ff;
   public final static int LL_BOXTYPE_NONE                          = -1; //
+  public final static int LL_BOXTYPE_FLAG_ALLOWSUSPEND = 0x40000000;
+  public final static int LL_BOXTYPE_FLAG_USEMARQUEE = 0x80000000;
   public final static int LL_BOXTYPE_NORMALMETER                   = 0; //
   public final static int LL_BOXTYPE_BRIDGEMETER                   = 1; //
   public final static int LL_BOXTYPE_NORMALWAIT                    = 2; //
@@ -395,6 +489,8 @@ public final class CmbtLL26
   public final static int LL_BOXTYPE_STDABORT                      = 7; //
   public final static int LL_BOXTYPE_MAX                           = 7; //
   public final static int LL_FILE_ALSONEW                          = 0x8000; //
+  public final static int LL_SELECTFILEDLGTITLE_USE_OSFILENAME = 0x00010000;
+  public final static int LL_FILE_FORCE_OS_DIALOG = 0x00020000;
   public final static int LL_FCTPARATYPE_DOUBLE                    = 0x01; //
   public final static int LL_FCTPARATYPE_DATE                      = 0x02; //
   public final static int LL_FCTPARATYPE_STRING                    = 0x04; //
@@ -409,6 +505,11 @@ public final class CmbtLL26
   public final static int LL_FCTPARATYPE_SAME                      = 0x803f; //
   public final static int LL_FCTPARATYPE_MASK                      = 0x8fff; //
   public final static int LL_FCTPARATYPEFLAG_NONULLCHECK           = 0x10000; //
+  public final static int LL_FCTPARATYPEFLAG_MULTIDIM_ALLOWED = 0x00020000; // internal
+  public final static int LL_FCTPARATYPEFLAG_RAW = 0x00080000; // parameter passed as string without evaluation
+  public final static int LL_FCTPARATYPEFLAG_RAW_WITH_SYNTAXCHECK = 0x00040000; // parameter passed as string without evaluation
+  public final static int LL_FCTPARATYPEFLAG_KEEP_LINEBREAKS = 0x00100000;
+  public final static int LL_FCTPARATYPEFLAG_EXECUTE_ON_SYNTAXCHECK_AT_LOADTIME = 0x00200000;
   public final static int LL_EXPRTYPE_DOUBLE                       = 1; //
   public final static int LL_EXPRTYPE_DATE                         = 2; //
   public final static int LL_EXPRTYPE_STRING                       = 3; //
@@ -430,24 +531,25 @@ public final class CmbtLL26
   public final static int LL_CB_PAGE                               = 0x40000000; // callback for each page
   public final static int LL_CB_PROJECT                            = 0x20000000; // callback for each label
   public final static int LL_CB_OBJECT                             = 0x10000000; // callback for each object
-  public final static int LL_CB_HELP                               = 0x08000000; // callback for HELP (F1/Button)
+  public final static int LL_CB_HELP                               = 0x08000000; // callback for HELP = F1/Button)
   public final static int LL_CB_TABLELINE                          = 0x04000000; // callback for table line
   public final static int LL_CB_TABLEFIELD                         = 0x02000000; // callback for table field
-  public final static int LL_CB_QUERY_IS_VARIABLE_OR_FIELD         = 0x01000000; // callback for delayload (LL_QUERY_IS_VARIABLE_OR_FIELD)
+  public final static int LL_CB_QUERY_IS_VARIABLE_OR_FIELD         = 0x01000000; // callback for delayload = LL_QUERY_IS_VARIABLE_OR_FIELD)
   public final static int LL_OPTION_CALLBACKPARAMETER              = 7; // default: 0
   public final static int LL_OPTION_HELPAVAILABLE                  = 8; // default: TRUE
   public final static int LL_OPTION_SORTVARIABLES                  = 9; // default: TRUE
   public final static int LL_OPTION_SUPPORTPAGEBREAK               = 10; // default: TRUE
   public final static int LL_OPTION_SHOWPREDEFVARS                 = 11; // default: TRUE
   public final static int LL_OPTION_USEHOSTPRINTER                 = 13; // default: FALSE // use host printer via callback
-  public final static int LL_OPTION_EXTENDEDEVALUATION             = 14; // allows expressions in chevrons (amwin mode)
-  public final static int LL_OPTION_TABREPRESENTATIONCODE          = 15; // default: 247 (0xf7)
+  public final static int LL_OPTION_EXTENDEDEVALUATION             = 14; // allows expressions in chevrons = amwin mode)
+  public final static int LL_OPTION_TABREPRESENTATIONCODE          = 15; // default: 247 = 0xf7)
+  public final static int LL_OPTION_SHOWSTATE            = 16; // r/o, 
   public final static int LL_OPTION_METRIC                         = 18; // default: depends on Windows defaults
   public final static int LL_OPTION_ADDVARSTOFIELDS                = 19; // default: FALSE
   public final static int LL_OPTION_MULTIPLETABLELINES             = 20; // default: TRUE
   public final static int LL_OPTION_CONVERTCRLF                    = 21; // default: FALSE
   public final static int LL_OPTION_WIZ_FILENEW                    = 22; // default: FALSE
-  public final static int LL_OPTION_RETREPRESENTATIONCODE          = 23; // default: LL_CHAR_NEWLINE (182)
+  public final static int LL_OPTION_RETREPRESENTATIONCODE          = 23; // default: LL_CHAR_NEWLINE = 182)
   public final static int LL_OPTION_PRVZOOM_PERC                   = 25; // initial preview zoom
   public final static int LL_OPTION_PRVRECT_LEFT                   = 26; // initial preview position
   public final static int LL_OPTION_PRVRECT_TOP                    = 27; //
@@ -460,7 +562,7 @@ public final class CmbtLL26
   public final static int LL_STG_COMPRESS_THREADED                 = 0x00008000; //
   public final static int LL_STG_COMPRESS_UNTHREADED               = 0x00010000; //
   public final static int LL_OPTION_NOPARAMETERCHECK               = 32; // you need a bit more speed?
-  public final static int LL_OPTION_NONOTABLECHECK                 = 33; // don't check on "NO_TABLEOBJECT" error. Default TRUE (don't check)
+  public final static int LL_OPTION_NONOTABLECHECK                 = 33; // don't check on "NO_TABLEOBJECT" error. Default TRUE = don't check)
   public final static int LL_OPTION_DRAWFOOTERLINEONPRINT          = 34; // delay footerline printing to LlPrint(). Default FALSE
   public final static int LL_OPTION_PRVZOOM_LEFT                   = 35; // initial preview position in percent of screen
   public final static int LL_OPTION_PRVZOOM_TOP                    = 36; //
@@ -478,7 +580,7 @@ public final class CmbtLL26
   public final static int LL_OPTION_EMFRESOLUTION                  = 49; // default: 100 for 1/100 mm
   public final static int LL_OPTION_SETCREATIONINFO                = 50; // default: TRUE
   public final static int LL_OPTION_XLATVARNAMES                   = 51; // default: TRUE
-  public final static int LL_OPTION_LANGUAGE                       = 52; // returns current language (r/o)
+  public final static int LL_OPTION_LANGUAGE                       = 52; // returns current language = r/o)
   public final static int LL_OPTION_PHANTOMSPACEREPRESENTATIONCODE = 54; // default: LL_CHAR_PHANTOMSPACE
   public final static int LL_OPTION_LOCKNEXTCHARREPRESENTATIONCODE = 55; // default: LL_CHAR_LOCK
   public final static int LL_OPTION_EXPRSEPREPRESENTATIONCODE      = 56; // default: LL_CHAR_EXPRSEP
@@ -489,7 +591,7 @@ public final class CmbtLL26
   public final static int LL_OPTION_LCID                           = 65; // default: LOCALE_USER_DEFAULT
   public final static int LL_OPTION_TEXTQUOTEREPRESENTATIONCODE    = 66; // default: 1
   public final static int LL_OPTION_SCALABLEFONTSONLY              = 67; // default: TRUE
-  public final static int LL_OPTION_NOTIFICATIONMESSAGEHWND        = 68; // default: NULL (parent window handle)
+  public final static int LL_OPTION_NOTIFICATIONMESSAGEHWND        = 68; // default: NULL = parent window handle)
   public final static int LL_OPTION_DEFDEFFONT                     = 69; // default: GetStockObject(ANSI_VAR_FONT)
   public final static int LL_OPTION_CODEPAGE                       = 70; // default: CP_ACP; set codepage to use for conversions.
   public final static int LL_OPTION_FORCEFONTCHARSET               = 71; // default: FALSE; set font's charset to the codepage according to LL_OPTION_LCID. Default: FALSE
@@ -500,12 +602,12 @@ public final class CmbtLL26
   public final static int LL_OPTION_SKIPRETURNATENDOFRTF           = 77; // default: FALSE
   public final static int LL_OPTION_INTERCHARSPACING               = 78; // default: FALSE: allows character interspacing in case of block justify
   public final static int LL_OPTION_INCLUDEFONTDESCENT             = 79; // default: TRUE
-  public final static int LL_OPTION_RESOLUTIONCOMPATIBLETO9X       = 80; // default: FALSE (on NT/2K, else TRUE)
+  public final static int LL_OPTION_RESOLUTIONCOMPATIBLETO9X       = 80; // default: FALSE = on NT/2K, else TRUE)
   public final static int LL_OPTION_USECHARTFIELDS                 = 81; // default: FALSE
   public final static int LL_OPTION_OFNDIALOG_NOPLACESBAR          = 82; // default: FALSE; do not use "Places" bar in NT2K?
   public final static int LL_OPTION_SKETCH_COLORDEPTH              = 83; // default: 1
   public final static int LL_OPTION_FINAL_TRUE_ON_LASTPAGE         = 84; // default: FALSE: internal use
-  public final static int LL_OPTION_INTERCHARSPACING_FORCED        = 86; // default: FALSE: forces character interspacing calculation in TEXT objects (possibly dangerous and slow)
+  public final static int LL_OPTION_INTERCHARSPACING_FORCED        = 86; // default: FALSE: forces character interspacing calculation in TEXT objects = possibly dangerous and slow)
   public final static int LL_OPTION_RTFAUTOINCREMENT               = 87; // default: FALSE, to increment RTF char pointer if nothing can be printed
   public final static int LL_OPTION_UNITS_DEFAULT                  = 88; // default: LL_OPTION_UNITS_SYSDEFAULT. Use for contols that query the units, where we need to return "sysdefault" also
   public final static int LL_OPTION_NO_MAPI                        = 89; // default: FALSE. Inhibit MAPI load for preview
@@ -517,6 +619,7 @@ public final class CmbtLL26
   public final static int LL_OPTION_TOOLBARSTYLEFLAG_GRADIENT      = 0x80; // starting with XP, use gradient style
   public final static int LL_OPTION_TOOLBARSTYLEFLAG_DOCKABLE      = 0x40; // dockable toolbars?
   public final static int LL_OPTION_TOOLBARSTYLEFLAG_CANCLOSE      = 0x20; // internal use only
+  public final static int LL_OPTION_TOOLBARSTYLEFLAG_SHRINK_TO_FIT = 0x10; // internal use only 
   public final static int LL_OPTION_MENUSTYLE                      = 91; // default: LL_OPTION_MENUSTYLE_STANDARD
   public final static int LL_OPTION_MENUSTYLE_STANDARD_WITHOUT_BITMAPS = 0; // values: see CTL
   public final static int LL_OPTION_MENUSTYLE_STANDARD             = 1; //
@@ -548,8 +651,8 @@ public final class CmbtLL26
   public final static int LL_OPTION_UISTYLE_OFFICE2003             = 2; // 90=0x42, 91=3, 92=0x10, 93=2, 94=2, 95=0x22
   public final static int LL_OPTION_NOFILEVERSIONUPGRADEWARNING    = 100; // default: FALSE
   public final static int LL_OPTION_UPDATE_FOOTER_ON_DATALINEBREAK_AT_FIRST_LINE = 101; // default: FALSE
-  public final static int LL_OPTION_ESC_CLOSES_PREVIEW             = 102; // shall ESC close the preview window (default: FALSE)
-  public final static int LL_OPTION_VIEWER_ASSUMES_TEMPFILE        = 103; // shall the viewer assume that the file is a temporary file (and not store values in it)? default TRUE
+  public final static int LL_OPTION_ESC_CLOSES_PREVIEW             = 102; // shall ESC close the preview window = default: FALSE)
+  public final static int LL_OPTION_VIEWER_ASSUMES_TEMPFILE        = 103; // shall the viewer assume that the file is a temporary file = and not store values in it)? default TRUE
   public final static int LL_OPTION_CALC_USED_VARS                 = 104; // default: TRUE
   public final static int LL_OPTION_BOTTOMALIGNMENT_WIN9X_UNLIKE_NT = 105; // default: TRUE
   public final static int LL_OPTION_NOPRINTJOBSUPERVISION          = 106; // default: TRUE
@@ -580,6 +683,9 @@ public final class CmbtLL26
   public final static int LL_OPTION_VARLISTDISPLAY_FOLDERPOS_TOP   = 0x0020; //
   public final static int LL_OPTION_VARLISTDISPLAY_FOLDERPOS_BOTTOM = 0x0030; //
   public final static int LL_OPTION_VARLISTDISPLAY_FOLDERPOS_MASK  = 0x00f0; //
+  public final static int LL_OPTION_VARLISTDISPLAY_LLFOLDERPOS_BOTTOM = 0x0100;
+  public final static int LL_OPTION_VARLISTDISPLAY_INITSCROLLPOS_TOP = 0x0200;
+  public final static int LL_OPTION_VARLISTDISPLAY_ALPHASORT_RESPECT_NUMBERS = 0x0400;
   public final static int LL_OPTION_WORKAROUND_RTFBUG_EMPTYFIRSTPAGE = 122; //
   public final static int LL_OPTION_FORMULASTRINGCOMPARISONS_CASESENSITIVE = 123; // default: TRUE
   public final static int LL_OPTION_FIELDS_IN_PROJECTPARAMETERS    = 124; // default: FALSE
@@ -608,10 +714,10 @@ public final class CmbtLL26
   public final static int LL_OPTION_RESERVED142                    = 142; //
   public final static int LL_OPTION_DESIGNEREXPORTPARAMETER        = 143; // default: NULL
   public final static int LL_OPTION_DESIGNERPRINT_SINGLETHREADED   = 144; // default: FALSE
-  public final static int LL_OPTION_ALLOW_COMMENTS_IN_FORMULA      = 145; // default: TRUE (still only available in LL13 in pro/enterprise version)
-  public final static int LL_OPTION_USE_MLANG_LINEBREAKALGORITHM   = 146; // default: FALSE (would use MLANG to calculate the line break algorithm)
+  public final static int LL_OPTION_ALLOW_COMMENTS_IN_FORMULA      = 145; // default: TRUE = still only available in LL13 in pro/enterprise version)
+  public final static int LL_OPTION_USE_MLANG_LINEBREAKALGORITHM   = 146; // default: FALSE = would use MLANG to calculate the line break algorithm)
   public final static int LL_OPTION_USE_JPEG_OPTIMIZATION          = 147; // default: TRUE
-  public final static int LL_OPTION_ENABLE_IMAGESMOOTHING          = 148; // default: TRUE (uses GDIPLUS - no smoothing on Win2000/98 if not GDIPLUS installed! Right now, applies only to JPEG.)
+  public final static int LL_OPTION_ENABLE_IMAGESMOOTHING          = 148; // default: TRUE = uses GDIPLUS - no smoothing on Win2000/98 if not GDIPLUS installed! Right now, applies only to JPEG.)
   public final static int LL_OPTION_MAXRTFVERSION_AVAILABLE        = 159; // r/o
   public final static int LL_OPTION_CONDREPRESENTATIONCODES_LIKE_ANSI = 160; // default: FALSE
   public final static int LL_OPTION_NULL_IS_NONDESTRUCTIVE         = 161; // default: FALSE
@@ -621,19 +727,261 @@ public final class CmbtLL26
   public final static int LL_ROUNDINGSTRATEGY_ARITHMETIC_SYMMETRIC = 1; //
   public final static int LL_OPTION_RESERVED164                    = 164; //
   public final static int LL_OPTION_RESERVED165                    = 165; //
-  public final static int LL_OPTION_PICTURE_TRANSPARENCY_IS_WHITE  = 166; // default: false (transparent)
-  public final static int LL_OPTION_FLOATPRECISION                 = 167; // global (not job specific!). Default 0 (double)
+  public final static int LL_OPTION_PICTURE_TRANSPARENCY_IS_WHITE  = 166; // default: false = transparent)
+  public final static int LL_OPTION_FLOATPRECISION                 = 167; // global = not job specific!). Default 0 = double)
   public final static int LL_OPTION_SUPPRESS_LRUENTRY              = 168; //
-  public final static int LL_OPTION_FORCEFIRSTGROUPHEADER          = 169; // default: false (group match string is an empty string)
-  public final static int LL_OPTIONSTR_LABEL_PRJEXT                = 0; // internal... (compatibility to L6)
-  public final static int LL_OPTIONSTR_LABEL_PRVEXT                = 1; // internal... (compatibility to L6)
-  public final static int LL_OPTIONSTR_LABEL_PRNEXT                = 2; // internal... (compatibility to L6)
-  public final static int LL_OPTIONSTR_CARD_PRJEXT                 = 3; // internal... (compatibility to L6)
-  public final static int LL_OPTIONSTR_CARD_PRVEXT                 = 4; // internal... (compatibility to L6)
-  public final static int LL_OPTIONSTR_CARD_PRNEXT                 = 5; // internal... (compatibility to L6)
-  public final static int LL_OPTIONSTR_LIST_PRJEXT                 = 6; // internal... (compatibility to L6)
-  public final static int LL_OPTIONSTR_LIST_PRVEXT                 = 7; // internal... (compatibility to L6)
-  public final static int LL_OPTIONSTR_LIST_PRNEXT                 = 8; // internal... (compatibility to L6)
+  public final static int LL_OPTION_FORCEFIRSTGROUPHEADER          = 169; // default: false = group match string is an empty string)
+  public final static int LL_OPTION_SUPPORT_PDFINPUTFIELDS = 170; // PDF 3.0 supports text objects and check boxes as input objects - default: true
+  public final static int LL_OPTION_ENHANCED_SKIPRETURNATENDOFRTF = 171; // default: false.
+  public final static int LL_OPTION_HIERARCHICALDATASOURCE = 172; // default: false
+  public final static int LL_OPTION_FORCE_HEADER_EVEN_ON_LARGE_FOOTERLINES = 173; // default: false
+  public final static int LL_OPTION_PRINTERDEVICEOPTIMIZATION = 174; // default: true
+  public final static int LL_OPTION_RTFHEIGHTSCALINGPERCENTAGE = 175; // default: 100
+  public final static int LL_OPTION_FORCE_DEFAULT_PRINTER_IN_PREVIEW = 176; // default: false
+  public final static int LL_OPTION_SAVE_PROJECT_IN_UTF8 = 178; // BOOL, default 0 = meaning: project is saved as UNICODE if A API is not used)
+  public final static int LL_DRILLDOWNFILTERSTRATEGY_ALLOW_ONLY_SUBTABLES = 0;
+  public final static int LL_DRILLDOWNFILTERSTRATEGY_ALLOW_ALL_TABLES = 1;
+  public final static int LL_DRILLDOWNFILTERSTRATEGY_ALLOW_SUBTABLES_AND_UNRELATED = 2;
+  public final static int LL_DRILLDOWNFILTERSTRATEGY_ALLOW_SUBTABLES_AND_USERDEFINED = 3;
+  public final static int LL_DRILLDOWNFILTERSTRATEGY_MASK = 0x0f;
+  public final static int LL_DRILLDOWNFILTERFLAG_OFFER_BASERECORD_AS_VARIABLES = 0x10;
+  public final static int LL_OPTION_DRILLDOWN_DATABASEFILTERING = 179; // default: 0 = filter all except subtables of the base table: LL_DRILLDOWNFILTERSTRATEGY_ALLOW_ONLY_SUBTABLES)
+  public final static int LL_OPTION_SUPPRESS_TASKBARBUTTON_PROGRESSSTATE = 180; // default: false
+  public final static int LL_OPTION_PRINTDLG_DEVICECHANGE_KEEPS_DEVMODESETTINGS = 181; // default: true
+  public final static int LL_OPTION_DRILLDOWN_SUPPORTS_EMBEDDING = 182; // default: true
+  public final static int LL_VARLISTCLEARSTRATEGY_EMPTY_LIST = 0;
+  public final static int LL_VARLISTCLEARSTRATEGY_SET_NULL = 1;
+  public final static int LL_VARLISTCLEARSTRATEGY_SET_DEFAULT = 2;
+  public final static int LL_OPTION_VARLISTCLEARSTRATEGY_ON_DEFINE_START = 183; // default: LL_VARLISTCLEARSTRATEGY_EMPTY_LIST
+  public final static int LL_OPTION_RESERVED184 = 184;
+  public final static int LL_OPTION_KEEP_EMPTY_SUM_VARS = 185; // default: false
+  public final static int LL_OPTION_RESERVED187 = 187; // internal test flag
+  public final static int LL_OPTION_DEFAULTDECSFORSTR = 188; // default: 5. Sets the default number of decimals for Str$
+  public final static int LL_OPTION_RESETPROJECTSTATE_FORCES_NEW_PRINTJOB = 189; // default: false
+  public final static int LL_OPTION_DEFINEXXXSTART_COMPATIBLE_TO_PRE15 = 190;
+  public final static int LL_OPTION_RESETPROJECTSTATE_FORCES_NEW_DC = 191; // default: true
+  public final static int LL_OPTION_BITMAP_RESOLUTION_FOR_PREVIEW = 192; // default: 0 = leave original size), suggestions are 300 or 600. -1 to use device default.
+  public final static int LL_OPTION_DRAW_EMPTY_CHARTOBJECTS = 193; // default: false
+  public final static int LL_OPTION_PREVIOUS_DEFAULTS_TO_NULL = 194; // default: false = for compatibility). Previous() returns NULL on first record if TRUE, otherwise some default value for the given datatype.
+  public final static int LL_OPTION_FORCE_IMAGEEMBEDDING = 195; // default: false. Images added via the image dialog are always embedded.
+  public final static int LL_OPTION_VARKEY_MAP_SHARP_S_TO_SS = 196; // default: false
+  public final static int LL_OPTION_NO_LAYERED_WINDOWS = 197; // default: false
+  public final static int LL_OPTION_SCALED_PERCENTAGEFORMATTER = 198; // default: false = 0.1="0.1%", true: 0.1="10%")
+  public final static int LL_OPTION_USE_ANTIALIAS = 199; // default: true
+  public final static int LL_OPTION_FORCETABLELINECALLBACK = 200; // LL_CMND_TABLE_LINE is called even when COLORINGMODE_LL ist set, default: false
+  public final static int LL_OPTION_EXPORTCONSUMER = 201; // internal use only
+  public final static int LL_OPTION_TOC_IDX_ITEMID = 202; // internal use only
+  public final static int LL_OPTION_FORCED2PASSMODE = 203; // default: false
+  public final static int LL_OPTION_SETVAR_ONLY_SETS_IF_CONTAINER_PRINTS = 204; // default: false
+  public final static int LL_OPTION_SHOW_PREVIEW_AFTER_PRINT_END = 206; // "Export-ShowResult" sets this for PRV...
+  public final static int LL_OPTION_PROPLIST_COMBOBOX_SCROLL_WRAPS = 207; // default: FALSE
+  public final static int LL_OPTION_ALWAYS_CALC_GROUPCHANGE_CONDITION = 208; // default: false
+  public final static int LL_OPTION_NULLHANDLING_SUPPORTED_IN_ENHMODE = 209; // default: false 
+  public final static int LL_OPTION_RESETPROJECTSTATE_FORCES_NEW_PREVIEWJOB = 210; // default: true
+  public final static int LL_OPTION_USE_LEGACY_WORDWRAPPINGALGORITHM = 211; // default: false
+  public final static int LL_OPTION_PREVIEW_USES_PRINTTHREAD = 212; // default: true
+  public final static int LL_OPTION_LL_SUPPLIES_MESSAGELOOP_WHILE_PRINTING_TO_PREVIEW = 213; // default: true
+  public final static int LL_OPTION_PRINTERDCCACHE_TIMEOUT_SEC = 214; // default: 60 = 0 -> no cache)
+  public final static int LL_OPTION_DESIGNER_RIBBONBACKGROUNDCOLOR = 215; // default: undefined = system default)
+  public final static int LL_OPTION_INTERNAL_EMFCLEANUP = 216; // no comment -> internal!
+  public final static int LL_OPTION_RIBBON_DEFAULT_ENABLEDSTATE = 217; // default: true
+  public final static int LL_OPTION_PRVFILEVERSION = 218; // default: 0 = 2 would be an optimized version, supported since LL18, usually a bit faster if printing > 5000 pages)
+  public final static int LL_OPTION_TRY_REDUCE_BMPSIZE_BY_CONVERTING_TO_PNG_OR_JPEG = 219; // default: false
+  public final static int LL_OPTION_NO_IMAGEFILEOPTIMIZATION = 220; // default: false. Set this to TRUE if you know you're replacing an image file during printing that is used in a project using its file name
+  public final static int LL_OPTION_NO_ENFORCED_GROUPFOOTERPRIORITY_FOR_LAST_GROUPFOOTER = 221; // default: false. Compatibility to LL 16.008.
+  public final static int LL_OPTION_ALLOW_COMBINED_COLLECTING_OF_DATA_FOR_COLLECTIONCONTROLS = 222; // default: true
+  public final static int LL_OPTION_SUPPRESS_LOADERRORMESSAGES = 223; // default: false. Please take care that this is a reference counted flag, so add = true) and subtract = false) the same number of calls! [ChK]
+  public final static int LL_OPTION_IGNOREFORMULARESULTMISMATCH_AT_LOADTIME = 224; // default: false. Switches the r8117 = err #3535) change back to the old behavior
+  public final static int LL_OPTION_MAX_SIZE_OF_PROJECTINFOCACHE = 225; // default: 1000
+  public final static int LL_OPTION_NO_CORRECTION_OF_UNICODE_RTF = 226; // default: false
+  public final static int LL_OPTION_MAY_RELEASE_UNNECESSARY_PROPS_AT_PRINTTIME = 227; // default: false
+  public final static int LL_OPTION_DO_NOT_RESTORE_PREVSTATE_ON_FILTER_MISMATCH = 228; // default: false = LL17: implicitly TRUE until 17.006)
+  public final static int LL_OPTION_SUPPORT_USERDEFINED_REPORTPAGELAYOUT = 229; // default: false
+  public final static int LL_OPTION_DESIGNER_RIBBONTEXTCOLOR = 230; // default: undefined = system default)
+  public final static int LL_PARTSHARINGFLAG_VARIABLES_TOC = 0x01;
+  public final static int LL_PARTSHARINGFLAG_VARIABLES_IDX = 0x02;
+  public final static int LL_PARTSHARINGFLAG_VARIABLES_GTC = 0x04;
+  public final static int LL_OPTION_PARTSHARINGFLAGS = 231; // default: 0xff
+  public final static int LL_OPTION_PIECHARTORDER_COMPATIBLE_TO_PRE19 = 232; // default: 1 = LL18), 0 = >= LL19)
+  public final static int LL_OPTION_DATABASESTRUCTURE_SORT_DECLARATIONORDER = 233; // default: false = sorted alphabetically)
+  public final static int LL_OPTION_REPORT_PARAMETERS_REALDATAJOBPARAMETER = 234; // default: NULL
+  public final static int LL_OPTION_EXPANDABLE_REGIONS_REALDATAJOBPARAMETER = 235; // default: NULL
+  public final static int LL_OPTION_IMPROVED_TABLELINEANCHORING = 236; // default: FALSE
+  public final static int LL_OPTION_INTERACTIVESORTING_REALDATAJOBPARAMETER = 237; // default: NULL
+  public final static int LL_OPTION_TEMPFILESTRATEGY = 238; // default: LL_TEMPFILESTRATEGY_SPEED
+  public final static int LL_TEMPFILESTRATEGY_SPEED = 0;
+  public final static int LL_TEMPFILESTRATEGY_SIZE = 1;
+  public final static int LL_TEMPFILESTRATEGY_SECURITY = 2;
+  public final static int LL_OPTION_RTF_WHITE_BACKGROUND_IS_TRANSPARENT = 239; // default: TRUE = !)
+  public final static int LL_OPTION_NO_DOTTED_LINE_ON_SECONDARY_AXIS = 240; // default: FALSE
+  public final static int LL_OPTION_NO_PREVIOUS_VARLIST = 241;
+  public final static int LL_OPTION_COMMIT_FILE_ON_SAVE = 242; // default: false
+  public final static int LL_OPTION_DO_NOT_RTRIM_CELLTEXT = 243; // default: false
+  public final static int LL_OPTION_ALLOW_FCT_TEXTWIDTH = 244; // default: false
+  public final static int LL_OPTION_PASTEOBJECTS_TO_FIRST_VISIBLE_LAYER = 245; // default: false
+  public final static int LL_OPTION_EMPTY_FILE_TRIGGERS_PROJECT_WIZARD = 246; // default: false
+  public final static int LL_OPTION_DELAY_UPDATE_REMAININGTABLESPACE = 247; // default: false 
+  public final static int LL_OPTION_WIZARD_ADDS_ORGNAME_TO_UI = 248; // default: false
+  public final static int LL_OPTION_PROHIBIT_EXTERNAL_FILES = 249; // default: false
+  public final static int LL_OPTION_DRAWINGS_INLINED     = 250; // default: 0 = 1 = inlined, 2 = leave as is, but no BLOBs - for GTC)
+  public final static int LL_OPTION_SERIALIZE_PRINTAPI   = 251; // default: false
+  public final static int LL_OPTION_PROJECTFILELOCKTIMEOUT_IN_MS = 252; // default: 10000
+  public final static int LL_OPTION_ILLDATAPROVIDER      = 253;
+  public final static int LL_OPTION_RTF_SUPPORTS_PARABREAKOPTIONS = 254; // default: false
+  public final static int LL_OPTION_FORCE_PDFEMBEDDING   = 255; // default: false. PDF documents added via the pdf dialog are always embedded
+  public final static int LL_OPTION_IGNORE_NONSCALEABLEFONTPROPERTIES = 256; // default: false. PDF documents added via the pdf dialog are always embedded
+  public final static int LL_DATAPROVIDERTHREADNESS_NONE = 0;
+  public final static int LL_DATAPROVIDERTHREADNESS_ONE_INSTANCE_PER_THREAD = 1;
+  public final static int LL_DATAPROVIDERTHREADNESS_DONTCARE = 2; // default 
+  public final static int LL_OPTION_DATAPROVIDER_THREADEDNESS = 257;
+  public final static int LL_OPTION_SUBREPORT_BASE       = 258;
+  public final static int LL_OPTION_SUBREPORT_CLIENT     = 259;
+  public final static int LL_OPTION_NO_IPICTURE_SUPPORT  = 260; // default: false
+  public final static int LL_OPTION_FORCE_JPEG_RECOMPRESSION = 261; // default: false
+  public final static int LL_OPTION_TEXTWRAP_TOLERANCE_PERC = 262; // default: 0 = no tolerance)
+  public final static int LL_OPTION_NO_USERVARCHECK_ON_LOAD = 263; // default: false
+  public final static int LL_OPTION_TOC_IDX_PAGE         = 264; // internal use only
+  public final static int LL_OPTION_RTF_TAB_KEY_IS_TAB_FORMATTER = 265; // default: false
+  public final static int LL_OPTION_VARLISTDISPLAY_LL_FOLDER_AT_END = 266; // default: false
+  public final static int LL_OPTION_DOM_DO_NOT_KILL_EMPTY_TABLE = 267; // default: false
+  public final static int LL_OPTION_ENABLE_INPUTOBJECTS_IN_TABLES = 268; // default: true
+  public final static int LL_OPTION_MAX_ENTRIES_FOR_AUTOCOMPLETE = 269; // default: 200
+  public final static int LL_OPTION_DEFAULT_FOR_SHADOWPAGEWRAP = 270; // default: true
+  public final static int LL_OPTION_MAX_UNDO_STEPS       = 271; // default: 10
+  public final static int LL_OPTION_HTML_USE_MAILFORMAT  = 272; // default: false
+  public final static int LL_OPTION_CLIP_LABELS_TO_PROJECTAREA = 273; // default: false = may paint beyond the border not to lose any data)
+  public final static int LL_OPTION_RESETPROJECTSTATE_FORCES_NEW_EXPORTJOB = 274;
+  public final static int LL_OPTION_SCRIPTENGINE_ENABLED = 276; // default: false
+  public final static int LL_OPTION_SCRIPTENGINE_TIMEOUTMS = 277; // default: 10000
+  public final static int LL_OPTION_SCRIPTENGINE_AUTOEXECUTE = 278; // default: false
+  public final static int LL_OPTION_SHAPEFILE_TIMEOUTMS  = 279; // default: 1000 
+  public final static int LL_OPTION_COUNTALLPRINTEDDATA_LASTPRINT = 280; // r/o
+  public final static int LL_OPTION_SAVE_AS_ACTS_AS_EXPORT = 281; // default: false
+  public final static int LL_OPTION_RESETPROJECTSTATE_TRIGGERS_NEW_SHEET = 282; // default: true
+  public final static int LL_OPTION_HIDE_EXPORT_TAB_FROM_LAYOUT_CONFIG = 283; // default: false
+  public final static int LL_OPTION_USE_VARLIST_NAMESORTINDEXCACHE = 284; // should be defined for job -1
+  public final static int LL_OPTION_NOCONTRASTOPTIMIZATION = 285; // default: false
+  public final static int LL_OPTION_AUTORECOVERY_DISABLED = 286; // default: false
+  public final static int LL_OPTION_AUTORECOVERY_SAVEOPTIONS = 287; // default: LL_AUTORECOVERY_SAVEOPTIONS_NEWFILE = value might be combination of following)
+  public final static int LL_AUTORECOVERY_SAVEOPTIONS_NEWFILE = 1;
+  public final static int LL_AUTORECOVERY_SAVEOPTIONS_OVERWRITE = 2;
+  public final static int LL_OPTION_LINK_PRINTERQUEUES   = 288; // default: false, does not work yet
+  public final static int LL_OPTION_FORCE_RTFMERGING     = 289; // default: false, forces to merge RTF contents even if there is just one part to load, compatibility switch
+  public final static int LL_OPTION_W201512300001        = 290; // do not check on empty bodylines for "ActivateNextLine" - sort of "I know what I am doing in my print loop"
+  public final static int LL_OPTION_CALCLINEHEIGHT_COMPATIBLE_TO_19 = 291; // LL19 had a wrong line height calculation, force compatible mode. Default: false.
+  public final static int LL_OPTION_FORCE_UNIQUE_PARAMETERUISTRING = 292; // Report parameter UI strings will be forced as unique. Default: false.
+  public final static int LL_OPTION_AUTOMATICFOOTER      = 293; // Creates automatically footer-line in table-line wizard. Default: true.
+  public final static int LL_OPTION_SUPPORT_PREDEFINED_COLORS = 294; // default: for design/print job: always true. Otherwise false.
+  public final static int LL_OPTION_FAVORITE_SETTINGS    = 295; // default: display button and use registry settings
+  public final static int LL_FAVORITES_ENABLE_FAVORITES_BY_DEFAULT = 0x0001;
+  public final static int LL_FAVORITES_HIDE_FAVORITES_BUTTON = 0x0002;
+  public final static int LL_OPTION_NEWMODE_EXPRSTARTREPRESENTATIONCODE = 296; // default: 0xab
+  public final static int LL_OPTION_NEWMODE_EXPRENDREPRESENTATIONCODE = 297; // default: 0xbb
+  public final static int LL_OPTION_RESERVED_298         = 298; // outdated, not used any more
+  public final static int LL_OPTION_ILLREPOSITORY        = 299; // host repository
+  public final static int LL_OPTION_VARLISTLOOKUP_ALLOWS_GLOBALNAME = 300; // default: 0
+  public final static int LL_OPTION_FORCESAVEDESIGNSCHEME = 301; // default: false
+  public final static int LL_OPTION_REPOSITORY_SINGLEPROJECTMODE = 302; // default: false
+  public final static int LL_OPTION_ANIMATIONS_DISABLED  = 303; // default: 0
+  public final static int LL_OPTION_ANIMATIONS_DISABLED_DISABLEALL = 0x01;
+  public final static int LL_OPTION_ANIMATIONS_DISABLED_HIDE_STD = 0x02;
+  public final static int LL_OPTION_ANIMATIONS_DISABLED_HIDE_HTML = 0x04; //   
+  public final static int LL_OPTION_UPDATE_INTERACTIONINFO_PER_PAGE = 304; // default: false. "true" means some overhead per page
+  public final static int LL_OPTION_IS_REPORTSERVERDESIGNER = 305; // internal
+  public final static int LL_OPTION_IMPROVED_FRAMEDRAWING = 306; // default: false
+  public final static int LL_OPTION_POSTPAINT_TABLESEPARATORS = 307; // default: true
+  public final static int LL_OPTION_CROSSTAB_USE_CELLVALUE_INSTEAD_OF_DISPLAYVALUE = 308; // default: false;
+  public final static int LL_OPTION_SUPPORT_DELAYEDFIELDDEFINITION = 309; // default: false
+  public final static int LL_OPTION_SUPPRESS_REALDATAPREVIEW_IN_DESIGNER = 310; // default: false
+  public final static int LL_OPTION_MAX_RTFCONTROLS_IN_CACHE = 311; // default: 50
+  public final static int LL_OPTION_RDPEXPORT_CREATEMPFILEUNTILSAVEDONCE = 312; // internal
+  public final static int LL_OPTION_CRC32_ONLY_FOR_RTFDATA_ABOVE = 313; // limit of RTF stream size = in KB) up to which RTF text and BLOBs are compared using MD5 - above, it's CRC32 only. Default: 100 KB
+  public final static int LL_OPTION_PRINTER_FILE_SUPERSEDES_EXPORT_OPTIONS = 314; // settings in printer file supersede explicit export options
+  public final static int LL_OPTION_TRANSLATIONFLAGS     = 315; // default: both directions. Right now, only the omittance of _SAVE works.
+  public final static int LL_TRANSLATION_LOAD            = 0x01;
+  public final static int LL_TRANSLATION_SAVE            = 0x02;
+  public final static int LL_OPTION_PREVIEW_SCALES_RELATIVE_TO_PHYSICAL_SIZE = 316; // needs >= Windows 8.1. Stored in preview file to modify behaviour in viewer
+  public final static int LL_PREVIEW_SCALE_PHYSICAL_DESIGNERPREVIEW = 0x01;
+  public final static int LL_PREVIEW_SCALE_PHYSICAL_PREVIEW = 0x02;
+  public final static int LL_OPTION_NODEFAULTFONTOVERRIDE = 317; // default: false
+  public final static int LL_OPTION_TREEVIEWFILTER_VISIBILITYFLAGS = 318; // default: LL_TREEVIEWFILTER_IN_ALL_TREES
+  public final static int LL_TREEVIEWFILTER_IN_VARTREE   = 0x0001;
+  public final static int LL_TREEVIEWFILTER_IN_FCTWIZARD_VARTREE = 0x0002;
+  public final static int LL_TREEVIEWFILTER_IN_ALL_TREES = 0xffff;
+  public final static int LL_OPTION_COMPAT_ALLOW_INVALID_CHARS_IN_SINGLEFIELDFORMULA = 319; // default: FALSE
+  public final static int LL_OPTION_TREEVIEWFILTER_MAXIMUM_RECURSION_SEARCH_DEPTH = 320; // default: 10
+  public final static int LL_OPTION_USER_ABORT_CANCELS_POSTPRINTPROCESSING = 321; // default: false
+  public final static int LL_OPTION_NOTOCRESET_ON_RESETPROJECTSTATE = 322; // default: false
+  public final static int LL_OPTION_NOIDXRESET_ON_RESETPROJECTSTATE = 323; // default: false
+  public final static int LL_OPTION_SUPPRESS_FORMULASUBITEMS_IN_VARTREE = 324; // default: false
+  public final static int LL_OPTION_TEMPLATE_OVERRIDES_USER_DESIGNSCHEME = 325; // default: true
+  public final static int LL_OPTION_ALLOW_ASSUMPTION_PRINTERS_CAN_PRINT_MULTIPLE_JOBS_IN_ONE_HDC = 326; // default: true
+  public final static int LL_OPTION_PERSISTENT_PRINTER_USE_FOR_OUTPUT = 327; // default: false
+  public final static int LL_OPTION_GET_CURRENT_PROJECTTYPE = 328; // R/O
+  public final static int LL_OPTION_DELAY_CALC_OF_USED_VARS = 329; // default: false
+  public final static int LL_OPTION_USE_FONT_SIZE_AS_MAXIMUM_SIZE_FOR_TEXTFITTING = 330; // default: false
+  public final static int LL_OPTION_CLIP_FIELDS_EXCEEDING_TABLE_WIDTH = 331; // default: 0
+  public final static int LL_CLIP_FIELDS_VISUALLY        = 1;
+  public final static int LL_CLIP_FIELDS_FIT_AT_LOAD_TIME = 2;
+  public final static int LL_CLIP_FIELDS_FIT_AT_LOAD_TIME_PRINTING_ONLY = 3;
+  public final static int LL_CLIP_FIELDS_FIT_COMPAT      = 4;
+  public final static int LL_CLIP_FIELDS_METHOD_MASK     = 0x0f;
+  public final static int LL_CLIP_FIELDS_FLAG_IGNORE_APPEARANCE_CONDITION = 0x10;
+  public final static int LL_CLIP_FIELDS_FLAG_INCLUDE_NONCONST_WIDTH = 0x20;
+  public final static int LL_OPTION_COMPAT_ALLOW_FIELDS_IN_PROJECT_FILTER = 332; // default: false
+  public final static int LL_OPTION_SUPPRESS_CELLCLIPPING_TO_REPORTCONTAINER = 333; // default: false
+  public final static int LL_OPTION_RSCRIPT_MULTIJOBEXECUTION = 334; // default: 0
+  public final static int LL_OPTION_RETRIES_FOR_STARTDOC = 335; // INT, default: 1
+  public final static int LL_OPTION_PRN_FORCE_PROJECTSIZE_AS_PAPERSIZE = 336; // default: 0 = 1: if "ForcePaperFormat"=TRUE, do not iterate available paper formats and look up a matching one, just put the selected size in the DEVMODE structure and hope for the printer to accept it. 3: )
+  public final static int LL_OPTION_IS_PRINTING          = 337; // r/o, returns if there's an active print job for the current job
+  public final static int LL_OPTION_IDLEITERATIONCHECK_MAX_ITERATIONS = 338; // 0 = no check. default: 0
+  public final static int LL_REPOSITORYTHREADNESS_NONE   = 0;
+  public final static int LL_REPOSITORYTHREADNESS_DONTCARE = 1; // default 
+  public final static int LL_REPOSITORYTHREADNESS_QUERY  = 2;
+  public final static int LL_OPTION_REPOSITORY_THREADEDNESS = 339;
+  public final static int LL_OPTION_ALLOW_EMPTY_STRING_IN_XLAT = 340; // default: false
+  public final static int LL_OPTION_GTC_LASTPOSITION_CONSIDER_INDEX = 341; // default: false
+  public final static int LL_OPTION_DESIGNERACTIONMESSAGE = 342; // r/o - joba handle can be any value, this is global
+  public final static int LL_DESIGNERACTION_REFRESH_VARTREE = 1;
+  public final static int LL_OPTION_DESIGNERFRAME_HWND   = 343; // r/o
+  public final static int LL_OPTION_MULTISECTIONPRINT_MERGE = 344; // r/o
+  public final static int LL_OPTION_COMPAT_ALLOW_FIELDS_IN_STATIC_TABLE = 345; // default: FALSE
+  public final static int LL_OPTION_COMPAT_GROUPHEADER_SAME_PAGE_LOCAL_ONLY = 346; // default: false = must be set to true to behave as LL24)
+  public final static int LL_OPTION_RESERVED_348         = 348; // see #37979
+  public final static int LL_OPTION_COMPAT_PROHIBITFILTERRELATIONS = 349; // default: FALSE
+  public final static int LL_OPTION_ONLY_SHOW_EXISTING_PAPERSIZES_FOR_PRINTER = 350; // default: false... do not add system defined papers to the ist of the printer's paper sizes unless the driver does not return any
+  public final static int LL_OPTION_DEFAULT_DECIMALS     = 351; // default: settings from registry/2. ATTENTION: global option
+  public final static int LL_OPTION_ILLPREPRINTTEXTPROCESSOR = 353; // ILLPrePrintTextProcessor
+  public final static int LL_OPTION_USERVAR_TRACKTEMPLATEOVERRIDE = 354; // default: false
+  public final static int LL_OPTION_PROJECTVAR_IGNOREEMPTY = 355; // default: false
+  public final static int LL_OPTION_SUPPRESS_FUNCTION_POPUP = 356; // default: false
+  public final static int LL_OPTION_SUPPRESS_SYMBOLFONTMAPPING = 357; // default: false - attn: global option!
+  public final static int LL_OPTION_COMPAT_ENABLE_FORCEWRAP_ON_EXPORT = 358; // default: false
+  public final static int LL_OPTION_SORTINDEX_LCMAP_INITFLAGVALUE = 359; // default: 0x1400
+  public final static int LL_OPTION_EXPANDABLE_REGIONS_FORCE_STATE = 360; // default: 0
+  public final static int LL_OPTION_EXPANDABLE_REGIONS_FORCE_STATE_NEUTRAL = 0; // default 
+  public final static int LL_OPTION_EXPANDABLE_REGIONS_FORCE_STATE_OPEN = 1;
+  public final static int LL_OPTION_EXPANDABLE_REGIONS_FORCE_STATE_CLOSE = 2;
+  public final static int LL_OPTION_COMPAT_NULL_IN_COND_ARG1_YIELDS_NULL = 361; // default: false
+  public final static int LL_OPTION_SUPPRESSCROSSTHREADEDWARNING = 362; // default: 0
+  public final static int LL_OPTION_ALLOWSUBREPORTS      = 363; // default: 1
+  public final static int LL_OPTION_INTERNALRELOADOPERATION = 364; // default: 0
+  public final static int LL_INTERNALRELOADOPERATION_NEUTRAL = 0; // default 
+  public final static int LL_INTERNALRELOADOPERATION_LOAD = 1;
+  public final static int LL_INTERNALRELOADOPERATION_ERRORLIST = 2;
+  public final static int LL_OPTION_COMPAT_BODYLINE_CELL_MAY_WRAP_EMPTY_ON_FIRST_PRINT = 365; // default: false
+  public final static int LL_OPTION_RTFEDITOR_SUPPRESS_KEYBOARDAUTOSWITCH = 366; // default: false
+  public final static int LL_OPTION_BUILDTREERECURSEOPTIONS = 367; // default: 32 threshold for active stacksize based formula evaluation recursion detection
+  public final static int LL_OPTION_GROUPFOOTERS_ARE_IMMUTABLE = 368; // default: false
+  public final static int LL_OPTIONSTR_LABEL_PRJEXT                = 0; // internal... = compatibility to L6)
+  public final static int LL_OPTIONSTR_LABEL_PRVEXT                = 1; // internal... = compatibility to L6)
+  public final static int LL_OPTIONSTR_LABEL_PRNEXT                = 2; // internal... = compatibility to L6)
+  public final static int LL_OPTIONSTR_CARD_PRJEXT                 = 3; // internal... = compatibility to L6)
+  public final static int LL_OPTIONSTR_CARD_PRVEXT                 = 4; // internal... = compatibility to L6)
+  public final static int LL_OPTIONSTR_CARD_PRNEXT                 = 5; // internal... = compatibility to L6)
+  public final static int LL_OPTIONSTR_LIST_PRJEXT                 = 6; // internal... = compatibility to L6)
+  public final static int LL_OPTIONSTR_LIST_PRVEXT                 = 7; // internal... = compatibility to L6)
+  public final static int LL_OPTIONSTR_LIST_PRNEXT                 = 8; // internal... = compatibility to L6)
   public final static int LL_OPTIONSTR_LLXPATHLIST                 = 12; //
   public final static int LL_OPTIONSTR_SHORTDATEFORMAT             = 13; //
   public final static int LL_OPTIONSTR_DECIMAL                     = 14; // decimal point, default: system
@@ -661,18 +1009,58 @@ public final class CmbtLL26
   public final static int LL_OPTIONSTR_FAX_SENDERCOMPANY           = 38; //
   public final static int LL_OPTIONSTR_FAX_SENDERDEPT              = 39; //
   public final static int LL_OPTIONSTR_FAX_SENDERBILLINGCODE       = 40; //
-  public final static int LL_OPTIONSTR_FAX_AVAILABLEQUEUES         = 42; // r/o (Tab-separated) [job can be -1 or a valid job]
+  public final static int LL_OPTIONSTR_FAX_AVAILABLEQUEUES         = 42; // r/o = Tab-separated) [job can be -1 or a valid job]
   public final static int LL_OPTIONSTR_LOGFILEPATH                 = 43; //
   public final static int LL_OPTIONSTR_LICENSINGINFO               = 44; // w/o, SERNO to define licensing state
   public final static int LL_OPTIONSTR_PRINTERALIASLIST            = 45; // multiple "PrnOld=PrnNew1[;PrnNew2[;...]]", erase with NULL or ""
-  public final static int LL_OPTIONSTR_PREVIEWFILENAME             = 46; // path of preview file (directory will be overridden by LlSetPrinterDefaultsDir(), if given)
+  public final static int LL_OPTIONSTR_PREVIEWFILENAME             = 46; // path of preview file = directory will be overridden by LlSetPrinterDefaultsDir(), if given)
   public final static int LL_OPTIONSTR_EXPORTS_ALLOWED_IN_PREVIEW  = 47; // set in preview file
   public final static int LL_OPTIONSTR_HELPFILENAME                = 48; //
   public final static int LL_OPTIONSTR_NULLVALUE                   = 49; // string which represents the NULL value
   public final static int LL_OPTIONSTR_DEFAULT_EXPORT              = 50; // default export medium for new projects
   public final static int LL_OPTIONSTR_ORIGINALPROJECTFILENAME     = 51; // fixup project path for relative paths in realdata preview/export in designer
+  public final static int LL_OPTIONSTR_HIERARCHICALDATASOURCE_ROOT = 52; // internal use only
+  public final static int LL_OPTIONSTR_PRINTERDEFINITIONFILENAME = 53; // override for P file name
+  public final static int LL_OPTIONSTR_DOCINFO_DATATYPE  = 54; // DOCINFO.lpszDatatype
+  public final static int LL_OPTIONSTR_IDX_PRJEXT        = 55;
+  public final static int LL_OPTIONSTR_IDX_PRVEXT        = 56;
+  public final static int LL_OPTIONSTR_IDX_PRNEXT        = 57;
+  public final static int LL_OPTIONSTR_TOC_PRJDESCR      = 58;
+  public final static int LL_OPTIONSTR_IDX_PRJDESCR      = 59;
+  public final static int LL_OPTIONSTR_TOC_PRJEXT        = 60;
+  public final static int LL_OPTIONSTR_TOC_PRVEXT        = 61;
+  public final static int LL_OPTIONSTR_TOC_PRNEXT        = 62;
+  public final static int LL_OPTIONSTR_DEFAULTSCHEME     = 63; // default: empty = COMBIT)
+  public final static int LL_OPTIONSTR_DEFAULTPROJECTNAME = 64; // DOCINFO.lpszDatatype
+  public final static int LL_OPTIONSTR_GTC_PRJEXT        = 65;
+  public final static int LL_OPTIONSTR_GTC_PRVEXT        = 66;
+  public final static int LL_OPTIONSTR_GTC_PRNEXT        = 67;
+  public final static int LL_OPTIONSTR_GTC_PRJDESCR      = 68;
+  public final static int LL_OPTIONSTR_ERRORTEXT_FROM_EXPORT = 69; // r/o
+  public final static int LL_OPTIONSTR_DEFAULTPRJDESCR   = 70; // default: empty = localized version of 'List & Label project file')
+  public final static int LL_OPTIONSTR_DEFAULTPRINTER    = 71; // if set, this printer is used instead of the system's default printer = applies to ALL JOBS, so job ID must be "-1"!)
+  public final static int LL_OPTIONSTR_QUERY_LICENSINGINFO = 72; // r/o, returns serial number in return value
+  public final static int LL_OPTIONSTR_RESERVED73        = 73;
+  public final static int LL_OPTIONSTR_REPRESENTATION_BOOL_TRUE = 74;
+  public final static int LL_OPTIONSTR_REPRESENTATION_BOOL_FALSE = 75;
+  public final static int LL_OPTIONSTR_DEFAULT_FILENAME_FOR_SAVEAS = 76; // if set, this filename is used as a default name when "Save as" is chosen from the menu
+  public final static int LL_OPTIONSTR_LABEL_PRJDESCR_SINGULAR = 77;
+  public final static int LL_OPTIONSTR_LIST_PRJDESCR_SINGULAR = 78;
+  public final static int LL_OPTIONSTR_CARD_PRJDESCR_SINGULAR = 79;
+  public final static int LL_OPTIONSTR_TOC_PRJDESCR_SINGULAR = 80;
+  public final static int LL_OPTIONSTR_IDX_PRJDESCR_SINGULAR = 81;
+  public final static int LL_OPTIONSTR_GTC_PRJDESCR_SINGULAR = 82;
+  public final static int LL_OPTIONSTR_DEFAULTIMAGEPATH  = 83;
+  public final static int LL_OPTIONSTR_EMBEDDED_EXPORTS  = 84; // ';' separated list of exports, for example "DOCX;XLSX;PDF". default: none. NOT COMPATIBLE WITH LL_QUERY_FILENAME_FOR_EXPORTJOB = !)
+  public final static int LL_OPTIONSTR_DRILLDOWN_ROOT    = 85; // internal
+  public final static int LL_OPTIONSTR_LEGACY_EXPORTERS_ALLOWED = 86; // ';' separated list of legacy exporters = JQM, HTML) to be allowed. Default is empty.
   public final static int LL_SYSCOMMAND_MINIMIZE                   = -1; //
   public final static int LL_SYSCOMMAND_MAXIMIZE                   = -2; //
+  public final static int LL_PHFG_AGGREGATE              = 0x01;
+  public final static int LL_PHFG_PRINT                  = 0x02;
+  public final static int LL_PHFG_CROSSTAB               = 0x04;
+  public final static int LL_PHFG_OTHERS                 = 0x08;
+  public final static int LL_PHFG_ALL                    = 0xFF;
   public final static int LL_DLGBOXMODE_3DBUTTONS                  = 0x8000; // 'or'ed
   public final static int LL_DLGBOXMODE_3DFRAME2                   = 0x4000; // 'OR'ed
   public final static int LL_DLGBOXMODE_3DFRAME                    = 0x1000; // 'OR'ed
@@ -696,19 +1084,25 @@ public final class CmbtLL26
   public final static int LL_GROUP_ALWAYSFOOTER                    = 0x40000000; //
   public final static int LL_PRINTERCONFIG_SAVE                    = 1; //
   public final static int LL_PRINTERCONFIG_RESTORE                 = 2; //
+  public final static int LL_PRJTYPE_OPTION_FORCEDEFAULTSETTINGS = 0x8000;
+  public final static int LL_PRJTYPE_OPTION_CREATEPARTSFROMPROJECT = 0x4000;
+  public final static int LL_PRJTYPE_OPTION_NOMERGEPRINTERSETTINGS = 0x2000;
   public final static int LL_RTFTEXTMODE_RTF                       = 0x0000; //
   public final static int LL_RTFTEXTMODE_PLAIN                     = 0x0001; //
   public final static int LL_RTFTEXTMODE_EVALUATED                 = 0x0000; //
   public final static int LL_RTFTEXTMODE_RAW                       = 0x0002; //
+  public final static int LL_RTFTEXTFLAG_ALL             = 0x0000;
+  public final static int LL_RTFTEXTFLAG_SELECTION       = 0x0004;
+  public final static int LL_ENUMFLAG_INCLUDE_INTERNAL   = 1; // include internal variables/fields
   public final static int LL_ERR_BAD_JOBHANDLE                     = -1; // bad jobhandle
   public final static int LL_ERR_TASK_ACTIVE                       = -2; // LlDefineLayout() only once in a job
-  public final static int LL_ERR_BAD_OBJECTTYPE                    = -3; // nObjType must be one of the allowed values (obsolete constant)
+  public final static int LL_ERR_BAD_OBJECTTYPE                    = -3; // nObjType must be one of the allowed values = obsolete constant)
   public final static int LL_ERR_BAD_PROJECTTYPE                   = -3; // nObjType must be one of the allowed values
   public final static int LL_ERR_PRINTING_JOB                      = -4; // print job not opened, no print object
   public final static int LL_ERR_NO_BOX                            = -5; // LlPrintSetBoxText(...) called when no abort box exists!
   public final static int LL_ERR_ALREADY_PRINTING                  = -6; // the current operation cannot be performed while a print job is open
   public final static int LL_ERR_NOT_YET_PRINTING                  = -7; // LlPrintGetOptionString...
-  public final static int LL_ERR_NO_PROJECT                        = -10; // object with requested name does not exist (former ERR_NO_OBJECT)
+  public final static int LL_ERR_NO_PROJECT                        = -10; // object with requested name does not exist = former ERR_NO_OBJECT)
   public final static int LL_ERR_NO_PRINTER                        = -11; // printer couldn't be opened
   public final static int LL_ERR_PRINTING                          = -12; // error while printing
   public final static int LL_ERR_EXPORTING                         = -13; // error while exporting
@@ -716,9 +1110,9 @@ public final class CmbtLL26
   public final static int LL_ERR_BAD_PRINTER                       = -15; // PrintOptionsDialog(): no printer available
   public final static int LL_ERR_NO_PREVIEWMODE                    = -16; // Preview functions: not in preview mode
   public final static int LL_ERR_NO_PREVIEWFILES                   = -17; // PreviewDisplay(): no file found
-  public final static int LL_ERR_PARAMETER                         = -18; // bad parameter (usually NULL pointer)
+  public final static int LL_ERR_PARAMETER                         = -18; // bad parameter = usually NULL pointer)
   public final static int LL_ERR_BAD_EXPRESSION                    = -19; // bad expression in LlExprEvaluate() and LlExprType()
-  public final static int LL_ERR_BAD_EXPRMODE                      = -20; // bad expression mode (LlSetExpressionMode())
+  public final static int LL_ERR_BAD_EXPRMODE                      = -20; // bad expression mode = LlSetExpressionMode())
   public final static int LL_ERR_NO_TABLE                          = -21; // not used
   public final static int LL_ERR_CFGNOTFOUND                       = -22; // on LlPrintStart(), LlPrintWithBoxStart() [not found]
   public final static int LL_ERR_EXPRESSION                        = -23; // on LlPrintStart(), LlPrintWithBoxStart()
@@ -738,9 +1132,8 @@ public final class CmbtLL26
   public final static int LL_ERR_UNKNOWNSORTORDER                  = -37; // on LlGetFieldContents()
   public final static int LL_ERR_NOPRINTERCFG                      = -38; // on LlPrintCopyPrinterConfiguration() - no or bad file
   public final static int LL_ERR_SAVEPRINTERCFG                    = -39; // on LlPrintCopyPrinterConfiguration() - file could not be saved
-  public final static int LL_ERR_RESERVED                          = -40; // function not yet implemeted
   public final static int LL_ERR_NOVALIDPAGES                      = -41; // could also be that 16 bit Viewer tries to open 32bit-only storage
-  public final static int LL_ERR_NOTINHOSTPRINTERMODE              = -42; // cannot be done in Host Printer Mode (LlSetPrinterInPrinterFile())
+  public final static int LL_ERR_NOTINHOSTPRINTERMODE              = -42; // cannot be done in Host Printer Mode = LlSetPrinterInPrinterFile())
   public final static int LL_ERR_NOTFINISHED                       = -43; // appears when a project reset() is done, but the table not finished
   public final static int LL_ERR_BUFFERTOOSMALL                    = -44; // LlXXGetOptionStr()
   public final static int LL_ERR_BADCODEPAGE                       = -45; // LL_OPTION_CODEPAGE
@@ -758,15 +1151,23 @@ public final class CmbtLL26
   public final static int LL_ERR_INVALIDOPERATION                  = -57; //
   public final static int LL_ERR_PROPERTY_ALREADY_DEFINED          = -58; //
   public final static int LL_ERR_CFGFOUND                          = -59; // on LlPrjOpen() with CREATE_NEW disposition, or of project file is r/o and access flag is r/w
-  public final static int LL_ERR_SAVECFG                           = -60; // error while saving (LlProjectSave())
-  public final static int LL_ERR_WRONGTHREAD                       = -61; // internal (.NET)
+  public final static int LL_ERR_SAVECFG                           = -60; // error while saving = LlProjectSave())
+  public final static int LL_ERR_WRONGTHREAD                       = -61; // internal = .NET)
+  public final static int LL_ERR_NO_SUCH_INFORMATION     = -62;
+  public final static int LL_ERR_SINK_ALREADY_PRESENT    = -63;
+  public final static int LL_ERR_SINK_NOT_PRESENT        = -64;
+  public final static int LL_ERR_ACCESS_DENIED           = -65;
+  public final static int LL_ERR_IDLEITERATION_DETECTED  = -66;
   public final static int LL_ERR_USER_ABORTED                      = -99; // user aborted printing
-  public final static int LL_ERR_BAD_DLLS                          = -100; // DLLs not up to date (CTL, DWG, UTIL)
+  public final static int LL_ERR_BAD_DLLS                          = -100; // DLLs not up to date = CTL, DWG, UTIL)
   public final static int LL_ERR_NO_LANG_DLL                       = -101; // no or out-of-date language resource DLL
   public final static int LL_ERR_NO_MEMORY                         = -102; // out of memory
   public final static int LL_ERR_EXCEPTION                         = -104; // there was a GPF during the API execution. Any action that follows might cause problems!
-  public final static int LL_ERR_LICENSEVIOLATION                  = -105; // your license does not allow this call (see LL_OPTIONSTR_LICENSINGINFO)
+  public final static int LL_ERR_LICENSEVIOLATION                  = -105; // your license does not allow this call = see LL_OPTIONSTR_LICENSINGINFO)
   public final static int LL_ERR_NOT_SUPPORTED_IN_THIS_OS          = -106; // the OS does not support this function
+  public final static int LL_ERR_NO_MORE_DATA            = -107;
+  public final static int LL_WRN_FIRSTWARNING            = -900;
+  public final static int LL_WRN_REPORTPARAMETERS_COLLECTION_FINISHED = -994; // internal use
   public final static int LL_WRN_ISNULL                            = -995; // LlExprEvaluate[Var]()
   public final static int LL_WRN_TABLECHANGE                       = -996; //
   public final static int LL_WRN_PRINTFINISHED                     = -997; // LlRTFDisplay()
@@ -794,6 +1195,9 @@ public final class CmbtLL26
   public final static int LL_LLX_EXTENSIONTYPE_BARCODE             = 2; //
   public final static int LL_LLX_EXTENSIONTYPE_OBJECT              = 3; // nyi
   public final static int LL_LLX_EXTENSIONTYPE_WIZARD              = 4; // nyi
+  public final static int LL_LLX_EXTENSIONTYPEFLAG_FORCE_PUBLIC = 0x00010000;
+  public final static int LL_LLX_EXTENSIONTYPEFLAG_FORCE_PRIVATE = 0x00020000;
+  public final static int LL_LLX_EXTENSIONTYPE_TYPEMASK  = 0x0000000f;
   public final static int LL_DECLARECHARTROW_FOR_OBJECTS           = 0x00000001; //
   public final static int LL_DECLARECHARTROW_FOR_TABLECOLUMNS      = 0x00000002; // body only
   public final static int LL_DECLARECHARTROW_FOR_TABLECOLUMNS_FOOTERS = 0x00000004; //
@@ -801,6 +1205,8 @@ public final class CmbtLL26
   public final static int LL_GETCHARTOBJECTCOUNT_CHARTOBJECTS_BEFORE_TABLE = 2; //
   public final static int LL_GETCHARTOBJECTCOUNT_CHARTCOLUMNS      = 3; // body only
   public final static int LL_GETCHARTOBJECTCOUNT_CHARTCOLUMNS_FOOTERS = 4; //
+  public final static int LL_VARIANTFLAG_NEUTRAL         = 0x00000000;
+  public final static int LL_VARIANTFLAG_USE_JULIAN_DATE = 0x00000001;
   public final static int LL_GRIPT_DIM_SCM                         = 1; //
   public final static int LL_GRIPT_DIM_PERC                        = 2; //
   public final static int LL_PARAMETERFLAG_PUBLIC                  = 0x00000000; //
@@ -816,23 +1222,33 @@ public final class CmbtLL26
   public final static int LL_PARAMETERTYPE_MAIL                    = 2; //
   public final static int LL_PARAMETERTYPE_LLINTERNAL              = 4; //
   public final static int LL_PARAMETERTYPE_MASK                    = 0x0000000f; //
+  public final static int LL_LOCCONVERSION_LCID          = 0;
+  public final static int LL_LOCCONVERSION_COUNTRYPREFIX = 1;
+  public final static int LL_LOCCONVERSION_COUNTRYISONAME = 2;
+  public final static int LL_LOCCONVERSION_DIALPREFIX    = 3; // Not yet implemented
   public final static int LL_PRJOPEN_AM_READWRITE                  = 0x40000000; //
   public final static int LL_PRJOPEN_AM_READONLY                   = 0x00000000; // default
   public final static int LL_PRJOPEN_AM_MASK                       = 0x40000000; //
   public final static int LL_PRJOPEN_CD_OPEN_EXISTING              = 0x00000000; // fails if it does not exist - default
-  public final static int LL_PRJOPEN_CD_CREATE_ALWAYS              = 0x10000000; // open (but do not read contents) if exists, create if not
+  public final static int LL_PRJOPEN_CD_CREATE_ALWAYS              = 0x10000000; // open = but do not read contents) if exists, create if not
   public final static int LL_PRJOPEN_CD_CREATE_NEW                 = 0x20000000; // fails if already exists
-  public final static int LL_PRJOPEN_CD_OPEN_ALWAYS                = 0x30000000; // open (and load) if exists, create if not
+  public final static int LL_PRJOPEN_CD_OPEN_ALWAYS                = 0x30000000; // open = and load) if exists, create if not
   public final static int LL_PRJOPEN_CD_MASK                       = 0x30000000; // fails if it does not exist
   public final static int LL_PRJOPEN_EM_IGNORE_FORMULAERRORS       = 0x08000000; //
   public final static int LL_PRJOPEN_EM_MASK                       = 0x08000000; //
   public final static int LL_PRJOPEN_FLG_NOINITPRINTER             = 0x04000000; //
+  public final static int LL_PRJOPEN_FLG_NOOBJECTLOAD    = 0x02000000;
+  public final static int LL_PRJOPEN_FLG_RESERVED        = 0x01000000; // internal use
   public final static int LL_ASSOCIATEPREVIEWCONTROLFLAG_DELETE_ON_CLOSE = 0x0001; //
   public final static int LL_ASSOCIATEPREVIEWCONTROLFLAG_HANDLE_IS_ATTACHINFO = 0x0002; //
+  public final static int LL_ASSOCIATEPREVIEWCONTROLFLAG_PRV_REPLACE = 0x0000;
+  public final static int LL_ASSOCIATEPREVIEWCONTROLFLAG_PRV_ADD_TO_CONTROL_STACK = 0x0004;
+  public final static int LL_ASSOCIATEPREVIEWCONTROLFLAG_PRV_ADD_TO_CONTROL_IN_TAB = 0x0008;
+  public final static int LL_ASSOCIATEPREVIEWCONTROLMASK_ATTACHLOCATION = 0x003c;
   public final static int LL_DESFILEOPEN_OPEN_EXISTING             = 0x00000000; // fails if it does not exist - default
-  public final static int LL_DESFILEOPEN_CREATE_ALWAYS             = 0x10000000; // open (but do not read contents) if exists, create if not
+  public final static int LL_DESFILEOPEN_CREATE_ALWAYS             = 0x10000000; // open = but do not read contents) if exists, create if not
   public final static int LL_DESFILEOPEN_CREATE_NEW                = 0x20000000; // fails if already exists
-  public final static int LL_DESFILEOPEN_OPEN_ALWAYS               = 0x30000000; // open (and load) if exists, create if not
+  public final static int LL_DESFILEOPEN_OPEN_ALWAYS               = 0x30000000; // open = and load) if exists, create if not
   public final static int LL_DESFILEOPEN_OPEN_IMPORT               = 0x40000000; // fails if it does not exist - only imports data
   public final static int LL_DESFILEOPEN_OPENMASK                  = 0x70000000; //
   public final static int LL_DESFILEOPENFLAG_SUPPRESS_SAVEDIALOG   = 0x00000001; //
@@ -856,6 +1272,7 @@ public final class CmbtLL26
   public final static int LL_USEDIDENTIFIERSFLAG_CHARTFIELDS		= 0x0004; //
   public final static int LL_USEDIDENTIFIERSFLAG_TABLES					= 0x0008; //
   public final static int LL_USEDIDENTIFIERSFLAG_RELATIONS			= 0x0010; //
+  public final static int LL_USEDIDENTIFIERSFLAG_FILES   = 0x0020;
   public final static int LL_TEMPFILENAME_DEFAULT							= 0x0000; //
   public final static int LL_TEMPFILENAME_ENSURELONGPATH				= 0x0001; //
   public final static int LL_DICTIONARY_TYPE_STATIC      = 1;
@@ -864,6 +1281,36 @@ public final class CmbtLL26
   public final static int LL_DICTIONARY_TYPE_RELATION    = 4;
   public final static int LL_DICTIONARY_TYPE_SORTORDER   = 5;
   public final static int LL_DICTIONARY_TYPE_ALL         = 0; // only valid for NULL, NULL to clear all dictionaries in one run
+  public final static int LL_UILANGUAGETYPE_NORMAL       = 0x00000001;
+  public final static int LL_UILANGUAGETYPE_TRIAL        = 0x00000002;
+  public final static int LL_ADDTABLEOPT_SUPPORTSSTACKEDSORTORDERS = 0x00000001;
+  public final static int LL_ADDTABLEOPT_SUPPORTSADVANCEDFILTERING = 0x00000002;
+  public final static int LL_ADDTABLEOPT_1TO1_RELATION_ONLY = 0x00000004;
+  public final static int LL_INPLACEDESIGNERINTERACTION_QUERY_CANCLOSE = 1; // wParam = 0, lParam = &BOOL
+  public final static int LL_JOBSTATEFLAG_VARLIST        = 0x00000001;
+  public final static int LL_JOBSTATEFLAG_FIELDLIST      = 0x00000002;
+  public final static int LL_JOBSTATEFLAG_CHARTFIELDLIST = 0x00000004;
+  public final static int LL_JOBSTATEFLAG_DATABASESTRUCT = 0x00000008;
+  public final static int LL_JOBSTATEFLAG_DICTIONARIES   = 0x00000010;
+  public final static int LL_JOBSTATEFLAG_JOBSETTINGS    = 0x00000020;
+  public final static int LL_JOBSTATEFLAG_ALL            = 0x0000003F;
+  public final static int LL_EXPRXLATRESULT_OPTIMAL      = 0x00000000;
+  public final static int LL_EXPRXLATRESULT_PARTIAL      = 0x00000001;
+  public final static int LL_EXPRXLATRESULT_FAIL         = 0x00000002;
+  public final static int LL_EXPRXLATRESULT_MASK         = 0x00000007; // some reserve
+  public final static int LLSTGTESTSTGCMP_MASK_PAGECOUNT = 0x000000ff;
+  public final static int LLSTGTESTSTGCMP_FLAG_PRVSINGLEPAGE = 0x00000100;
+  public final static int LLSTGTESTSTGCMP_FLAG_EXCLUDE_EMBEDDEDSTORAGES = 0x00000200;
+  public final static int LLSRTRIGGEREXPORT_DISCARD_EXPANDABLE_REGIONS = 1;
+  public final static int LLJOBOPENCOPYEXFLAG_NO_COPY_FIELDLIST = 0x0001;
+  public final static int LLJOBOPENCOPYEXFLAG_NO_COPY_DBSTRUCTS = 0x0002;
+  public final static int LLJOBOPENCOPYEXFLAG_NO_COPY_XLATTABLES = 0x0004;
+  public final static int LLJOBOPENCOPYEXFLAG_NO_COPY_LLXPARAMETERS = 0x0008;
+  public final static int LL_DOM_CURRENT_OBJECT_LEVEL_OBJECT = 0;
+  public final static int LL_DOM_CURRENT_OBJECT_LEVEL_CONTAINERITEM = 1;
+  public final static int LL_DOM_CURRENT_OBJECT_LEVEL_FIELD = 2;
+  public final static int LL_FIND_AND_REPLACE_FLAG_CASEINSENSITIVE = 0;
+  public final static int LL_FIND_AND_REPLACE_FLAG_CASESENSITIVE = 1;
 
   private CmbtLL2632 LL26_32 = null;
   private CmbtLL2664 LL26_64 = null;
