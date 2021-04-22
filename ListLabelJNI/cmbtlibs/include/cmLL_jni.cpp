@@ -2781,16 +2781,34 @@ JNIEXPORT void JNICALL FCT(_LlProfileEnd)(
 
 // =======================================================================
 JNIEXPORT jint JNICALL FCT(_LlDbAddTable)(
-																							JNIEnv* pJEnv, 
-																							jobject /*oJObject*/, // unused 
-																							jint LlJob, 
-																							jstring TableID, 
-																							jstring DisplayName
-																							)
-// =======================================================================
+	JNIEnv* pJEnv,
+	jobject /*oJObject*/, // unused 
+	jint LlJob,
+	jstring TableID,
+	jstring DisplayName
+	)
+	// =======================================================================
 {
 	jni_env_registry.add(LlJob, pJEnv);
-    jint res = ((jint)(LlDbAddTable((HLLJOB)(LlJob), ConvertJStringToCString(pJEnv, TableID), ConvertJStringToCString(pJEnv, DisplayName))));
+	jint res = ((jint)(LlDbAddTable((HLLJOB)(LlJob), ConvertJStringToCString(pJEnv, TableID), ConvertJStringToCString(pJEnv, DisplayName))));
+	jni_env_registry.rem(LlJob);
+	return res;
+}
+
+
+// =======================================================================
+JNIEXPORT jint JNICALL FCT(_LlDbAddTableEx)(
+	JNIEnv* pJEnv,
+	jobject /*oJObject*/, // unused 
+	jint LlJob,
+	jstring TableID,
+	jstring DisplayName,
+	jint Options
+	)
+	// =======================================================================
+{
+	jni_env_registry.add(LlJob, pJEnv);
+	jint res = ((jint)(LlDbAddTableEx((HLLJOB)(LlJob), ConvertJStringToCString(pJEnv, TableID), ConvertJStringToCString(pJEnv, DisplayName), (UINT)Options)));
 	jni_env_registry.rem(LlJob);
 	return res;
 }
@@ -3401,7 +3419,7 @@ JNIEXPORT jint JNICALL FCT(_LlExprGetUsedVarsEx)(
 
 
 // =======================================================================
-JNIEXPORT jint JNICALL FCT(_LlDomGetProject)(
+JNIEXPORT jHANDLE JNICALL FCT(_LlDomGetProject)(
 											JNIEnv* pJEnv, 
 											jobject /*oJObject*/, // unused 
 											jint LlJob, 
@@ -3411,18 +3429,19 @@ JNIEXPORT jint JNICALL FCT(_LlDomGetProject)(
 {
 	// register for LL-callbacks
 	jni_env_registry.add(LlJob, pJEnv);
-	
-    // call ll-function
-	HLLDOMOBJ hObj;
-	intptr_t nReturn = LlDomGetProject((int)LlJob, &hObj);
-	if(nReturn == 0)
-		nReturn = (intptr_t)hObj;
-	
+
+	// call ll-function
+	HLLDOMOBJ   hObj;
+	jHANDLE     result = NULL;
+
+	if (LlDomGetProject((int)LlJob, &hObj) == 0)
+		result = (jHANDLE)(intptr_t)hObj;
+
 	// unregister LL-callbacks
 	jni_env_registry.rem(LlJob);
-	
+
 	// return function
-	return (jint)nReturn; // attention: caller have to check, wether the return-value is a valid object handle (HIWORD(nReturn) == (WORD)-1 -> no valid handle!)
+	return result; // change: nullptr on error, no information about the reason except debug logging
 }
 
 
@@ -3507,7 +3526,7 @@ JNIEXPORT jint JNICALL FCT(_LlDomSetProperty)(
 
 
 // =======================================================================
-JNIEXPORT jint JNICALL FCT(_LlDomGetObject)(
+JNIEXPORT jHANDLE JNICALL FCT(_LlDomGetObject)(
 											JNIEnv* pJEnv, 
 											jobject /*oJObject*/, // unused 
 											jHLLDOMOBJ DOMObj,
@@ -3526,15 +3545,15 @@ JNIEXPORT jint JNICALL FCT(_LlDomGetObject)(
 	
 	// call ll-function
 	HLLDOMOBJ hObj;
-	intptr_t nReturn = LlDomGetObject((HLLDOMOBJ)DOMObj, (CString)sName, &hObj);
-	if(nReturn == 0)
-		nReturn = (intptr_t)hObj;
+	jHANDLE nReturn = NULL;
+	if(LlDomGetObject((HLLDOMOBJ)DOMObj, (CString)sName, &hObj) == 0)
+		nReturn = (jHANDLE)(intptr_t)hObj;
 	
 	// unregister LL-callbacks
 	jni_env_registry.rem((jint)DOMObj);
 	
 	// return function
-	return (jint)nReturn; // attention: caller have to check, wether the return-value is a valid object handle (HIWORD(nReturn) == (WORD)-1 -> no valid handle!)
+	return nReturn; // change: nullptr on error, no information about the reason except debug logging
 }
 
 
@@ -3565,7 +3584,7 @@ JNIEXPORT jint JNICALL FCT(_LlDomGetSubobjectCount)(
 
 
 // =======================================================================
-JNIEXPORT jint JNICALL FCT(_LlDomGetSubobject)(
+JNIEXPORT jHANDLE JNICALL FCT(_LlDomGetSubobject)(
 												JNIEnv* pJEnv, 
 												jobject /*oJObject*/, // unused 
 												jHLLDOMOBJ DOMObj,
@@ -3579,20 +3598,20 @@ JNIEXPORT jint JNICALL FCT(_LlDomGetSubobject)(
 	
 	// call ll-function
 	HLLDOMOBJ hObj;
-	intptr_t nReturn = LlDomGetSubobject((HLLDOMOBJ)DOMObj, (int)Position, &hObj);
-	if(nReturn == 0)
-		nReturn = (intptr_t)hObj;
+	jHANDLE nReturn = NULL;
+	if(LlDomGetSubobject((HLLDOMOBJ)DOMObj, (int)Position, &hObj) == 0)
+		nReturn = (jHANDLE)(intptr_t)hObj;
 	
 	// unregister LL-callbacks
 	jni_env_registry.rem((jint)DOMObj);
 	
 	// return function
-	return (jint)nReturn; // attention: caller have to check, wether the return-value is a valid object handle (HIWORD(nReturn) == (WORD)-1 -> no valid handle!)
+	return nReturn; // change: nullptr on error, no information about the reason except debug logging
 }
 
 
 // =======================================================================
-JNIEXPORT jint JNICALL FCT(_LlDomCreateSubobject)(
+JNIEXPORT jHANDLE JNICALL FCT(_LlDomCreateSubobject)(
 												JNIEnv* pJEnv, 
 												jobject /*oJObject*/, // unused 
 												jHLLDOMOBJ DOMObj, 
@@ -3612,15 +3631,15 @@ JNIEXPORT jint JNICALL FCT(_LlDomCreateSubobject)(
 	
 	// call ll-function
 	HLLDOMOBJ hObj;
-	intptr_t nReturn = LlDomCreateSubobject((HLLDOMOBJ)DOMObj, (int)Position, (CString)sType, &hObj);
-	if(nReturn == 0)
-		nReturn = (intptr_t)hObj;
+	jHANDLE nReturn = NULL;
+	if(LlDomCreateSubobject((HLLDOMOBJ)DOMObj, (int)Position, (CString)sType, &hObj) == 0)
+		nReturn = (jHANDLE)(intptr_t)hObj;
 	
 	// unregister LL-callbacks
 	jni_env_registry.rem((jint)DOMObj);
 	
 	// return function
-	return (jint)nReturn; // attention: caller have to check, wether the return-value is a valid object handle (HIWORD(nReturn) == (WORD)-1 -> no valid handle!)
+	return nReturn; // change: nullptr on error, no information about the reason except debug logging
 }
 
 

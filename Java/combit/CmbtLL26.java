@@ -2,7 +2,7 @@
 // Java Declaration File
 // constants and function definitions for combit List & Label 26
 // Copyright (c) combit Software GmbH, Konstanz, Germany
-// Version: 26.001
+// Version: 26.002
 //
 
 package combit;
@@ -3812,6 +3812,28 @@ public final class CmbtLL26
 	  }
 	}
 
+	public int LlDbAddTableEx
+	(
+	int                  Job,
+	final String         TableID,
+	final String         DisplayName,
+	int					 Options
+	)
+	{
+	  if(LL26_32 != null)
+	  {
+		  return LL26_32.LlDbAddTableEx(Job, TableID, DisplayName, Options);
+	  }
+	  else if(LL26_64 != null)
+	  {
+		  return LL26_64.LlDbAddTableEx(Job, TableID, DisplayName, Options);
+	  }
+	  else
+	  {
+		  throw new UnsupportedOperationException("Platform not supported by List & Label");
+	  }
+	}
+
   public int LlDbAddTableRelation
 	(
 	int                  Job,
@@ -4124,7 +4146,7 @@ public final class CmbtLL26
 	  }
 	}
 
-  public int LlDomGetProject
+  public long LlDomGetProject
 	(
 	int                  LlJob,
 	long                 DOMObj
@@ -4186,7 +4208,7 @@ public final class CmbtLL26
 	  }
 	}
 
-  public int LlDomGetObject
+  public long LlDomGetObject
 	(
 	long                 DOMObj,
 	final String         Name,
@@ -4227,7 +4249,7 @@ public final class CmbtLL26
 	  }
 	}
 
-  public int LlDomGetSubobject
+  public long LlDomGetSubobject
 	(
 	long                 DOMObj,
 	int                  Position,
@@ -4248,7 +4270,7 @@ public final class CmbtLL26
 	  }
 	}
 
-  public int LlDomCreateSubobject
+  public long LlDomCreateSubobject
 	(
 	long                 DOMObj,
 	int                  Position,

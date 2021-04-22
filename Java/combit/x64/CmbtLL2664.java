@@ -2,7 +2,7 @@
 // Java Declaration File
 // constants and function definitions for combit List & Label 26
 // Copyright (c) combit Software GmbH, Konstanz, Germany
-// Version: 26.000
+// Version: 26.002
 //
 
 package combit.x64;
@@ -813,6 +813,14 @@ public final class CmbtLL2664
 	final String         DisplayName
 	);
 
+  public native int LlDbAddTableEx
+	(
+	int                  Job,
+	final String         TableID,
+	final String         DisplayName,
+	int					 Options
+	);
+
   public native int LlDbAddTableRelation
 	(
 	int                  Job,
@@ -915,7 +923,7 @@ public final class CmbtLL2664
 	boolean              OrgName
 	);
 
-  public native int LlDomGetProject
+  public native long LlDomGetProject
 	(
 	int                  LlJob,
 	long                 DOMObj
@@ -935,7 +943,7 @@ public final class CmbtLL2664
 	final String         Value
 	);
 
-  public native int LlDomGetObject
+  public native long LlDomGetObject
 	(
 	long                 DOMObj,
 	final String         Name,
@@ -948,14 +956,14 @@ public final class CmbtLL2664
 	long                 Count
 	);
 
-  public native int LlDomGetSubobject
+  public native long LlDomGetSubobject
 	(
 	long                 DOMObj,
 	int                  Position,
 	long                 DOMSubObj
 	);
 
-  public native int LlDomCreateSubobject
+  public native long LlDomCreateSubobject
 	(
 	long                 DOMObj,
 	int                  Position,
