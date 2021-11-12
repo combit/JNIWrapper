@@ -11,11 +11,11 @@
 
 #if defined(_WIN64)
 
-	#define FCT(f) __GLUE3(Java_combit_x64_CmbtLL26, 64, f)
+	#define FCT(f) __GLUE3(Java_combit_x64_CmbtLL27, 64, f)
 
 #else
 
-	#define FCT(f) __GLUE3(Java_combit_x86_CmbtLL26, 32, f)
+	#define FCT(f) __GLUE3(Java_combit_x86_CmbtLL27, 32, f)
 
 #endif
 

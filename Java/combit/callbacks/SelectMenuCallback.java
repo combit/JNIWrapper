@@ -3,13 +3,13 @@
 package combit.callbacks;
 
 // imports
-import combit.CmbtLL26;
+import combit.CmbtLL27;
 
 /**
 * Description: Notification that a menu has been selected.
 *
 * @author Copyright (c) combit Software GmbH
-* @version 26.0
+* @version 27.0
 */
 
 public class SelectMenuCallback extends CallbackInfo
@@ -33,7 +33,7 @@ public class SelectMenuCallback extends CallbackInfo
   */
   public SelectMenuCallback(int hLlJob, int menuID)
   {
-    super(hLlJob, CmbtLL26.LL_CMND_SELECTMENU);
+    super(hLlJob, CmbtLL27.LL_CMND_SELECTMENU);
     menuID_ = menuID;
     lResult_ = false;
   }

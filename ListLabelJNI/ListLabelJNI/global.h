@@ -70,11 +70,11 @@ public:
 
 
 // Environment registry: any LL method that potentially may have callbacks
-// should register itself (see: Java_combit_CmbtLL26_LlPrint)
+// should register itself (see: Java_combit_CmbtLL27_LlPrint)
 extern Registry<JNIEnv*> jni_env_registry;
 
 // Callback registry: holds callback objects provided by user
-// (see Java_combit_CmbtLL26_LlSetNotificationCallback).
+// (see Java_combit_CmbtLL27_LlSetNotificationCallback).
 extern Registry<jobject> jni_callback_registry;
 
 

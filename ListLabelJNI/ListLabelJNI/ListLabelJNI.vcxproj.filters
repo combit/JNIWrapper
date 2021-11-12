@@ -56,10 +56,10 @@
     <None Include="res\ListLabelJNI.rc2">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\Java\combit\CmbtLL26.java">
+    <None Include="..\..\Java\combit\CmbtLL27.java">
       <Filter>_Java\combit</Filter>
     </None>
-    <None Include="..\..\Java\combit\CmbtLS26.java">
+    <None Include="..\..\Java\combit\CmbtLS27.java">
       <Filter>_Java\combit</Filter>
     </None>
     <None Include="..\..\Java\combit\WinHelper.java">
@@ -68,19 +68,19 @@
     <None Include="..\..\Java\combit\callbacks\EvaluateCallback.java">
       <Filter>_Java\combit\callbacks</Filter>
     </None>
-    <None Include="..\..\Java\combit\x64\CmbtLL2664.java">
+    <None Include="..\..\Java\combit\x64\CmbtLL2764.java">
       <Filter>_Java\combit\x64</Filter>
     </None>
-    <None Include="..\..\Java\combit\x64\CmbtLS2664.java">
+    <None Include="..\..\Java\combit\x64\CmbtLS2764.java">
       <Filter>_Java\combit\x64</Filter>
     </None>
     <None Include="..\..\Java\combit\x64\WinHelper64.java">
       <Filter>_Java\combit\x64</Filter>
     </None>
-    <None Include="..\..\Java\combit\x86\CmbtLL2632.java">
+    <None Include="..\..\Java\combit\x86\CmbtLL2732.java">
       <Filter>_Java\combit\x86</Filter>
     </None>
-    <None Include="..\..\Java\combit\x86\CmbtLS2632.java">
+    <None Include="..\..\Java\combit\x86\CmbtLS2732.java">
       <Filter>_Java\combit\x86</Filter>
     </None>
     <None Include="..\..\Java\combit\x86\WinHelper32.java">
