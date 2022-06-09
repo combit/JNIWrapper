@@ -1,7 +1,7 @@
-# Project Description
-Accessing the List & Label API from Java is not directly possible, because it is a native C++ API. Therefore you need a Translation-Layer to communicate from Java to List & Label (C++) and back to Java. This is achieved by using the Jave Native Interface (JNI) which is a standard programming interface for writing Java native methods. See also https://en.wikipedia.org/wiki/Java_Native_Interface
+# List & Label JNI Wrapper
+Accessing the API of the **List & Label Reporting Tool** from Java is not directly possible, because it is a native C++ API. Therefore you need a Translation-Layer to communicate from Java to List & Label (C++) and back to Java. This is achieved by using the Jave Native Interface (JNI) which is a standard programming interface for writing Java native methods. See also [Java Native Interface - Wikipedia](https://en.wikipedia.org/wiki/Java_Native_Interface).
 
-This project contains a Visual Studio C++ project for such a Translation-Layer and its output generates a JNI Wrapper DLL. Additionally, the necessary Java (Declaration) files are also included. Inside of your Java application source code you can simply access the List & Label native APIs like this:
+This repository contains a Visual Studio C++ project for such a Translation-Layer and its output generates a JNI Wrapper DLL. Additionally, the necessary Java (Declaration) files are also included. Inside of your Java application source code you can simply access the List & Label native APIs like this:
   ```
   // Create object for accessing the JNI of List & Label
   CmbtLL?? Ll = new CmbtLL??();
@@ -17,28 +17,31 @@ This project contains a Visual Studio C++ project for such a Translation-Layer a
   Ll.LlJobClose(nLLJob_);
   ```
 
-For a fully functional free 30-day trial version and further information about reporting tool List & Label please visit: https://www.combit.com/reporting-tool/
-
 # What's Available so Far
-* The fundamentals of course: calling the Designer and printing or exporting with options
-* Working with one report container in a Designer project
-* Using relations, sortings and groupings
-* Real data preview and export within the Designer
-* Report parameters for filtering
-* Accessing Designer projects with the DOM (Document Object Model) API from source code at runtime
-* Both x86 and x64 support
+- The fundamentals of course: calling the Designer and printing or exporting with options
+- Working with one report container in a Designer project
+- Using relations, sortings and groupings
+- Real data preview and export within the Designer
+- Report parameters for filtering
+- Accessing Designer projects with the DOM (Document Object Model) API from source code at runtime
+- Both x86 and x64 support
 
-# How Can I Help?
-We're happy to receive pull requests. Fields of interest include
+# Contributions
+We're happy to receive pull requests for any improvements on this repository.
 
-* Own Designer functions, objects and actions
-* Drilldown-reporting and expandable regions
-* Implementation of the ILlDataProvider Interface enables a lot more features like
+Further fields of interest include:
+- Own Designer functions, objects and actions
+- Drilldown-reporting and expandable regions
+- Implementation of the ILlDataProvider Interface enables a lot more features like
     - using multiple report containers per Designer project 
     - nested tables 
     - autosize for column widths 
     - printing columns across-down 
     - etc.
-* Windows DEVMODE structure support for calling LlSetPrinterInPrinterFile for special printer settings
+- Windows DEVMODE structure support for calling LlSetPrinterInPrinterFile for special printer settings
 
-Any feedback as well as additional contributions are very welcome, just contact the project's administrator.
+# About List & Label and Where to Get
+List & Label is our **Reporting Tool for Software Developers** for desktop, web and cloud applications. For further information and a fully functional free 30-day trial version please visit our [website](https://www.combit.com/reporting-tool/).
+
+# Contact
+Please contact us at [github@combit.com](mailto:github@combit.com) with any additional feedback.
