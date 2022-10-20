@@ -3,14 +3,14 @@
 package combit.callbacks;
 
 // imports
-import combit.CmbtLL27;
+import combit.CmbtLL28;
 import java.util.HashMap;
 
 /**
 * Description: Allows the host application to disable menu items in List & Label. For more information see the Programmer's Manual.
 *
 * @author Copyright (c) combit Software GmbH
-* @version 27.0
+* @version 28.0
 */
 
 public class EnableMenuCallback extends CallbackInfo
@@ -34,7 +34,7 @@ public class EnableMenuCallback extends CallbackInfo
   */
   public EnableMenuCallback(int hLlJob, int hMenu)
   {
-    super(hLlJob, CmbtLL27.LL_CMND_ENABLEMENU);
+    super(hLlJob, CmbtLL28.LL_CMND_ENABLEMENU);
     hMenu_ = hMenu;
 
     // init hashmap

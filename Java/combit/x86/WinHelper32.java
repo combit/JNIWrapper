@@ -1,8 +1,8 @@
 //
 // Java Declaration File
-// constants and function definitions for combit List & Label 27
+// constants and function definitions for combit List & Label 28
 // Copyright (c) combit Software GmbH, Konstanz, Germany
-// Version: 27.000
+// Version: 28.000
 //
 
 package combit.x86;
@@ -29,6 +29,6 @@ public final class WinHelper32
 	
 	static
 	  {
-		System.loadLibrary("ListLabel27JNI_x86"); // use List & Label JNI x86
+		System.loadLibrary("ListLabel28JNI_x86"); // use List & Label JNI x86
 	  }
   };

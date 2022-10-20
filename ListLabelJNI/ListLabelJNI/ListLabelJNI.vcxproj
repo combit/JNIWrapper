@@ -22,33 +22,38 @@
     <ProjectGuid>{273E46C6-F18E-4666-ABFB-9A5929720D43}</ProjectGuid>
     <RootNamespace>ListLabelJNI</RootNamespace>
     <Keyword>MFCDLLProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <SpectreMitigation>Spectre</SpectreMitigation>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
+    <SpectreMitigation>Spectre</SpectreMitigation>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <SpectreMitigation>Spectre</SpectreMitigation>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
+    <SpectreMitigation>Spectre</SpectreMitigation>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -77,25 +82,25 @@
     <OutDir>.\..\bin\Deb32\</OutDir>
     <IntDir>.\..\bin\Deb32\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>ListLabel27JNI_x86</TargetName>
+    <TargetName>ListLabel28JNI_x86</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>.\..\bin\Deb64\</OutDir>
     <IntDir>.\..\bin\Deb64\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>ListLabel27JNI_x64</TargetName>
+    <TargetName>ListLabel28JNI_x64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>.\..\bin\Rel32\</OutDir>
     <IntDir>.\..\bin\Rel32\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>ListLabel27JNI_x86</TargetName>
+    <TargetName>ListLabel28JNI_x86</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>.\..\bin\Rel64\</OutDir>
     <IntDir>.\..\bin\Rel64\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>ListLabel27JNI_x64</TargetName>
+    <TargetName>ListLabel28JNI_x64</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -126,9 +131,9 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>cmLL27.lib;cmLS27.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cmLL28.lib;cmLS28.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
-      <OutputFile>$(OutDir)ListLabel27JNI_x86.dll</OutputFile>
+      <OutputFile>$(OutDir)ListLabel28JNI_x86.dll</OutputFile>
       <AdditionalLibraryDirectories>..\cmbtlibs\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\ListLabelJNI.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -174,9 +179,9 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>cxLL27.lib;cxLS27.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cxLL28.lib;cxLS28.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
-      <OutputFile>$(OutDir)ListLabel27JNI_x64.dll</OutputFile>
+      <OutputFile>$(OutDir)ListLabel28JNI_x64.dll</OutputFile>
       <AdditionalLibraryDirectories>..\cmbtlibs\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\ListLabelJNI.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -220,8 +225,8 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>cmLL27.lib;cmLS27.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)ListLabel27JNI_x86.dll</OutputFile>
+      <AdditionalDependencies>cmLL28.lib;cmLS28.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)ListLabel28JNI_x86.dll</OutputFile>
       <AdditionalLibraryDirectories>..\cmbtlibs\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\ListLabelJNI.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -267,8 +272,8 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>cxLL27.lib;cxLS27.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)ListLabel27JNI_x64.dll</OutputFile>
+      <AdditionalDependencies>cxLL28.lib;cxLS28.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)ListLabel28JNI_x64.dll</OutputFile>
       <AdditionalLibraryDirectories>..\cmbtlibs\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\ListLabelJNI.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -299,16 +304,16 @@
     <ClCompile Include="WinHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Java\combit\x64\CmbtLL2764.java" />
-    <None Include="..\..\Java\combit\x64\CmbtLS2764.java" />
+    <None Include="..\..\Java\combit\x64\CmbtLL2864.java" />
+    <None Include="..\..\Java\combit\x64\CmbtLS2864.java" />
     <None Include="..\..\Java\combit\x64\WinHelper64.java" />
-    <None Include="..\..\Java\combit\x86\CmbtLL2732.java" />
-    <None Include="..\..\Java\combit\x86\CmbtLS2732.java" />
+    <None Include="..\..\Java\combit\x86\CmbtLL2832.java" />
+    <None Include="..\..\Java\combit\x86\CmbtLS2832.java" />
     <None Include="..\..\Java\combit\x86\WinHelper32.java" />
     <None Include="ListLabelJNI.def" />
     <None Include="res\ListLabelJNI.rc2" />
-    <None Include="..\..\Java\combit\CmbtLL27.java" />
-    <None Include="..\..\Java\combit\CmbtLS27.java" />
+    <None Include="..\..\Java\combit\CmbtLL28.java" />
+    <None Include="..\..\Java\combit\CmbtLS28.java" />
     <None Include="..\..\Java\combit\WinHelper.java" />
     <CustomBuild Include="..\..\Java\combit\callbacks\Callback.java">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

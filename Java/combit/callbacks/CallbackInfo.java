@@ -6,7 +6,7 @@ package combit.callbacks;
 * Description: Superclass for the specified parameters for the List & Label callbacks.
 *
 * @author Copyright (c) combit Software GmbH
-* @version 27.0
+* @version 28.0
 */
 
 public class CallbackInfo

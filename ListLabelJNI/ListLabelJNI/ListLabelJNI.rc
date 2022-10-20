@@ -77,8 +77,8 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 27,0,0,0
- PRODUCTVERSION 27,0,0,0
+ FILEVERSION 28,0,0,0
+ PRODUCTVERSION 28,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -94,13 +94,13 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "combit GmbH"
-            VALUE "FileDescription", "ListLabel27JNI DLL"
-            VALUE "FileVersion", "27.0.0.0"
-            VALUE "InternalName", "ListLabel27JNI"
+            VALUE "FileDescription", "ListLabel28JNI DLL"
+            VALUE "FileVersion", "28.0.0.0"
+            VALUE "InternalName", "ListLabel28JNI"
             VALUE "LegalCopyright", "Copyright (C) combit GmbH.  All rights reserved."
-            VALUE "OriginalFilename", "ListLabel27JNI.dll"
-            VALUE "ProductName", "ListLabel27JNI Dynamic Link Library"
-            VALUE "ProductVersion", "27.0.0.0"
+            VALUE "OriginalFilename", "ListLabel28JNI.dll"
+            VALUE "ProductName", "ListLabel28JNI Dynamic Link Library"
+            VALUE "ProductVersion", "28.0.0.0"
         END
     END
     BLOCK "VarFileInfo"

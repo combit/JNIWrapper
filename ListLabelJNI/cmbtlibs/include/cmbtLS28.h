@@ -1,11 +1,11 @@
-/**** C/C++ constants and function definitions for LS27.DLL ****/
+/**** C/C++ constants and function definitions for LS28.DLL ****/
 /****  (c) combit GmbH ****/
-/****  [build of 2020-11-30 08:11:39] ****/
+/****  [build of 2022-08-29 20:08:42] ****/
 
-#ifndef _LS27_H /* include header only once */
-#define _LS27_H
+#ifndef _LS28_H /* include header only once */
+#define _LS28_H
 
-#if !defined(_LS27_DONT_INCLUDE_OLE2_H) && !defined(_RC_INVOKED_) && !defined(RC_INVOKED)
+#if !defined(_LS28_DONT_INCLUDE_OLE2_H) && !defined(_RC_INVOKED_) && !defined(RC_INVOKED)
   #if defined(WIN32)
     #include <ole2.h>
   #endif
@@ -243,6 +243,7 @@
 #define LL_ERR_STG_UNKNOWN_CONVERTER   (-1018               )
 #define LL_ERR_STG_INET_ERROR          (-1019               )
 #define LL_ERR_STG_NOTFOUND            (-1020               )
+#define LL_ERR_STG_SEND_FAILED_NEED_OAUTH2_TOKEN (-1021               )
 #define LL_WRN_STG_UNFAXED_PAGES       (-1100               )
 #define LS_OPTION_HAS16BITPAGES        (200                 ) /* has job 16 bit pages? */
 #define LS_OPTION_BOXTYPE              (201                 ) /* wait meter box type */
@@ -258,6 +259,7 @@
 #define LS_OPTION_INPUTOBJECTSFINISHED (212                 )
 #define LS_OPTION_HASHYPERLINKS        (213                 )
 #define LS_OPTION_USED_PRINTERCOUNT    (214                 ) /* count of printers actually used (compares DEVMODEs etc) */
+#define LS_OPTION_JOB_GTC_COUNT        (215                 ) /* returns number of GTC pages, use this for each job, not with bOneJobTranslation */
 #define LS_OPTION_PAGENUMBER           (0                   ) /* page number of current page */
 #define LS_OPTION_COPIES               (1                   ) /* number of copies (same for all pages at the moment) */
 #define LS_OPTION_PRN_ORIENTATION      (2                   ) /* orientation (DMORIENT_LANDSCAPE, DMORIENT_PORTRAIT) */
@@ -405,7 +407,7 @@
 #define LS_VIEWERCONTROL_RESET_ZOOM    (WM_USER+13          )
 #define LS_VIEWERCONTROL_SET_ZOOM_TWICE (WM_USER+14          )
 #define LS_VIEWERCONTROL_SET_PAGE      (WM_USER+20          ) /* wParam = page# (0..n-1) */
-#define LS_VIEWERCONTROL_GET_PAGE      (WM_USER+21          )
+#define LS_VIEWERCONTROL_GET_PAGE      (WM_USER+21          ) /* wParam = 0: currently selected page, wParam = 1: currently viewed top page in right pane */
 #define LS_VIEWERCONTROL_GET_PAGECOUNT (WM_USER+22          )
 #define LS_VIEWERCONTROL_GET_PAGECOUNT_FAXPAGES (WM_USER+23          )
 #define LS_VIEWERCONTROL_GET_JOB       (WM_USER+24          )
@@ -489,6 +491,7 @@
 #define LS_VIEWERCONTROL_SELECTION_COPY (WM_USER+72          ) /* lParam == &scLSSelectionOptions (null, or _pvText == null -> to clipboard) */
 #define LS_VIEWERCONTROL_GET_HAS_SELECTION (WM_USER+73          )
 #define LS_VIEWERCONTROL_SELECTION_SELECT (WM_USER+74          ) /* wParam = page index#, -1 for all; lParam = 0 (select only this), 1 (add to selection) */
+#define LS_VIEWERCONTROL_GET_HASUNSAVEDINPUTOBJECTS (WM_USER+75          ) /* reserved, internal */
 #define LS_VIEWERCONTROL_NTFY_PAGELOADED (1                   ) /* lParam = page# */
 #define LS_VIEWERCONTROL_NTFY_UPDATETOOLBAR (2                   ) /* called when control does NOT have an own toolbar. lParam points to an ILSViewerToolbarInfoProxy interface */
 #define LS_VIEWERCONTROL_NTFY_PRINT_START (3                   ) /* lParam = &scViewerControlPrintData, return 1 to abort print */
@@ -524,6 +527,7 @@
 #define LS_VIEWERCONTROL_NTFY_ACTIONRESULT (35                  ) /* lParam = &scLSNtfyActionResult */
 #define LS_VIEWERCONTROL_NTFY_RESETSEARCHSTATE (36                  ) /* reserved, internal */
 #define LS_VIEWERCONTROL_NTFY_SELECTION_CHANGED (37                  )
+#define LS_VIEWERCONTROL_QUEST_DYNAMICREPORTPARAMETERS (38                  )
 #define LS_VIEWERCONTROL_OPEN_STORAGE_IN_NEW_WINDOW (32                  ) /* lParam = &scOpenStorageInNewWindow. Reply with 1 if done. */
 #define LL_NTFY_VIEWERDRILLDOWN        (67                  ) /* defined in LL !!! reserved constant! */
 #define LS_MAILCONFIG_GLOBAL           (0x0001              )
@@ -552,6 +556,8 @@
 #define LS_CONVERT_IS_NOPERPIXELALPHA  (0x00000010          )
 #define LS_CONVERT_IS_SRCCOPY          (0x00000020          )
 #define LS_CONVERT_IS_NO_JPEGCONVERSION (0x00000040          ) /* for PDF Conversion (PDF export handles these itself) */
+#define LS_CONVERT_IS_QUALITY_MASK     (0xff000000          ) /* 75 if not given */
+#define LS_CONVERT_IS_QUALITY_SHIFT    (24                  )
 #define LS_STGPRINTEX_OPTION_FORCE_SIMPLEX (0x00000001          )
 #define LS_STGPRINTEX_OPTION_FORCE_DUPLEX_VERT (0x00000002          )
 #define LS_STGPRINTEX_OPTION_FORCE_DUPLEX_HORZ (0x00000003          )
@@ -846,7 +852,7 @@ extern "C"
 {
 #endif
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LlStgsysStorageOpen LlStgsysStorageOpenW
        #define LlStgsysStorageOpenO LlStgsysStorageOpenA
@@ -854,7 +860,7 @@ extern "C"
        #define LlStgsysStorageOpen LlStgsysStorageOpenA
        #define LlStgsysStorageOpenO LlStgsysStorageOpenW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI HLLSTG   DLLPROC  LlStgsysStorageOpenA
 	(
@@ -865,8 +871,8 @@ CMBT_LS_WINAPI HLLSTG   DLLPROC  LlStgsysStorageOpenA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI HLLSTG   DLLPROC  LlStgsysStorageOpenW
 	(
@@ -892,7 +898,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetFileVersion
 	HLLSTG               hStg
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LlStgsysGetFilename LlStgsysGetFilenameW
        #define LlStgsysGetFilenameO LlStgsysGetFilenameA
@@ -900,7 +906,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetFileVersion
        #define LlStgsysGetFilename LlStgsysGetFilenameA
        #define LlStgsysGetFilenameO LlStgsysGetFilenameW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetFilenameA
 	(
@@ -912,8 +918,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetFilenameA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetFilenameW
 	(
@@ -959,7 +965,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetPageOptionValue
 	INT                  nOption
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LlStgsysGetPageOptionString LlStgsysGetPageOptionStringW
        #define LlStgsysGetPageOptionStringO LlStgsysGetPageOptionStringA
@@ -967,7 +973,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetPageOptionValue
        #define LlStgsysGetPageOptionString LlStgsysGetPageOptionStringA
        #define LlStgsysGetPageOptionStringO LlStgsysGetPageOptionStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetPageOptionStringA
 	(
@@ -979,8 +985,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetPageOptionStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetPageOptionStringW
 	(
@@ -992,7 +998,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetPageOptionStringW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LlStgsysSetPageOptionString LlStgsysSetPageOptionStringW
        #define LlStgsysSetPageOptionStringO LlStgsysSetPageOptionStringA
@@ -1000,7 +1006,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetPageOptionStringW
        #define LlStgsysSetPageOptionString LlStgsysSetPageOptionStringA
        #define LlStgsysSetPageOptionStringO LlStgsysSetPageOptionStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysSetPageOptionStringA
 	(
@@ -1011,8 +1017,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysSetPageOptionStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysSetPageOptionStringW
 	(
@@ -1084,7 +1090,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysDeleteFiles
 	HLLSTG               hStg
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LlStgsysPrint LlStgsysPrintW
        #define LlStgsysPrintO LlStgsysPrintA
@@ -1092,7 +1098,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysDeleteFiles
        #define LlStgsysPrint LlStgsysPrintA
        #define LlStgsysPrintO LlStgsysPrintW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysPrintA
 	(
@@ -1108,8 +1114,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysPrintA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysPrintW
 	(
@@ -1125,7 +1131,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysPrintW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LlStgsysStoragePrint LlStgsysStoragePrintW
        #define LlStgsysStoragePrintO LlStgsysStoragePrintA
@@ -1133,7 +1139,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysPrintW
        #define LlStgsysStoragePrint LlStgsysStoragePrintA
        #define LlStgsysStoragePrintO LlStgsysStoragePrintW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysStoragePrintA
 	(
@@ -1150,8 +1156,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysStoragePrintA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysStoragePrintW
 	(
@@ -1168,7 +1174,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysStoragePrintW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LlStgsysGetPagePrinter LlStgsysGetPagePrinterW
        #define LlStgsysGetPagePrinterO LlStgsysGetPagePrinterA
@@ -1176,7 +1182,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysStoragePrintW
        #define LlStgsysGetPagePrinter LlStgsysGetPagePrinterA
        #define LlStgsysGetPagePrinterO LlStgsysGetPagePrinterW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetPagePrinterA
 	(
@@ -1188,8 +1194,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetPagePrinterA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetPagePrinterW
 	(
@@ -1208,7 +1214,7 @@ CMBT_LS_WINAPI void     DLLPROC  LsSetDebug
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LsGetViewerControlClassName LsGetViewerControlClassNameW
        #define LsGetViewerControlClassNameO LsGetViewerControlClassNameA
@@ -1216,7 +1222,7 @@ CMBT_LS_WINAPI void     DLLPROC  LsSetDebug
        #define LsGetViewerControlClassName LsGetViewerControlClassNameA
        #define LsGetViewerControlClassNameO LsGetViewerControlClassNameW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI LPCSTR   DLLPROC  LsGetViewerControlClassNameA
 	(
@@ -1224,8 +1230,8 @@ CMBT_LS_WINAPI LPCSTR   DLLPROC  LsGetViewerControlClassNameA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI LPCWSTR  DLLPROC  LsGetViewerControlClassNameW
 	(
@@ -1246,7 +1252,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsCreateViewerControlOverParent
 	HWND                 hParentControl
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LlStgsysGetJobOptionStringEx LlStgsysGetJobOptionStringExW
        #define LlStgsysGetJobOptionStringExO LlStgsysGetJobOptionStringExA
@@ -1254,7 +1260,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsCreateViewerControlOverParent
        #define LlStgsysGetJobOptionStringEx LlStgsysGetJobOptionStringExA
        #define LlStgsysGetJobOptionStringExO LlStgsysGetJobOptionStringExW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetJobOptionStringExA
 	(
@@ -1265,8 +1271,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetJobOptionStringExA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetJobOptionStringExW
 	(
@@ -1277,7 +1283,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetJobOptionStringExW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LlStgsysSetJobOptionStringEx LlStgsysSetJobOptionStringExW
        #define LlStgsysSetJobOptionStringExO LlStgsysSetJobOptionStringExA
@@ -1285,7 +1291,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetJobOptionStringExW
        #define LlStgsysSetJobOptionStringEx LlStgsysSetJobOptionStringExA
        #define LlStgsysSetJobOptionStringExO LlStgsysSetJobOptionStringExW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysSetJobOptionStringExA
 	(
@@ -1295,8 +1301,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysSetJobOptionStringExA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysSetJobOptionStringExW
 	(
@@ -1315,7 +1321,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetJobOptionV
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LsConversionJobOpen LsConversionJobOpenW
        #define LsConversionJobOpenO LsConversionJobOpenA
@@ -1323,7 +1329,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetJobOptionV
        #define LsConversionJobOpen LsConversionJobOpenA
        #define LsConversionJobOpenO LsConversionJobOpenW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI HLSCNVJOB DLLPROC  LsConversionJobOpenA
 	(
@@ -1333,8 +1339,8 @@ CMBT_LS_WINAPI HLSCNVJOB DLLPROC  LsConversionJobOpenA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI HLSCNVJOB DLLPROC  LsConversionJobOpenW
 	(
@@ -1369,7 +1375,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionConvertStgToStream
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LsConversionPrint LsConversionPrintW
        #define LsConversionPrintO LsConversionPrintA
@@ -1377,7 +1383,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionConvertStgToStream
        #define LsConversionPrint LsConversionPrintA
        #define LsConversionPrintO LsConversionPrintW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsConversionPrintA
 	(
@@ -1388,8 +1394,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionPrintA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsConversionPrintW
 	(
@@ -1408,7 +1414,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionConfigurationDlg
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LsConversionSetOptionString LsConversionSetOptionStringW
        #define LsConversionSetOptionStringO LsConversionSetOptionStringA
@@ -1416,7 +1422,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionConfigurationDlg
        #define LsConversionSetOptionString LsConversionSetOptionStringA
        #define LsConversionSetOptionStringO LsConversionSetOptionStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsConversionSetOptionStringA
 	(
@@ -1426,8 +1432,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionSetOptionStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsConversionSetOptionStringW
 	(
@@ -1437,7 +1443,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionSetOptionStringW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LsConversionGetOptionString LsConversionGetOptionStringW
        #define LsConversionGetOptionStringO LsConversionGetOptionStringA
@@ -1445,7 +1451,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionSetOptionStringW
        #define LsConversionGetOptionString LsConversionGetOptionStringA
        #define LsConversionGetOptionStringO LsConversionGetOptionStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsConversionGetOptionStringA
 	(
@@ -1456,8 +1462,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionGetOptionStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsConversionGetOptionStringW
 	(
@@ -1468,7 +1474,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionGetOptionStringW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LsConversionConvertEMFToFile LsConversionConvertEMFToFileW
        #define LsConversionConvertEMFToFileO LsConversionConvertEMFToFileA
@@ -1476,7 +1482,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionGetOptionStringW
        #define LsConversionConvertEMFToFile LsConversionConvertEMFToFileA
        #define LsConversionConvertEMFToFileO LsConversionConvertEMFToFileW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsConversionConvertEMFToFileA
 	(
@@ -1486,8 +1492,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionConvertEMFToFileA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsConversionConvertEMFToFileW
 	(
@@ -1497,7 +1503,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionConvertEMFToFileW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LsConversionConvertStgToFile LsConversionConvertStgToFileW
        #define LsConversionConvertStgToFileO LsConversionConvertStgToFileA
@@ -1505,7 +1511,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionConvertEMFToFileW
        #define LsConversionConvertStgToFile LsConversionConvertStgToFileA
        #define LsConversionConvertStgToFileO LsConversionConvertStgToFileW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsConversionConvertStgToFileA
 	(
@@ -1515,8 +1521,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionConvertStgToFileA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsConversionConvertStgToFileW
 	(
@@ -1526,7 +1532,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionConvertStgToFileW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LlStgsysStorageConvert LlStgsysStorageConvertW
        #define LlStgsysStorageConvertO LlStgsysStorageConvertA
@@ -1534,7 +1540,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsConversionConvertStgToFileW
        #define LlStgsysStorageConvert LlStgsysStorageConvertA
        #define LlStgsysStorageConvertO LlStgsysStorageConvertW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysStorageConvertA
 	(
@@ -1544,8 +1550,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysStorageConvertA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysStorageConvertW
 	(
@@ -1555,7 +1561,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysStorageConvertW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LlStgsysConvert LlStgsysConvertW
        #define LlStgsysConvertO LlStgsysConvertA
@@ -1563,7 +1569,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysStorageConvertW
        #define LlStgsysConvert LlStgsysConvertA
        #define LlStgsysConvertO LlStgsysConvertW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysConvertA
 	(
@@ -1573,8 +1579,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysConvertA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LlStgsysConvertW
 	(
@@ -1584,7 +1590,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysConvertW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LsMailConfigurationDialog LsMailConfigurationDialogW
        #define LsMailConfigurationDialogO LsMailConfigurationDialogA
@@ -1592,7 +1598,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysConvertW
        #define LsMailConfigurationDialog LsMailConfigurationDialogA
        #define LsMailConfigurationDialogO LsMailConfigurationDialogW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsMailConfigurationDialogA
 	(
@@ -1603,8 +1609,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LsMailConfigurationDialogA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsMailConfigurationDialogW
 	(
@@ -1629,7 +1635,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsMailJobClose
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LsMailSetOptionString LsMailSetOptionStringW
        #define LsMailSetOptionStringO LsMailSetOptionStringA
@@ -1637,7 +1643,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsMailJobClose
        #define LsMailSetOptionString LsMailSetOptionStringA
        #define LsMailSetOptionStringO LsMailSetOptionStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsMailSetOptionStringA
 	(
@@ -1647,8 +1653,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LsMailSetOptionStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsMailSetOptionStringW
 	(
@@ -1658,7 +1664,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsMailSetOptionStringW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LsMailGetOptionString LsMailGetOptionStringW
        #define LsMailGetOptionStringO LsMailGetOptionStringA
@@ -1666,7 +1672,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsMailSetOptionStringW
        #define LsMailGetOptionString LsMailGetOptionStringA
        #define LsMailGetOptionStringO LsMailGetOptionStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsMailGetOptionStringA
 	(
@@ -1677,8 +1683,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LsMailGetOptionStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsMailGetOptionStringW
 	(
@@ -1718,7 +1724,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetLLFilename
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LlStgsysStorageCreate LlStgsysStorageCreateW
        #define LlStgsysStorageCreateO LlStgsysStorageCreateA
@@ -1726,7 +1732,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysGetLLFilename
        #define LlStgsysStorageCreate LlStgsysStorageCreateA
        #define LlStgsysStorageCreateO LlStgsysStorageCreateW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI HLLSTG   DLLPROC  LlStgsysStorageCreateA
 	(
@@ -1738,8 +1744,8 @@ CMBT_LS_WINAPI HLLSTG   DLLPROC  LlStgsysStorageCreateA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI HLLSTG   DLLPROC  LlStgsysStorageCreateW
 	(
@@ -1760,7 +1766,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysAppendEMF
 	BOOL                 bPhysicalPage
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LsProfileStart LsProfileStartW
        #define LsProfileStartO LsProfileStartA
@@ -1768,7 +1774,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysAppendEMF
        #define LsProfileStart LsProfileStartA
        #define LsProfileStartO LsProfileStartW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsProfileStartA
 	(
@@ -1779,8 +1785,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LsProfileStartA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsProfileStartW
 	(
@@ -1809,7 +1815,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsGetOrgTextFromGlyphsW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LsMailView LsMailViewW
        #define LsMailViewO LsMailViewA
@@ -1817,7 +1823,7 @@ CMBT_LS_WINAPI INT      DLLPROC  LsGetOrgTextFromGlyphsW
        #define LsMailView LsMailViewA
        #define LsMailViewO LsMailViewW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsMailViewA
 	(
@@ -1828,8 +1834,8 @@ CMBT_LS_WINAPI INT      DLLPROC  LsMailViewA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI INT      DLLPROC  LsMailViewW
 	(
@@ -1875,7 +1881,7 @@ CMBT_LS_WINAPI UINT     DLLPROC  LsGetDlgboxMode
 	void
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
    #ifdef UNICODE
        #define LlStgsysStorageOpenEx LlStgsysStorageOpenExW
        #define LlStgsysStorageOpenExO LlStgsysStorageOpenExA
@@ -1883,7 +1889,7 @@ CMBT_LS_WINAPI UINT     DLLPROC  LsGetDlgboxMode
        #define LlStgsysStorageOpenEx LlStgsysStorageOpenExA
        #define LlStgsysStorageOpenExO LlStgsysStorageOpenExW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI HLLSTG   DLLPROC  LlStgsysStorageOpenExA
 	(
@@ -1892,8 +1898,8 @@ CMBT_LS_WINAPI HLLSTG   DLLPROC  LlStgsysStorageOpenExA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLS27APIDEFINES)
-#endif // WIN32, _NO_CMLS27APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLS28APIDEFINES)
+#endif // WIN32, _NO_CMLS28APIDEFINES
 #ifdef WIN32
 CMBT_LS_WINAPI HLLSTG   DLLPROC  LlStgsysStorageOpenExW
 	(
@@ -2071,5 +2077,5 @@ CMBT_LS_WINAPI INT      DLLPROC  LlStgsysStorageLayoutPrint
 
 #endif  /* #ifndef _RC_INVOKED_ */
 
-#endif  /* #ifndef _LS27_H */
+#endif  /* #ifndef _LS28_H */
 

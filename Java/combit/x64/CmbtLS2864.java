@@ -1,16 +1,16 @@
 //
 // Java Declaration File
-// constants and function definitions for combit List & Label 27
+// constants and function definitions for combit List & Label 28
 // Copyright (c) combit Software GmbH, Konstanz, Germany
-// Version: 27.000
+// Version: 28.000
 //
 
-package combit.x86;
+package combit.x64;
 
-public final class CmbtLS2732
+public final class CmbtLS2864
   {
   
-  public native int LlStgsysStorageOpen
+  public native long LlStgsysStorageOpen
 	(
 	final String         Filename,
 	final String         TempPath,
@@ -20,22 +20,22 @@ public final class CmbtLS2732
 
   public native void LlStgsysStorageClose
 	(
-	int                  Stg
+	long                  Stg
 	);
 
   public native int LlStgsysGetAPIVersion
 	(
-	int                  Stg
+	long                  Stg
 	);
 
   public native int LlStgsysGetFileVersion
 	(
-	int                  Stg
+	long                  Stg
 	);
 
   public native int LlStgsysGetFilename
 	(
-	int					Stg,
+	long				Stg,
 	int                 Job,
 	int                 File,
 	StringBuffer        Buffer
@@ -43,41 +43,41 @@ public final class CmbtLS2732
 
   public native int LlStgsysGetJobCount
 	(
-	int                  Stg
+	long                  Stg
 	);
 
   public native int LlStgsysSetJob
 	(
-	int                  Stg,
+	long                 Stg,
 	int                  Job
 	);
 
   public native int LlStgsysGetJob
 	(
-	int                  Stg
+	long                  Stg
 	);
 
   public native int LlStgsysGetPageCount
 	(
-	int                  Stg
+	long                  Stg
 	);
 
   public native int LlStgsysGetJobOptionValue
 	(
-	int                  Stg,
+	long                  Stg,
 	int                  Option
 	);
 
   public native int LlStgsysGetPageOptionValue
 	(
-	int                  Stg,
+	long                 Stg,
 	int                  PageIndex,
 	int                  Option
 	);
 
   public native int LlStgsysGetPageOptionString
 	(
-	int                  Stg,
+	long                 Stg,
 	int                  PageIndex,
 	int                  Option,
 	StringBuffer         Buffer
@@ -85,7 +85,7 @@ public final class CmbtLS2732
 
   public native int LlStgsysSetPageOptionString
 	(
-	int                  Stg,
+	long                 Stg,
 	int                  PageIndex,
 	int                  Option,
 	final String         Buffer
@@ -93,46 +93,46 @@ public final class CmbtLS2732
 
   public native int LlStgsysAppend
 	(
-	int                  Stg,
-	int                  StgToAppend
+	long                  Stg,
+	long                  StgToAppend
 	);
 
   public native int LlStgsysDeleteJob
 	(
-	int                  Stg,
+	long                 Stg,
 	int                  PageIndex
 	);
 
   public native int LlStgsysDeletePage
 	(
-	int                  Stg,
+	long                 Stg,
 	int                  PageIndex
 	);
 
-  public native int LlStgsysGetPageMetafile
+  public native long LlStgsysGetPageMetafile
 	(
-	int                  Stg,
+	long                 Stg,
 	int                  PageIndex
 	);
 
   public native int LlStgsysDestroyMetafile
 	(
-	int                  MF
+	long                  MF
 	);
 
   public native int LlStgsysGetLastError
 	(
-	int                  Stg
+	long                  Stg
 	);
 
   public native int LlStgsysDeleteFiles
 	(
-	int                  Stg
+	long                  Stg
 	);
 
   public native int LlStgsysPrint
 	(
-	int                	Stg,
+	long                Stg,
 	final String		PrinterName1,
 	final String		PrinterName2,
 	int					StartPageIndex,
@@ -140,7 +140,7 @@ public final class CmbtLS2732
 	int					Copies,
 	int					Flags,
 	final String		Message,
-	int					WndParent
+	long				WndParent
 	);
 
   public native int LlStgsysStoragePrint
@@ -154,7 +154,7 @@ public final class CmbtLS2732
 	int                  Copies,
 	int                  Flags,
 	final String         Message,
-	int                  WndParent
+	long                 WndParent
 	);
 
   public native void LsSetDebug
@@ -172,67 +172,67 @@ public final class CmbtLS2732
 
   public native int LsCreateViewerControlOverParent
 	(
-	int				 	Stg,
-	int                 ParentControl
+	long				 Stg,
+	long                 ParentControl
 	);
 
   public native int LlStgsysGetJobOptionStringEx
 	(
-	int	                 Stg,
+	long                 Stg,
 	final String         Key,
 	StringBuffer         Buffer
 	);
 
   public native int LlStgsysSetJobOptionStringEx
 	(
-	int                  Stg,
+	long                 Stg,
 	final String         Key,
 	final String         Buffer
 	);
 
-  public native int LsConversionJobOpen
+  public native long LsConversionJobOpen
 	(
-	int                 WndParent,
-	int                 Language,
-	final String        Format
+	long                 WndParent,
+	int                  Language,
+	final String         Format
 	);
 
   public native int LsConversionJobClose
 	(
-	int                  CnvJob
+	long                  CnvJob
 	);
 
   public native int LsConversionConfigurationDlg
 	(
-	int                 CnvJob,
-	int                 WndParent
+	long                 CnvJob,
+	long                 WndParent
 	);
 
   public native int LsConversionSetOptionString
 	(
-	int                 CnvJob,
-	final String        Key,
-	final String        Data
+	long                 CnvJob,
+	final String         Key,
+	final String         Data
 	);
 
   public native int LsConversionGetOptionString
 	(
-	int                 CnvJob,
-	final String        Key,
-	StringBuffer        Buffer
+	long                 CnvJob,
+	final String         Key,
+	StringBuffer         Buffer
 	);
 
   public native int LsConversionConvertEMFToFile
 	(
-	int                 CnvJob,
-	long                EMF,
-	final String        Filename
+	long                 CnvJob,
+	long                 EMF,
+	final String         Filename
 	);
 
   public native int LsConversionConvertStgToFile
 	(
-	int                	CnvJob,
-	int                	Stg,
+	long                CnvJob,
+	long                Stg,
 	final String		Filename
 	);
 
@@ -245,79 +245,79 @@ public final class CmbtLS2732
 
   public native int LlStgsysConvert
 	(
-	int                 Stg,
-	final String        DstFilename,
-	final String        Format
+	long                 Stg,
+	final String         DstFilename,
+	final String         Format
 	);
 
   public native int LsMailConfigurationDialog
 	(
-	int                 WndParent,
-	final String        Subkey,
-	int                 Flags,
-	int                 Language
+	long                 WndParent,
+	final String         Subkey,
+	int                  Flags,
+	int                  Language
 	);
 
-  public native int LsMailJobOpen
+  public native long LsMailJobOpen
 	(
 	int                  Language
 	);
 
   public native int LsMailJobClose
 	(
-	int                  Job
+	long                  Job
 	);
 
   public native int LsMailSetOptionString
 	(
-	int                 Job,
-	final String        Key,
-	final String        Value
+	long                 Job,
+	final String         Key,
+	final String         Value
 	);
 
   public native int LsMailGetOptionString
 	(
-	int                 Job,
-	final String        Key,
-	StringBuffer        Buffer
+	long                 Job,
+	final String         Key,
+	StringBuffer         Buffer
 	);
 
   public native int LsMailSendFile
 	(
-	int                  Job,
-	int                  WndParent
+	long                  Job,
+	long                  WndParent
 	);
 
   public native int LsProfileStart
 	(
-	int                 Thread,
-	final String        Descr,
-	final String        Filename,
-	int                 TicksMS
+	long                 Thread,
+	final String         Descr,
+	final String         Filename,
+	int                  TicksMS
 	);
 
   public native void LsProfileEnd
 	(
-	int                  Thread
+	long                  Thread
 	);
 
   public native int LsMailView
 	(
-	int                 WndParent,
-	final String        MailFile,
-	int                 Rights,
-	int                 Language
+	long                 WndParent,
+	final String         MailFile,
+	int                  Rights,
+	int                  Language
 	);
 
   public native int LsInternalCreateViewerControlOverParent13
 	(
-	int                 ParentControl,
-	int                 Flags
+	long                 ParentControl,
+	int                  Flags
 	);
 
-  public native int LsInternalGetViewerControlFromParent13
+  public native long LsInternalGetViewerControlFromParent13
 	(
-	int                 ParentControl
+	long                 ParentControl
 	);
 
   public native void LsSetDlgboxMode
@@ -331,6 +331,6 @@ public final class CmbtLS2732
 
   static
   {
-	  System.loadLibrary("ListLabel27JNI_x86"); // use List & Label JNI x86
+	  System.loadLibrary("ListLabel28JNI_x64"); // use List & Label JNI x64
   }
 };
