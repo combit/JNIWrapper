@@ -2,10 +2,12 @@
 // Java Declaration File
 // constants and function definitions for combit List & Label 28
 // Copyright (c) combit Software GmbH, Konstanz, Germany
-// Version: 28.000
+// Version: 28.001
 //
 
 package combit.x64;
+
+import java.util.StringTokenizer;
 
 public final class CmbtLL2864
   {
@@ -1148,8 +1150,62 @@ public final class CmbtLL2864
 	  final String		ProjectFilename
 	  );
 
+  private static String sJNIModuleName = "ListLabel28JNI_x64";
+  private static String sMainLLModuleFile = "cxll28.dll";
+  private static String sPreloadLLModuleFileList = "cxll28xl.dll;cxll28oc.llx;cxll28pw.llx;cxll28bc.llx;cxll28ht.llx;cxmx28.dll;";
+  private static void PreloadLLModules()
+  {
+	  // just helper-code for pre-loading LL modules to avoid loader locks or runtime-errors while unloading app
+	  String sMainDLLPath = null;
+	  String sFileToLoad = null;
+	  String sFileSeparator = System.getProperty("file.separator");
+
+	  // get path to load LL modules from
+	  StringTokenizer parserPath = new StringTokenizer(System.getProperty("java.library.path"), ";");
+	  while (parserPath.hasMoreTokens())
+	  {
+		  sMainDLLPath = parserPath.nextToken();
+		  sFileToLoad = sMainDLLPath + sFileSeparator + sMainLLModuleFile;
+		  try
+		  {
+			  System.load(sFileToLoad);
+			  break; // stop loop - we found the path loading main DLL was successful!
+		  }
+		  catch(UnsatisfiedLinkError e)
+		  {
+			  continue; // try next path to load from
+		  }
+	  }
+	  
+	  // pre-load all other LL modules
+	  if(sMainDLLPath != null && !sMainDLLPath.isEmpty())
+	  {
+		  StringTokenizer parserFileList = new StringTokenizer(sPreloadLLModuleFileList.toString(), ";");
+		  while (parserFileList.hasMoreTokens())
+		  {
+			  sFileToLoad = sMainDLLPath + sFileSeparator + parserFileList.nextToken();
+			  try
+			  {
+				  System.load(sFileToLoad);
+			  }
+			  catch(UnsatisfiedLinkError e)
+			  {
+				  continue; // try next module to load - if exists, because some of them are optional (see also redist.txt)
+			  }
+		  }
+	  }
+  }
+  
   static
   {
-	  System.loadLibrary("ListLabel28JNI_x64"); // use List & Label JNI x64
+	  try
+	  {
+		  PreloadLLModules();
+	  }
+	  catch(Exception e)
+	  {
+	  }
+	  
+	  System.loadLibrary(sJNIModuleName.toString()); // use List & Label JNI x64
   }
 };
