@@ -3,7 +3,7 @@
 package combit.callbacks;
 
 // imports
-import combit.CmbtLL28;
+import combit.CmbtLL29;
 import java.awt.*; // important for the Rectangle in rcPaint
 
 /**
@@ -14,7 +14,7 @@ import java.awt.*; // important for the Rectangle in rcPaint
 * </p>
 *
 * @author Copyright (c) combit Software GmbH
-* @version 28.0
+* @version 29.0
 */
 
 public class ProjectCallback extends CallbackInfo
@@ -61,7 +61,7 @@ public class ProjectCallback extends CallbackInfo
   */
   public ProjectCallback(int hLlJob, boolean designerPreview, boolean preDraw, int paintDC, int refDC, Rectangle paint)
   {
-    super(hLlJob, CmbtLL28.LL_CMND_PROJECT);
+    super(hLlJob, CmbtLL29.LL_CMND_PROJECT);
     designerPreview_ = designerPreview;
     preDraw_ = preDraw;
     paintDC_ = paintDC;

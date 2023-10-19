@@ -1,6 +1,6 @@
-; ListLabel28JNI.def : Declares the module parameters for the DLL.
+; ListLabel29JNI.def : Declares the module parameters for the DLL.
 
-LIBRARY      "ListLabel28JNI"
+LIBRARY      "ListLabel29JNI"
 
 EXPORTS
     ; Explicit exports can go here

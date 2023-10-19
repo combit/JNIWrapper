@@ -3,13 +3,13 @@
 package combit.callbacks;
 
 // imports
-import combit.CmbtLL28;
+import combit.CmbtLL29;
 
 /**
 * Description: Notification that the user has saved the project in the Designer. The file name is passed.
 *
 * @author Copyright (c) combit Software GmbH
-* @version 28.0
+* @version 29.0
 */
 
 public class SaveFileNameCallback extends CallbackInfo
@@ -28,7 +28,7 @@ public class SaveFileNameCallback extends CallbackInfo
   */
   public SaveFileNameCallback(int hLlJob, String fileName)
   {
-    super(hLlJob, CmbtLL28.LL_CMND_SAVEFILENAME);
+    super(hLlJob, CmbtLL29.LL_CMND_SAVEFILENAME);
     fileName_ = fileName;
   }
 }

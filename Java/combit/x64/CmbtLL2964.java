@@ -1,17 +1,17 @@
 //
 // Java Declaration File
-// constants and function definitions for combit List & Label 28
+// constants and function definitions for combit List & Label 29
 // Copyright (c) combit Software GmbH, Konstanz, Germany
-// Version: 28.001
+// Version: 29.000
 //
 
-package combit.x86;
+package combit.x64;
 
 import java.util.StringTokenizer;
 
-public final class CmbtLL2832
+public final class CmbtLL2964
   {
-
+	
   public native int LlJobOpen
 	(
 	int                  Language
@@ -61,16 +61,16 @@ public final class CmbtLL2832
 	final String         VarName,
 	final String         Contents,
 	int                  Para,
-	int                  Ptr
+	long                 Ptr
 	);
 
   public native int LlDefineFieldExtHandle
 	(
 	int                  LlJob,
 	final String         VarName,
-	int                  Contents,
+	long                 Contents,
 	int                  Para,
-	int                  Ptr
+	long                 Ptr
 	);
 
   public native void LlDefineFieldStart
@@ -91,16 +91,16 @@ public final class CmbtLL2832
 	final String         VarName,
 	final String         Contents,
 	int                  Para,
-	int                  Ptr
+	long                 Ptr
 	);
 
   public native int LlDefineVariableExtHandle
 	(
 	int                  LlJob,
 	final String         VarName,
-	int                  Contents,
+	long                 Contents,
 	int                  Para,
-	int                  Ptr
+	long                 Ptr
 	);
 
   public native int LlDefineVariableName
@@ -124,7 +124,7 @@ public final class CmbtLL2832
   public native int LlDefineLayout
 	(
 	int                  LlJob,
-	int                  Wnd,
+	long                 Wnd,
 	final String         Title,
 	int                  ObjType,
 	final String         ObjName
@@ -133,19 +133,19 @@ public final class CmbtLL2832
   public native int LlDlgEditLine
 	(
 	int                  LlJob,
-	int                  Wnd,
+	long                 Wnd,
 	StringBuffer         Buf
 	);
 
   public native int LlDlgEditLineEx
 	(
 	int                  LlJob,
-	int                  Wnd,
+	long                 Wnd,
 	StringBuffer         Buffer,
 	int                  ParaTypes,
 	final String         Title,
 	boolean              Table,
-	int                  Reserved
+	long                 Reserved
 	);
 
   public native int LlPreviewSetTempPath
@@ -166,7 +166,7 @@ public final class CmbtLL2832
 	int                  LlJob,
 	final String         ObjName,
 	final String         Path,
-	int                  Wnd
+	long                 Wnd
 	);
 
   public native int LlPreviewDisplayEx
@@ -174,9 +174,9 @@ public final class CmbtLL2832
 	int                  LlJob,
 	final String         ObjName,
 	final String         Path,
-	int                  Wnd,
+	long                 Wnd,
 	int                  Options,
-	int                  Reserved
+	long                 Reserved
 	);
 
   public native int LlPrint
@@ -237,7 +237,7 @@ public final class CmbtLL2832
 	final String         Field
 	);
 
-  public native int LlPrintGetOption
+  public native long LlPrintGetOption
 	(
 	int                  LlJob,
 	int                  Index
@@ -253,14 +253,14 @@ public final class CmbtLL2832
   public native int LlPrintOptionsDialog
 	(
 	int                  LlJob,
-	int                  Wnd,
+	long                 Wnd,
 	final String         Text
 	);
 
   public native int LlPrintSelectOffsetEx
 	(
 	int                  LlJob,
-	int                  Wnd
+	long                 Wnd
 	);
 
   public native int LlPrintSetBoxText
@@ -274,7 +274,7 @@ public final class CmbtLL2832
 	(
 	int                  LlJob,
 	int                  Index,
-	int                  Value
+	long                 Value
 	);
 
   public native int LlPrintUpdateBox
@@ -298,14 +298,14 @@ public final class CmbtLL2832
 	final String         ObjName,
 	int                  PrintOptions,
 	int                  BoxType,
-	int                  Wnd,
+	long                 Wnd,
 	final String         Title
 	);
 
   public native int LlPrinterSetup
 	(
 	int                  LlJob,
-	int                  Wnd,
+	long                 Wnd,
 	int                  ObjType,
 	final String         ObjName
 	);
@@ -313,11 +313,11 @@ public final class CmbtLL2832
   public native int LlSelectFileDlgTitleEx
 	(
 	int                  LlJob,
-	int                  Wnd,
+	long                 Wnd,
 	final String         Title,
 	int                  ObjType,
 	StringBuffer         ObjName,
-	int                  Reserved
+	long                 Reserved
 	);
 
   public native void LlSetDlgboxMode
@@ -329,7 +329,7 @@ public final class CmbtLL2832
 	(
 	);
 
-  public native int LlExprParse
+  public native long LlExprParse
 	(
 	int                  LlJob,
 	final String         ExprText,
@@ -339,7 +339,7 @@ public final class CmbtLL2832
   public native int LlExprType
 	(
 	int                  LlJob,
-	int                  Expr
+	long                 Expr
 	);
 
   public native void LlExprError
@@ -351,20 +351,20 @@ public final class CmbtLL2832
   public native void LlExprFree
 	(
 	int                  LlJob,
-	int                  Expr
+	long                 Expr
 	);
 
   public native int LlExprEvaluate
 	(
 	int                  LlJob,
-	int                  Expr,
+	long                 Expr,
 	StringBuffer         Buf
 	);
 
   public native int LlExprGetUsedVars
 	(
 	int                  LlJob,
-	int                  Expr,
+	long                 Expr,
 	StringBuffer         Buffer
 	);
 
@@ -372,10 +372,10 @@ public final class CmbtLL2832
 	(
 	int                  LlJob,
 	int                  Mode,
-	int                  Value
+	long                 Value
 	);
 
-  public native int LlGetOption
+  public native long LlGetOption
 	(
 	int                  LlJob,
 	int                  Mode
@@ -465,7 +465,7 @@ public final class CmbtLL2832
   public native int LlPrintOptionsDialogTitle
 	(
 	int                  LlJob,
-	int                  Wnd,
+	long                 Wnd,
 	final String         Title,
 	final String         Text
 	);
@@ -511,7 +511,7 @@ public final class CmbtLL2832
 
   public native int LlAddCtlSupport
 	(
-	int                  Wnd,
+	long                 Wnd,
 	int                  Flags,
 	final String         Inifile
 	);
@@ -598,7 +598,7 @@ public final class CmbtLL2832
 	int                  Function
 	);
 
-  public native int LlRTFCreateObject
+  public native long LlRTFCreateObject
 	(
 	int                  LlJob
 	);
@@ -606,27 +606,27 @@ public final class CmbtLL2832
   public native int LlRTFDeleteObject
 	(
 	int                  LlJob,
-	int                  RTF
+	long                 RTF
 	);
 
   public native int LlRTFSetText
 	(
 	int                  LlJob,
-	int                  RTF,
+	long                 RTF,
 	final String         Text
 	);
 
   public native int LlRTFGetTextLength
 	(
 	int                  LlJob,
-	int                  RTF,
+	long                 RTF,
 	int                  Flags
 	);
 
   public native int LlRTFGetText
 	(
 	int                  LlJob,
-	int                  RTF,
+	long                 RTF,
 	int                  Flags,
 	StringBuffer         Buffer
 	);
@@ -634,9 +634,9 @@ public final class CmbtLL2832
   public native int LlRTFEditObject
 	(
 	int                  LlJob,
-	int                  RTF,
-	int                  Wnd,
-	int                  PrnDC,
+	long                 RTF,
+	long                 Wnd,
+	long                 PrnDC,
 	int                  ProjectType,
 	boolean              Modal
 	);
@@ -644,20 +644,20 @@ public final class CmbtLL2832
   public native int LlRTFCopyToClipboard
 	(
 	int                  LlJob,
-	int                  RTF
+	long                 RTF
 	);
 
   public native int LlRTFEditorProhibitAction
 	(
 	int                  LlJob,
-	int                  RTF,
+	long                 RTF,
 	int                  ControlID
 	);
 
   public native int LlRTFEditorInvokeAction
 	(
 	int                  LlJob,
-	int                  RTF,
+	long                 RTF,
 	int                  ControlID
 	);
 
@@ -667,22 +667,22 @@ public final class CmbtLL2832
 	final String         Text
 	);
 
-  public native int LlEnumGetFirstVar
+  public native long LlEnumGetFirstVar
 	(
 	int                  LlJob,
 	int                  Flags
 	);
 
-  public native int LlEnumGetFirstField
+  public native long LlEnumGetFirstField
 	(
 	int                  LlJob,
 	int                  Flags
 	);
 
-  public native int LlEnumGetNextEntry
+  public native long LlEnumGetNextEntry
 	(
 	int                  LlJob,
-	int                  Pos,
+	long                 Pos,
 	int                  Flags
 	);
 
@@ -725,7 +725,7 @@ public final class CmbtLL2832
 	final String         VarName,
 	final String         Contents,
 	int                  Para,
-	int                  Ptr
+	long                 Ptr
 	);
 
   public native int LlPrintDeclareChartRow
@@ -753,7 +753,7 @@ public final class CmbtLL2832
 	StringBuffer         Buffer
 	);
 
-  public native int LlEnumGetFirstChartField
+  public native long LlEnumGetFirstChartField
 	(
 	int                  LlJob,
 	int                  Flags
@@ -785,19 +785,19 @@ public final class CmbtLL2832
   public native int LlExprContainsVariable
 	(
 	int                  LlJob,
-	int                  Expr,
+	long                 Expr,
 	final String         Variable
 	);
 
   public native int LlExprIsConstant
 	(
 	int                  LlJob,
-	int                  Expr
+	long                 Expr
 	);
 
   public native int LlProfileStart
 	(
-	int                  Thread,
+	long                 Thread,
 	final String         Descr,
 	final String         Filename,
 	int                  TicksMS
@@ -805,7 +805,7 @@ public final class CmbtLL2832
 
   public native void LlProfileEnd
 	(
-	int                  Thread
+	long                 Thread
 	);
 
   public native int LlDbAddTable
@@ -920,7 +920,7 @@ public final class CmbtLL2832
   public native int LlExprGetUsedVarsEx
 	(
 	int                  LlJob,
-	int                  Expr,
+	long                 Expr,
 	StringBuffer         Buffer,
 	boolean              OrgName
 	);
@@ -928,54 +928,54 @@ public final class CmbtLL2832
   public native long LlDomGetProject
 	(
 	int                  LlJob,
-	int                  DOMObj
+	long                 DOMObj
 	);
 
   public native int LlDomGetProperty
 	(
-	int                  DOMObj,
+	long                 DOMObj,
 	final String         Name,
 	StringBuffer         Buffer
 	);
 
   public native int LlDomSetProperty
 	(
-	int                  DOMObj,
+	long                 DOMObj,
 	final String         Name,
 	final String         Value
 	);
 
   public native long LlDomGetObject
 	(
-	int                  DOMObj,
+	long                 DOMObj,
 	final String         Name,
-	int                  DOMSubObj
+	long                 DOMSubObj
 	);
 
   public native int LlDomGetSubobjectCount
 	(
-	int                  DOMObj,
-	int                  Count
+	long                 DOMObj,
+	long                 Count
 	);
 
   public native long LlDomGetSubobject
 	(
-	int                  DOMObj,
+	long                 DOMObj,
 	int                  Position,
-	int                  DOMSubObj
+	long                 DOMSubObj
 	);
 
   public native long LlDomCreateSubobject
 	(
-	int                  DOMObj,
+	long                 DOMObj,
 	int                  Position,
 	final String         Type,
-	int                  DOMSubObj
+	long                 DOMSubObj
 	);
 
   public native int LlDomDeleteSubobject
 	(
-	int                  DOMObj,
+	long                 DOMObj,
 	int                  Position
 	);
 
@@ -1001,7 +1001,7 @@ public final class CmbtLL2832
   public native int LlAssociatePreviewControl
 	(
 	int                  LlJob,
-	int                  WndControl,
+	long                 WndControl,
 	int                  Flags
 	);
 
@@ -1044,7 +1044,7 @@ public final class CmbtLL2832
 	final String         MenuHierarchy,
 	final String         TooltipText,
 	int                  Icon,
-	int                  Reserved
+	long                 Reserved
 	);
 
   public native int LlDesignerGetOptionString
@@ -1150,9 +1150,9 @@ public final class CmbtLL2832
 	  final String		ProjectFilename
 	  );
 
-  private static String sJNIModuleName = "ListLabel28JNI_x86";
-  private static String sMainLLModuleFile = "cmll28.dll";
-  private static String sPreloadLLModuleFileList = "cmll28xl.dll;cmll28oc.llx;cmll28pw.llx;cmll28bc.llx;cmll28ht.llx;cmmx28.dll;";
+  private static String sJNIModuleName = "ListLabel29JNI_x64";
+  private static String sMainLLModuleFile = "cxll29.dll";
+  private static String sPreloadLLModuleFileList = "cxll29xl.dll;cxll29oc.llx;cxll29pw.llx;cxll29bc.llx;cxll29ht.llx;cxmx29.dll;";
   private static void PreloadLLModules()
   {
 	  // just helper-code for pre-loading LL modules to avoid loader locks or runtime-errors while unloading app
@@ -1206,6 +1206,6 @@ public final class CmbtLL2832
 	  {
 	  }
 	  
-	  System.loadLibrary(sJNIModuleName.toString()); // use List & Label JNI x86
+	  System.loadLibrary(sJNIModuleName.toString()); // use List & Label JNI x64
   }
 };

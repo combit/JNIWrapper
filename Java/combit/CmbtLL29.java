@@ -1,8 +1,8 @@
 //
 // Java Declaration File
-// constants and function definitions for combit List & Label 28
+// constants and function definitions for combit List & Label 29
 // Copyright (c) combit Software GmbH, Konstanz, Germany
-// Version: 28.000
+// Version: 29.000
 //
 
 package combit;
@@ -10,7 +10,7 @@ package combit;
 import combit.x86.*;
 import combit.x64.*;
 
-public final class CmbtLL28
+public final class CmbtLL29
   {
   // language constants
   public final static int CMBTLANG_DEFAULT     = -1;
@@ -1347,21 +1347,21 @@ public final class CmbtLL28
   public final static int LL_FIND_AND_REPLACE_FLAG_CASEINSENSITIVE = 0;
   public final static int LL_FIND_AND_REPLACE_FLAG_CASESENSITIVE = 1;
 
-  private CmbtLL2832 LL28_32 = null;
-  private CmbtLL2864 LL28_64 = null;
+  private CmbtLL2932 LL29_32 = null;
+  private CmbtLL2964 LL29_64 = null;
   
   public int LlJobOpen
 	(
 	int                  Language
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlJobOpen(Language);
+		  return LL29_32.LlJobOpen(Language);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlJobOpen(Language);
+		  return LL29_64.LlJobOpen(Language);
 	  }
 	  else
 	  {
@@ -1374,13 +1374,13 @@ public final class CmbtLL28
 	int                  LCID
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlJobOpenLCID(LCID);
+		  return LL29_32.LlJobOpenLCID(LCID);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlJobOpenLCID(LCID);
+		  return LL29_64.LlJobOpenLCID(LCID);
 	  }
 	  else
 	  {
@@ -1393,13 +1393,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  LL28_32.LlJobClose(LlJob);
+		  LL29_32.LlJobClose(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  LL28_64.LlJobClose(LlJob);
+		  LL29_64.LlJobClose(LlJob);
 	  }
 	  else
 	  {
@@ -1412,13 +1412,13 @@ public final class CmbtLL28
 	int                  OnOff
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  LL28_32.LlSetDebug(OnOff);
+		  LL29_32.LlSetDebug(OnOff);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  LL28_64.LlSetDebug(OnOff);
+		  LL29_64.LlSetDebug(OnOff);
 	  }
 	  else
 	  {
@@ -1431,13 +1431,13 @@ public final class CmbtLL28
 	int                  Cmd
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetVersion(Cmd);
+		  return LL29_32.LlGetVersion(Cmd);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetVersion(Cmd);
+		  return LL29_64.LlGetVersion(Cmd);
 	  }
 	  else
 	  {
@@ -1450,13 +1450,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetNotificationMessage(LlJob);
+		  return LL29_32.LlGetNotificationMessage(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetNotificationMessage(LlJob);
+		  return LL29_64.LlGetNotificationMessage(LlJob);
 	  }
 	  else
 	  {
@@ -1470,13 +1470,13 @@ public final class CmbtLL28
 	int                  Message
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlSetNotificationMessage(LlJob, Message);
+		  return LL29_32.LlSetNotificationMessage(LlJob, Message);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlSetNotificationMessage(LlJob, Message);
+		  return LL29_64.LlSetNotificationMessage(LlJob, Message);
 	  }
 	  else
 	  {
@@ -1491,13 +1491,13 @@ public final class CmbtLL28
 	final String         Contents
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDefineField(LlJob, VarName, Contents);
+		  return LL29_32.LlDefineField(LlJob, VarName, Contents);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDefineField(LlJob, VarName, Contents);
+		  return LL29_64.LlDefineField(LlJob, VarName, Contents);
 	  }
 	  else
 	  {
@@ -1514,13 +1514,13 @@ public final class CmbtLL28
 	long                 Ptr
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDefineFieldExt(LlJob, VarName, Contents, Para, (int)Ptr);
+		  return LL29_32.LlDefineFieldExt(LlJob, VarName, Contents, Para, (int)Ptr);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDefineFieldExt(LlJob, VarName, Contents, Para, Ptr);
+		  return LL29_64.LlDefineFieldExt(LlJob, VarName, Contents, Para, Ptr);
 	  }
 	  else
 	  {
@@ -1537,13 +1537,13 @@ public final class CmbtLL28
 	long                 Ptr
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDefineFieldExtHandle(LlJob, VarName, (int)Contents, Para, (int)Ptr);
+		  return LL29_32.LlDefineFieldExtHandle(LlJob, VarName, (int)Contents, Para, (int)Ptr);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDefineFieldExtHandle(LlJob, VarName, Contents, Para, Ptr);
+		  return LL29_64.LlDefineFieldExtHandle(LlJob, VarName, Contents, Para, Ptr);
 	  }
 	  else
 	  {
@@ -1556,13 +1556,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  LL28_32.LlDefineFieldStart(LlJob);
+		  LL29_32.LlDefineFieldStart(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  LL28_64.LlDefineFieldStart(LlJob);
+		  LL29_64.LlDefineFieldStart(LlJob);
 	  }
 	  else
 	  {
@@ -1577,13 +1577,13 @@ public final class CmbtLL28
 	final String         Contents
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDefineVariable(LlJob, VarName, Contents);
+		  return LL29_32.LlDefineVariable(LlJob, VarName, Contents);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDefineVariable(LlJob, VarName, Contents);
+		  return LL29_64.LlDefineVariable(LlJob, VarName, Contents);
 	  }
 	  else
 	  {
@@ -1600,13 +1600,13 @@ public final class CmbtLL28
 	long                 Ptr
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDefineVariableExt(LlJob, VarName, Contents, Para, (int)Ptr);
+		  return LL29_32.LlDefineVariableExt(LlJob, VarName, Contents, Para, (int)Ptr);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDefineVariableExt(LlJob, VarName, Contents, Para, Ptr);
+		  return LL29_64.LlDefineVariableExt(LlJob, VarName, Contents, Para, Ptr);
 	  }
 	  else
 	  {
@@ -1623,13 +1623,13 @@ public final class CmbtLL28
 	long                 Ptr
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDefineVariableExtHandle(LlJob, VarName, (int)Contents, Para, (int)Ptr);
+		  return LL29_32.LlDefineVariableExtHandle(LlJob, VarName, (int)Contents, Para, (int)Ptr);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDefineVariableExtHandle(LlJob, VarName, Contents, Para, Ptr);
+		  return LL29_64.LlDefineVariableExtHandle(LlJob, VarName, Contents, Para, Ptr);
 	  }
 	  else
 	  {
@@ -1643,13 +1643,13 @@ public final class CmbtLL28
 	final String         VarName
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDefineVariableName(LlJob, VarName);
+		  return LL29_32.LlDefineVariableName(LlJob, VarName);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDefineVariableName(LlJob, VarName);
+		  return LL29_64.LlDefineVariableName(LlJob, VarName);
 	  }
 	  else
 	  {
@@ -1662,13 +1662,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  LL28_32.LlDefineVariableStart(LlJob);
+		  LL29_32.LlDefineVariableStart(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  LL28_64.LlDefineVariableStart(LlJob);
+		  LL29_64.LlDefineVariableStart(LlJob);
 	  }
 	  else
 	  {
@@ -1683,13 +1683,13 @@ public final class CmbtLL28
 	final String         Contents
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDefineSumVariable(LlJob, VarName, Contents);
+		  return LL29_32.LlDefineSumVariable(LlJob, VarName, Contents);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDefineSumVariable(LlJob, VarName, Contents);
+		  return LL29_64.LlDefineSumVariable(LlJob, VarName, Contents);
 	  }
 	  else
 	  {
@@ -1706,13 +1706,13 @@ public final class CmbtLL28
 	final String         ObjName
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDefineLayout(LlJob, (int)Wnd, Title, ObjType, ObjName);
+		  return LL29_32.LlDefineLayout(LlJob, (int)Wnd, Title, ObjType, ObjName);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDefineLayout(LlJob, Wnd, Title, ObjType, ObjName);
+		  return LL29_64.LlDefineLayout(LlJob, Wnd, Title, ObjType, ObjName);
 	  }
 	  else
 	  {
@@ -1727,13 +1727,13 @@ public final class CmbtLL28
 	StringBuffer         Buf
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDlgEditLine(LlJob, (int)Wnd, Buf);
+		  return LL29_32.LlDlgEditLine(LlJob, (int)Wnd, Buf);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDlgEditLine(LlJob, Wnd, Buf);
+		  return LL29_64.LlDlgEditLine(LlJob, Wnd, Buf);
 	  }
 	  else
 	  {
@@ -1752,13 +1752,13 @@ public final class CmbtLL28
 	long                 Reserved
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDlgEditLineEx(LlJob, (int)Wnd, Buffer, ParaTypes, Title, Table, (int)Reserved);
+		  return LL29_32.LlDlgEditLineEx(LlJob, (int)Wnd, Buffer, ParaTypes, Title, Table, (int)Reserved);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDlgEditLineEx(LlJob, Wnd, Buffer, ParaTypes, Title, Table, Reserved);
+		  return LL29_64.LlDlgEditLineEx(LlJob, Wnd, Buffer, ParaTypes, Title, Table, Reserved);
 	  }
 	  else
 	  {
@@ -1772,13 +1772,13 @@ public final class CmbtLL28
 	final String         Path
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPreviewSetTempPath(LlJob, Path);
+		  return LL29_32.LlPreviewSetTempPath(LlJob, Path);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPreviewSetTempPath(LlJob, Path);
+		  return LL29_64.LlPreviewSetTempPath(LlJob, Path);
 	  }
 	  else
 	  {
@@ -1793,13 +1793,13 @@ public final class CmbtLL28
 	final String         Path
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPreviewDeleteFiles(LlJob, ObjName, Path);
+		  return LL29_32.LlPreviewDeleteFiles(LlJob, ObjName, Path);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPreviewDeleteFiles(LlJob, ObjName, Path);
+		  return LL29_64.LlPreviewDeleteFiles(LlJob, ObjName, Path);
 	  }
 	  else
 	  {
@@ -1815,13 +1815,13 @@ public final class CmbtLL28
 	long                 Wnd
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPreviewDisplay(LlJob, ObjName, Path, (int)Wnd);
+		  return LL29_32.LlPreviewDisplay(LlJob, ObjName, Path, (int)Wnd);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPreviewDisplay(LlJob, ObjName, Path, Wnd);
+		  return LL29_64.LlPreviewDisplay(LlJob, ObjName, Path, Wnd);
 	  }
 	  else
 	  {
@@ -1839,13 +1839,13 @@ public final class CmbtLL28
 	long                 Reserved
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPreviewDisplayEx(LlJob, ObjName, Path, (int)Wnd, Options, (int)Reserved);
+		  return LL29_32.LlPreviewDisplayEx(LlJob, ObjName, Path, (int)Wnd, Options, (int)Reserved);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPreviewDisplayEx(LlJob, ObjName, Path, Wnd, Options, Reserved);
+		  return LL29_64.LlPreviewDisplayEx(LlJob, ObjName, Path, Wnd, Options, Reserved);
 	  }
 	  else
 	  {
@@ -1858,13 +1858,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrint(LlJob);
+		  return LL29_32.LlPrint(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrint(LlJob);
+		  return LL29_64.LlPrint(LlJob);
 	  }
 	  else
 	  {
@@ -1877,13 +1877,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintAbort(LlJob);
+		  return LL29_32.LlPrintAbort(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintAbort(LlJob);
+		  return LL29_64.LlPrintAbort(LlJob);
 	  }
 	  else
 	  {
@@ -1896,13 +1896,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintCheckLineFit(LlJob);
+		  return LL29_32.LlPrintCheckLineFit(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintCheckLineFit(LlJob);
+		  return LL29_64.LlPrintCheckLineFit(LlJob);
 	  }
 	  else
 	  {
@@ -1916,13 +1916,13 @@ public final class CmbtLL28
 	int                  Pages
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintEnd(LlJob, Pages);
+		  return LL29_32.LlPrintEnd(LlJob, Pages);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintEnd(LlJob, Pages);
+		  return LL29_64.LlPrintEnd(LlJob, Pages);
 	  }
 	  else
 	  {
@@ -1935,13 +1935,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintFields(LlJob);
+		  return LL29_32.LlPrintFields(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintFields(LlJob);
+		  return LL29_64.LlPrintFields(LlJob);
 	  }
 	  else
 	  {
@@ -1954,13 +1954,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintFieldsEnd(LlJob);
+		  return LL29_32.LlPrintFieldsEnd(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintFieldsEnd(LlJob);
+		  return LL29_64.LlPrintFieldsEnd(LlJob);
 	  }
 	  else
 	  {
@@ -1973,13 +1973,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintGetCurrentPage(LlJob);
+		  return LL29_32.LlPrintGetCurrentPage(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintGetCurrentPage(LlJob);
+		  return LL29_64.LlPrintGetCurrentPage(LlJob);
 	  }
 	  else
 	  {
@@ -1992,13 +1992,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintGetItemsPerPage(LlJob);
+		  return LL29_32.LlPrintGetItemsPerPage(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintGetItemsPerPage(LlJob);
+		  return LL29_64.LlPrintGetItemsPerPage(LlJob);
 	  }
 	  else
 	  {
@@ -2011,13 +2011,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintGetItemsPerTable(LlJob);
+		  return LL29_32.LlPrintGetItemsPerTable(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintGetItemsPerTable(LlJob);
+		  return LL29_64.LlPrintGetItemsPerTable(LlJob);
 	  }
 	  else
 	  {
@@ -2031,13 +2031,13 @@ public final class CmbtLL28
 	final String         Field
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintGetRemainingItemsPerTable(LlJob, Field);
+		  return LL29_32.LlPrintGetRemainingItemsPerTable(LlJob, Field);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintGetRemainingItemsPerTable(LlJob, Field);
+		  return LL29_64.LlPrintGetRemainingItemsPerTable(LlJob, Field);
 	  }
 	  else
 	  {
@@ -2051,13 +2051,13 @@ public final class CmbtLL28
 	final String         Field
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintGetRemItemsPerTable(LlJob, Field);
+		  return LL29_32.LlPrintGetRemItemsPerTable(LlJob, Field);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintGetRemItemsPerTable(LlJob, Field);
+		  return LL29_64.LlPrintGetRemItemsPerTable(LlJob, Field);
 	  }
 	  else
 	  {
@@ -2071,13 +2071,13 @@ public final class CmbtLL28
 	int                  Index
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintGetOption(LlJob, Index);
+		  return LL29_32.LlPrintGetOption(LlJob, Index);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintGetOption(LlJob, Index);
+		  return LL29_64.LlPrintGetOption(LlJob, Index);
 	  }
 	  else
 	  {
@@ -2092,13 +2092,13 @@ public final class CmbtLL28
 	StringBuffer         Port
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintGetPrinterInfo(LlJob, Prn, Port);
+		  return LL29_32.LlPrintGetPrinterInfo(LlJob, Prn, Port);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintGetPrinterInfo(LlJob, Prn, Port);
+		  return LL29_64.LlPrintGetPrinterInfo(LlJob, Prn, Port);
 	  }
 	  else
 	  {
@@ -2113,13 +2113,13 @@ public final class CmbtLL28
 	final String         Text
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintOptionsDialog(LlJob, (int)Wnd, Text);
+		  return LL29_32.LlPrintOptionsDialog(LlJob, (int)Wnd, Text);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintOptionsDialog(LlJob, Wnd, Text);
+		  return LL29_64.LlPrintOptionsDialog(LlJob, Wnd, Text);
 	  }
 	  else
 	  {
@@ -2133,13 +2133,13 @@ public final class CmbtLL28
 	long                 Wnd
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintSelectOffsetEx(LlJob, (int)Wnd);
+		  return LL29_32.LlPrintSelectOffsetEx(LlJob, (int)Wnd);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintSelectOffsetEx(LlJob, Wnd);
+		  return LL29_64.LlPrintSelectOffsetEx(LlJob, Wnd);
 	  }
 	  else
 	  {
@@ -2154,13 +2154,13 @@ public final class CmbtLL28
 	int                  Percentage
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintSetBoxText(LlJob, Text, Percentage);
+		  return LL29_32.LlPrintSetBoxText(LlJob, Text, Percentage);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintSetBoxText(LlJob, Text, Percentage);
+		  return LL29_64.LlPrintSetBoxText(LlJob, Text, Percentage);
 	  }
 	  else
 	  {
@@ -2175,13 +2175,13 @@ public final class CmbtLL28
 	long                 Value
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintSetOption(LlJob, Index, (int)Value);
+		  return LL29_32.LlPrintSetOption(LlJob, Index, (int)Value);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintSetOption(LlJob, Index, Value);
+		  return LL29_64.LlPrintSetOption(LlJob, Index, Value);
 	  }
 	  else
 	  {
@@ -2194,13 +2194,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintUpdateBox(LlJob);
+		  return LL29_32.LlPrintUpdateBox(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintUpdateBox(LlJob);
+		  return LL29_64.LlPrintUpdateBox(LlJob);
 	  }
 	  else
 	  {
@@ -2217,13 +2217,13 @@ public final class CmbtLL28
 	int                  dummy
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintStart(LlJob, ObjType, ObjName, PrintOptions, dummy);
+		  return LL29_32.LlPrintStart(LlJob, ObjType, ObjName, PrintOptions, dummy);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintStart(LlJob, ObjType, ObjName, PrintOptions, dummy);
+		  return LL29_64.LlPrintStart(LlJob, ObjType, ObjName, PrintOptions, dummy);
 	  }
 	  else
 	  {
@@ -2242,13 +2242,13 @@ public final class CmbtLL28
 	final String         Title
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintWithBoxStart(LlJob, ObjType, ObjName, PrintOptions, BoxType, (int)Wnd, Title);
+		  return LL29_32.LlPrintWithBoxStart(LlJob, ObjType, ObjName, PrintOptions, BoxType, (int)Wnd, Title);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintWithBoxStart(LlJob, ObjType, ObjName, PrintOptions, BoxType, Wnd, Title);
+		  return LL29_64.LlPrintWithBoxStart(LlJob, ObjType, ObjName, PrintOptions, BoxType, Wnd, Title);
 	  }
 	  else
 	  {
@@ -2264,13 +2264,13 @@ public final class CmbtLL28
 	final String         ObjName
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrinterSetup(LlJob, (int)Wnd, ObjType, ObjName);
+		  return LL29_32.LlPrinterSetup(LlJob, (int)Wnd, ObjType, ObjName);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrinterSetup(LlJob, Wnd, ObjType, ObjName);
+		  return LL29_64.LlPrinterSetup(LlJob, Wnd, ObjType, ObjName);
 	  }
 	  else
 	  {
@@ -2288,13 +2288,13 @@ public final class CmbtLL28
 	long                 Reserved
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlSelectFileDlgTitleEx(LlJob, (int)Wnd, Title, ObjType, ObjName, (int)Reserved);
+		  return LL29_32.LlSelectFileDlgTitleEx(LlJob, (int)Wnd, Title, ObjType, ObjName, (int)Reserved);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlSelectFileDlgTitleEx(LlJob, Wnd, Title, ObjType, ObjName, Reserved);
+		  return LL29_64.LlSelectFileDlgTitleEx(LlJob, Wnd, Title, ObjType, ObjName, Reserved);
 	  }
 	  else
 	  {
@@ -2307,13 +2307,13 @@ public final class CmbtLL28
 	int                  Mode
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  LL28_32.LlSetDlgboxMode(Mode);
+		  LL29_32.LlSetDlgboxMode(Mode);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  LL28_64.LlSetDlgboxMode(Mode);
+		  LL29_64.LlSetDlgboxMode(Mode);
 	  }
 	  else
 	  {
@@ -2325,13 +2325,13 @@ public final class CmbtLL28
 	(
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetDlgboxMode();
+		  return LL29_32.LlGetDlgboxMode();
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetDlgboxMode();
+		  return LL29_64.LlGetDlgboxMode();
 	  }
 	  else
 	  {
@@ -2346,13 +2346,13 @@ public final class CmbtLL28
 	boolean              IncludeFields
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlExprParse(LlJob, ExprText, IncludeFields);
+		  return LL29_32.LlExprParse(LlJob, ExprText, IncludeFields);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlExprParse(LlJob, ExprText, IncludeFields);
+		  return LL29_64.LlExprParse(LlJob, ExprText, IncludeFields);
 	  }
 	  else
 	  {
@@ -2366,13 +2366,13 @@ public final class CmbtLL28
 	long                 Expr
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlExprType(LlJob, (int)Expr);
+		  return LL29_32.LlExprType(LlJob, (int)Expr);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlExprType(LlJob, Expr);
+		  return LL29_64.LlExprType(LlJob, Expr);
 	  }
 	  else
 	  {
@@ -2386,13 +2386,13 @@ public final class CmbtLL28
 	StringBuffer         Buf
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  LL28_32.LlExprError(LlJob, Buf);
+		  LL29_32.LlExprError(LlJob, Buf);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  LL28_64.LlExprError(LlJob, Buf);
+		  LL29_64.LlExprError(LlJob, Buf);
 	  }
 	  else
 	  {
@@ -2406,13 +2406,13 @@ public final class CmbtLL28
 	long                 Expr
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  LL28_32.LlExprFree(LlJob, (int)Expr);
+		  LL29_32.LlExprFree(LlJob, (int)Expr);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  LL28_64.LlExprFree(LlJob, Expr);
+		  LL29_64.LlExprFree(LlJob, Expr);
 	  }
 	  else
 	  {
@@ -2427,13 +2427,13 @@ public final class CmbtLL28
 	StringBuffer         Buf
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlExprEvaluate(LlJob, (int)Expr, Buf);
+		  return LL29_32.LlExprEvaluate(LlJob, (int)Expr, Buf);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlExprEvaluate(LlJob, Expr, Buf);
+		  return LL29_64.LlExprEvaluate(LlJob, Expr, Buf);
 	  }
 	  else
 	  {
@@ -2448,13 +2448,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlExprGetUsedVars(LlJob, (int)Expr, Buffer);
+		  return LL29_32.LlExprGetUsedVars(LlJob, (int)Expr, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlExprGetUsedVars(LlJob, Expr, Buffer);
+		  return LL29_64.LlExprGetUsedVars(LlJob, Expr, Buffer);
 	  }
 	  else
 	  {
@@ -2469,13 +2469,13 @@ public final class CmbtLL28
 	long                 Value
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlSetOption(LlJob, Mode, (int)Value);
+		  return LL29_32.LlSetOption(LlJob, Mode, (int)Value);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlSetOption(LlJob, Mode, Value);
+		  return LL29_64.LlSetOption(LlJob, Mode, Value);
 	  }
 	  else
 	  {
@@ -2489,13 +2489,13 @@ public final class CmbtLL28
 	int                  Mode
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetOption(LlJob, Mode);
+		  return LL29_32.LlGetOption(LlJob, Mode);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetOption(LlJob, Mode);
+		  return LL29_64.LlGetOption(LlJob, Mode);
 	  }
 	  else
 	  {
@@ -2510,13 +2510,13 @@ public final class CmbtLL28
 	final String         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlSetOptionString(LlJob, Index, Buffer);
+		  return LL29_32.LlSetOptionString(LlJob, Index, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlSetOptionString(LlJob, Index, Buffer);
+		  return LL29_64.LlSetOptionString(LlJob, Index, Buffer);
 	  }
 	  else
 	  {
@@ -2531,13 +2531,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetOptionString(LlJob, Index, Buffer);
+		  return LL29_32.LlGetOptionString(LlJob, Index, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetOptionString(LlJob, Index, Buffer);
+		  return LL29_64.LlGetOptionString(LlJob, Index, Buffer);
 	  }
 	  else
 	  {
@@ -2552,13 +2552,13 @@ public final class CmbtLL28
 	final String         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintSetOptionString(LlJob, Index, Buffer);
+		  return LL29_32.LlPrintSetOptionString(LlJob, Index, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintSetOptionString(LlJob, Index, Buffer);
+		  return LL29_64.LlPrintSetOptionString(LlJob, Index, Buffer);
 	  }
 	  else
 	  {
@@ -2573,13 +2573,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintGetOptionString(LlJob, Index, Buffer);
+		  return LL29_32.LlPrintGetOptionString(LlJob, Index, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintGetOptionString(LlJob, Index, Buffer);
+		  return LL29_64.LlPrintGetOptionString(LlJob, Index, Buffer);
 	  }
 	  else
 	  {
@@ -2593,13 +2593,13 @@ public final class CmbtLL28
 	int                  MenuID
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDesignerProhibitAction(LlJob, MenuID);
+		  return LL29_32.LlDesignerProhibitAction(LlJob, MenuID);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDesignerProhibitAction(LlJob, MenuID);
+		  return LL29_64.LlDesignerProhibitAction(LlJob, MenuID);
 	  }
 	  else
 	  {
@@ -2613,13 +2613,13 @@ public final class CmbtLL28
 	final String         Function
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDesignerProhibitFunction(LlJob, Function);
+		  return LL29_32.LlDesignerProhibitFunction(LlJob, Function);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDesignerProhibitFunction(LlJob, Function);
+		  return LL29_64.LlDesignerProhibitFunction(LlJob, Function);
 	  }
 	  else
 	  {
@@ -2634,13 +2634,13 @@ public final class CmbtLL28
 	boolean              Enable
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintEnableObject(LlJob, ObjectName, Enable);
+		  return LL29_32.LlPrintEnableObject(LlJob, ObjectName, Enable);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintEnableObject(LlJob, ObjectName, Enable);
+		  return LL29_64.LlPrintEnableObject(LlJob, ObjectName, Enable);
 	  }
 	  else
 	  {
@@ -2657,13 +2657,13 @@ public final class CmbtLL28
 	final String         SketchExt
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlSetFileExtensions(LlJob, ObjType, ObjectExt, PrinterExt, SketchExt);
+		  return LL29_32.LlSetFileExtensions(LlJob, ObjType, ObjectExt, PrinterExt, SketchExt);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlSetFileExtensions(LlJob, ObjType, ObjectExt, PrinterExt, SketchExt);
+		  return LL29_64.LlSetFileExtensions(LlJob, ObjType, ObjectExt, PrinterExt, SketchExt);
 	  }
 	  else
 	  {
@@ -2677,13 +2677,13 @@ public final class CmbtLL28
 	final String         ObjectName
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintGetTextCharsPrinted(LlJob, ObjectName);
+		  return LL29_32.LlPrintGetTextCharsPrinted(LlJob, ObjectName);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintGetTextCharsPrinted(LlJob, ObjectName);
+		  return LL29_64.LlPrintGetTextCharsPrinted(LlJob, ObjectName);
 	  }
 	  else
 	  {
@@ -2698,13 +2698,13 @@ public final class CmbtLL28
 	final String         Field
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintGetFieldCharsPrinted(LlJob, ObjectName, Field);
+		  return LL29_32.LlPrintGetFieldCharsPrinted(LlJob, ObjectName, Field);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintGetFieldCharsPrinted(LlJob, ObjectName, Field);
+		  return LL29_64.LlPrintGetFieldCharsPrinted(LlJob, ObjectName, Field);
 	  }
 	  else
 	  {
@@ -2718,13 +2718,13 @@ public final class CmbtLL28
 	final String         VarName
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintIsVariableUsed(LlJob, VarName);
+		  return LL29_32.LlPrintIsVariableUsed(LlJob, VarName);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintIsVariableUsed(LlJob, VarName);
+		  return LL29_64.LlPrintIsVariableUsed(LlJob, VarName);
 	  }
 	  else
 	  {
@@ -2738,13 +2738,13 @@ public final class CmbtLL28
 	final String         FieldName
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintIsFieldUsed(LlJob, FieldName);
+		  return LL29_32.LlPrintIsFieldUsed(LlJob, FieldName);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintIsFieldUsed(LlJob, FieldName);
+		  return LL29_64.LlPrintIsFieldUsed(LlJob, FieldName);
 	  }
 	  else
 	  {
@@ -2760,13 +2760,13 @@ public final class CmbtLL28
 	final String         Text
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintOptionsDialogTitle(LlJob, (int)Wnd, Title, Text);
+		  return LL29_32.LlPrintOptionsDialogTitle(LlJob, (int)Wnd, Title, Text);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintOptionsDialogTitle(LlJob, Wnd, Title, Text);
+		  return LL29_64.LlPrintOptionsDialogTitle(LlJob, Wnd, Title, Text);
 	  }
 	  else
 	  {
@@ -2781,13 +2781,13 @@ public final class CmbtLL28
 	final String         ObjName
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlSetPrinterToDefault(LlJob, ObjType, ObjName);
+		  return LL29_32.LlSetPrinterToDefault(LlJob, ObjType, ObjName);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlSetPrinterToDefault(LlJob, ObjType, ObjName);
+		  return LL29_64.LlSetPrinterToDefault(LlJob, ObjType, ObjName);
 	  }
 	  else
 	  {
@@ -2800,13 +2800,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDefineSortOrderStart(LlJob);
+		  return LL29_32.LlDefineSortOrderStart(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDefineSortOrderStart(LlJob);
+		  return LL29_64.LlDefineSortOrderStart(LlJob);
 	  }
 	  else
 	  {
@@ -2821,13 +2821,13 @@ public final class CmbtLL28
 	final String         Text
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDefineSortOrder(LlJob, Identifier, Text);
+		  return LL29_32.LlDefineSortOrder(LlJob, Identifier, Text);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDefineSortOrder(LlJob, Identifier, Text);
+		  return LL29_64.LlDefineSortOrder(LlJob, Identifier, Text);
 	  }
 	  else
 	  {
@@ -2841,13 +2841,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintGetSortOrder(LlJob, Buffer);
+		  return LL29_32.LlPrintGetSortOrder(LlJob, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintGetSortOrder(LlJob, Buffer);
+		  return LL29_64.LlPrintGetSortOrder(LlJob, Buffer);
 	  }
 	  else
 	  {
@@ -2863,13 +2863,13 @@ public final class CmbtLL28
 	final String         Text
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDefineGrouping(LlJob, Sortorder, Identifier, Text);
+		  return LL29_32.LlDefineGrouping(LlJob, Sortorder, Identifier, Text);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDefineGrouping(LlJob, Sortorder, Identifier, Text);
+		  return LL29_64.LlDefineGrouping(LlJob, Sortorder, Identifier, Text);
 	  }
 	  else
 	  {
@@ -2883,13 +2883,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintGetGrouping(LlJob, Buffer);
+		  return LL29_32.LlPrintGetGrouping(LlJob, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintGetGrouping(LlJob, Buffer);
+		  return LL29_64.LlPrintGetGrouping(LlJob, Buffer);
 	  }
 	  else
 	  {
@@ -2904,13 +2904,13 @@ public final class CmbtLL28
 	final String         Inifile
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlAddCtlSupport((int)Wnd, Flags, Inifile);
+		  return LL29_32.LlAddCtlSupport((int)Wnd, Flags, Inifile);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlAddCtlSupport(Wnd, Flags, Inifile);
+		  return LL29_64.LlAddCtlSupport(Wnd, Flags, Inifile);
 	  }
 	  else
 	  {
@@ -2924,13 +2924,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintGetFilterExpression(LlJob, Buffer);
+		  return LL29_32.LlPrintGetFilterExpression(LlJob, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintGetFilterExpression(LlJob, Buffer);
+		  return LL29_64.LlPrintGetFilterExpression(LlJob, Buffer);
 	  }
 	  else
 	  {
@@ -2943,13 +2943,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintWillMatchFilter(LlJob);
+		  return LL29_32.LlPrintWillMatchFilter(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintWillMatchFilter(LlJob);
+		  return LL29_64.LlPrintWillMatchFilter(LlJob);
 	  }
 	  else
 	  {
@@ -2962,13 +2962,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintDidMatchFilter(LlJob);
+		  return LL29_32.LlPrintDidMatchFilter(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintDidMatchFilter(LlJob);
+		  return LL29_64.LlPrintDidMatchFilter(LlJob);
 	  }
 	  else
 	  {
@@ -2983,13 +2983,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetFieldContents(LlJob, Name, Buffer);
+		  return LL29_32.LlGetFieldContents(LlJob, Name, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetFieldContents(LlJob, Name, Buffer);
+		  return LL29_64.LlGetFieldContents(LlJob, Name, Buffer);
 	  }
 	  else
 	  {
@@ -3004,13 +3004,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetVariableContents(LlJob, Name, Buffer);
+		  return LL29_32.LlGetVariableContents(LlJob, Name, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetVariableContents(LlJob, Name, Buffer);
+		  return LL29_64.LlGetVariableContents(LlJob, Name, Buffer);
 	  }
 	  else
 	  {
@@ -3025,13 +3025,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetSumVariableContents(LlJob, Name, Buffer);
+		  return LL29_32.LlGetSumVariableContents(LlJob, Name, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetSumVariableContents(LlJob, Name, Buffer);
+		  return LL29_64.LlGetSumVariableContents(LlJob, Name, Buffer);
 	  }
 	  else
 	  {
@@ -3046,13 +3046,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetUserVariableContents(LlJob, Name, Buffer);
+		  return LL29_32.LlGetUserVariableContents(LlJob, Name, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetUserVariableContents(LlJob, Name, Buffer);
+		  return LL29_64.LlGetUserVariableContents(LlJob, Name, Buffer);
 	  }
 	  else
 	  {
@@ -3066,13 +3066,13 @@ public final class CmbtLL28
 	final String         Name
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetVariableType(LlJob, Name);
+		  return LL29_32.LlGetVariableType(LlJob, Name);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetVariableType(LlJob, Name);
+		  return LL29_64.LlGetVariableType(LlJob, Name);
 	  }
 	  else
 	  {
@@ -3086,13 +3086,13 @@ public final class CmbtLL28
 	final String         Name
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetFieldType(LlJob, Name);
+		  return LL29_32.LlGetFieldType(LlJob, Name);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetFieldType(LlJob, Name);
+		  return LL29_64.LlGetFieldType(LlJob, Name);
 	  }
 	  else
 	  {
@@ -3106,13 +3106,13 @@ public final class CmbtLL28
 	final String         Dir
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlSetPrinterDefaultsDir(LlJob, Dir);
+		  return LL29_32.LlSetPrinterDefaultsDir(LlJob, Dir);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlSetPrinterDefaultsDir(LlJob, Dir);
+		  return LL29_64.LlSetPrinterDefaultsDir(LlJob, Dir);
 	  }
 	  else
 	  {
@@ -3127,13 +3127,13 @@ public final class CmbtLL28
 	final String         ObjName
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlCreateSketch(LlJob, ObjType, ObjName);
+		  return LL29_32.LlCreateSketch(LlJob, ObjType, ObjName);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlCreateSketch(LlJob, ObjType, ObjName);
+		  return LL29_64.LlCreateSketch(LlJob, ObjType, ObjName);
 	  }
 	  else
 	  {
@@ -3147,13 +3147,13 @@ public final class CmbtLL28
 	int                  MenuID
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlViewerProhibitAction(LlJob, MenuID);
+		  return LL29_32.LlViewerProhibitAction(LlJob, MenuID);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlViewerProhibitAction(LlJob, MenuID);
+		  return LL29_64.LlViewerProhibitAction(LlJob, MenuID);
 	  }
 	  else
 	  {
@@ -3168,13 +3168,13 @@ public final class CmbtLL28
 	int                  Function
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintCopyPrinterConfiguration(LlJob, Filename, Function);
+		  return LL29_32.LlPrintCopyPrinterConfiguration(LlJob, Filename, Function);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintCopyPrinterConfiguration(LlJob, Filename, Function);
+		  return LL29_64.LlPrintCopyPrinterConfiguration(LlJob, Filename, Function);
 	  }
 	  else
 	  {
@@ -3187,13 +3187,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlRTFCreateObject(LlJob);
+		  return LL29_32.LlRTFCreateObject(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlRTFCreateObject(LlJob);
+		  return LL29_64.LlRTFCreateObject(LlJob);
 	  }
 	  else
 	  {
@@ -3207,13 +3207,13 @@ public final class CmbtLL28
 	long                 RTF
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlRTFDeleteObject(LlJob, (int)RTF);
+		  return LL29_32.LlRTFDeleteObject(LlJob, (int)RTF);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlRTFDeleteObject(LlJob, RTF);
+		  return LL29_64.LlRTFDeleteObject(LlJob, RTF);
 	  }
 	  else
 	  {
@@ -3228,13 +3228,13 @@ public final class CmbtLL28
 	final String         Text
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlRTFSetText(LlJob, (int)RTF, Text);
+		  return LL29_32.LlRTFSetText(LlJob, (int)RTF, Text);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlRTFSetText(LlJob, RTF, Text);
+		  return LL29_64.LlRTFSetText(LlJob, RTF, Text);
 	  }
 	  else
 	  {
@@ -3249,13 +3249,13 @@ public final class CmbtLL28
 	int                  Flags
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlRTFGetTextLength(LlJob, (int)RTF, Flags);
+		  return LL29_32.LlRTFGetTextLength(LlJob, (int)RTF, Flags);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlRTFGetTextLength(LlJob, RTF, Flags);
+		  return LL29_64.LlRTFGetTextLength(LlJob, RTF, Flags);
 	  }
 	  else
 	  {
@@ -3271,13 +3271,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlRTFGetText(LlJob, (int)RTF, Flags, Buffer);
+		  return LL29_32.LlRTFGetText(LlJob, (int)RTF, Flags, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlRTFGetText(LlJob, RTF, Flags, Buffer);
+		  return LL29_64.LlRTFGetText(LlJob, RTF, Flags, Buffer);
 	  }
 	  else
 	  {
@@ -3295,13 +3295,13 @@ public final class CmbtLL28
 	boolean              Modal
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlRTFEditObject(LlJob, (int)RTF, (int)Wnd, (int)PrnDC, ProjectType, Modal);
+		  return LL29_32.LlRTFEditObject(LlJob, (int)RTF, (int)Wnd, (int)PrnDC, ProjectType, Modal);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlRTFEditObject(LlJob, RTF, Wnd, PrnDC, ProjectType, Modal);
+		  return LL29_64.LlRTFEditObject(LlJob, RTF, Wnd, PrnDC, ProjectType, Modal);
 	  }
 	  else
 	  {
@@ -3315,13 +3315,13 @@ public final class CmbtLL28
 	long                 RTF
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlRTFCopyToClipboard(LlJob, (int)RTF);
+		  return LL29_32.LlRTFCopyToClipboard(LlJob, (int)RTF);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlRTFCopyToClipboard(LlJob, RTF);
+		  return LL29_64.LlRTFCopyToClipboard(LlJob, RTF);
 	  }
 	  else
 	  {
@@ -3336,13 +3336,13 @@ public final class CmbtLL28
 	int                  ControlID
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlRTFEditorProhibitAction(LlJob, (int)RTF, ControlID);
+		  return LL29_32.LlRTFEditorProhibitAction(LlJob, (int)RTF, ControlID);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlRTFEditorProhibitAction(LlJob, RTF, ControlID);
+		  return LL29_64.LlRTFEditorProhibitAction(LlJob, RTF, ControlID);
 	  }
 	  else
 	  {
@@ -3357,13 +3357,13 @@ public final class CmbtLL28
 	int                  ControlID
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlRTFEditorInvokeAction(LlJob, (int)RTF, ControlID);
+		  return LL29_32.LlRTFEditorInvokeAction(LlJob, (int)RTF, ControlID);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlRTFEditorInvokeAction(LlJob, RTF, ControlID);
+		  return LL29_64.LlRTFEditorInvokeAction(LlJob, RTF, ControlID);
 	  }
 	  else
 	  {
@@ -3377,13 +3377,13 @@ public final class CmbtLL28
 	final String         Text
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  LL28_32.LlDebugOutput(Indent, Text);
+		  LL29_32.LlDebugOutput(Indent, Text);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  LL28_64.LlDebugOutput(Indent, Text);
+		  LL29_64.LlDebugOutput(Indent, Text);
 	  }
 	  else
 	  {
@@ -3397,13 +3397,13 @@ public final class CmbtLL28
 	int                  Flags
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlEnumGetFirstVar(LlJob, Flags);
+		  return LL29_32.LlEnumGetFirstVar(LlJob, Flags);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlEnumGetFirstVar(LlJob, Flags);
+		  return LL29_64.LlEnumGetFirstVar(LlJob, Flags);
 	  }
 	  else
 	  {
@@ -3417,13 +3417,13 @@ public final class CmbtLL28
 	int                  Flags
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlEnumGetFirstField(LlJob, Flags);
+		  return LL29_32.LlEnumGetFirstField(LlJob, Flags);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlEnumGetFirstField(LlJob, Flags);
+		  return LL29_64.LlEnumGetFirstField(LlJob, Flags);
 	  }
 	  else
 	  {
@@ -3438,13 +3438,13 @@ public final class CmbtLL28
 	int                  Flags
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlEnumGetNextEntry(LlJob, (int)Pos, Flags);
+		  return LL29_32.LlEnumGetNextEntry(LlJob, (int)Pos, Flags);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlEnumGetNextEntry(LlJob, Pos, Flags);
+		  return LL29_64.LlEnumGetNextEntry(LlJob, Pos, Flags);
 	  }
 	  else
 	  {
@@ -3457,13 +3457,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintResetObjectStates(LlJob);
+		  return LL29_32.LlPrintResetObjectStates(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintResetObjectStates(LlJob);
+		  return LL29_64.LlPrintResetObjectStates(LlJob);
 	  }
 	  else
 	  {
@@ -3480,13 +3480,13 @@ public final class CmbtLL28
 	final String         Value
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlXSetParameter(LlJob, ExtensionType, ExtensionName, Key, Value);
+		  return LL29_32.LlXSetParameter(LlJob, ExtensionType, ExtensionName, Key, Value);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlXSetParameter(LlJob, ExtensionType, ExtensionName, Key, Value);
+		  return LL29_64.LlXSetParameter(LlJob, ExtensionType, ExtensionName, Key, Value);
 	  }
 	  else
 	  {
@@ -3503,13 +3503,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlXGetParameter(LlJob, ExtensionType, ExtensionName, Key, Buffer);
+		  return LL29_32.LlXGetParameter(LlJob, ExtensionType, ExtensionName, Key, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlXGetParameter(LlJob, ExtensionType, ExtensionName, Key, Buffer);
+		  return LL29_64.LlXGetParameter(LlJob, ExtensionType, ExtensionName, Key, Buffer);
 	  }
 	  else
 	  {
@@ -3522,13 +3522,13 @@ public final class CmbtLL28
 	int                  Job
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintResetProjectState(Job);
+		  return LL29_32.LlPrintResetProjectState(Job);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintResetProjectState(Job);
+		  return LL29_64.LlPrintResetProjectState(Job);
 	  }
 	  else
 	  {
@@ -3541,13 +3541,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  LL28_32.LlDefineChartFieldStart(LlJob);
+		  LL29_32.LlDefineChartFieldStart(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  LL28_64.LlDefineChartFieldStart(LlJob);
+		  LL29_64.LlDefineChartFieldStart(LlJob);
 	  }
 	  else
 	  {
@@ -3564,13 +3564,13 @@ public final class CmbtLL28
 	long                 Ptr
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDefineChartFieldExt(LlJob, VarName, Contents, Para, (int)Ptr);
+		  return LL29_32.LlDefineChartFieldExt(LlJob, VarName, Contents, Para, (int)Ptr);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDefineChartFieldExt(LlJob, VarName, Contents, Para, Ptr);
+		  return LL29_64.LlDefineChartFieldExt(LlJob, VarName, Contents, Para, Ptr);
 	  }
 	  else
 	  {
@@ -3584,13 +3584,13 @@ public final class CmbtLL28
 	int                  Flags
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintDeclareChartRow(LlJob, Flags);
+		  return LL29_32.LlPrintDeclareChartRow(LlJob, Flags);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintDeclareChartRow(LlJob, Flags);
+		  return LL29_64.LlPrintDeclareChartRow(LlJob, Flags);
 	  }
 	  else
 	  {
@@ -3604,13 +3604,13 @@ public final class CmbtLL28
 	int                  Type
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintGetChartObjectCount(LlJob, Type);
+		  return LL29_32.LlPrintGetChartObjectCount(LlJob, Type);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintGetChartObjectCount(LlJob, Type);
+		  return LL29_64.LlPrintGetChartObjectCount(LlJob, Type);
 	  }
 	  else
 	  {
@@ -3624,13 +3624,13 @@ public final class CmbtLL28
 	final String         FieldName
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintIsChartFieldUsed(LlJob, FieldName);
+		  return LL29_32.LlPrintIsChartFieldUsed(LlJob, FieldName);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintIsChartFieldUsed(LlJob, FieldName);
+		  return LL29_64.LlPrintIsChartFieldUsed(LlJob, FieldName);
 	  }
 	  else
 	  {
@@ -3645,13 +3645,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetChartFieldContents(LlJob, Name, Buffer);
+		  return LL29_32.LlGetChartFieldContents(LlJob, Name, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetChartFieldContents(LlJob, Name, Buffer);
+		  return LL29_64.LlGetChartFieldContents(LlJob, Name, Buffer);
 	  }
 	  else
 	  {
@@ -3665,13 +3665,13 @@ public final class CmbtLL28
 	int                  Flags
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlEnumGetFirstChartField(LlJob, Flags);
+		  return LL29_32.LlEnumGetFirstChartField(LlJob, Flags);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlEnumGetFirstChartField(LlJob, Flags);
+		  return LL29_64.LlEnumGetFirstChartField(LlJob, Flags);
 	  }
 	  else
 	  {
@@ -3686,13 +3686,13 @@ public final class CmbtLL28
 	int                  Dimension
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintGetRemainingSpacePerTable(LlJob, Field, Dimension);
+		  return LL29_32.LlPrintGetRemainingSpacePerTable(LlJob, Field, Dimension);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintGetRemainingSpacePerTable(LlJob, Field, Dimension);
+		  return LL29_64.LlPrintGetRemainingSpacePerTable(LlJob, Field, Dimension);
 	  }
 	  else
 	  {
@@ -3708,13 +3708,13 @@ public final class CmbtLL28
 	int                  Flags
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlSetDefaultProjectParameter(LlJob, Parameter, Value, Flags);
+		  return LL29_32.LlSetDefaultProjectParameter(LlJob, Parameter, Value, Flags);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlSetDefaultProjectParameter(LlJob, Parameter, Value, Flags);
+		  return LL29_64.LlSetDefaultProjectParameter(LlJob, Parameter, Value, Flags);
 	  }
 	  else
 	  {
@@ -3730,13 +3730,13 @@ public final class CmbtLL28
 	int                  Flags
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintSetProjectParameter(LlJob, Parameter, Value, Flags);
+		  return LL29_32.LlPrintSetProjectParameter(LlJob, Parameter, Value, Flags);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintSetProjectParameter(LlJob, Parameter, Value, Flags);
+		  return LL29_64.LlPrintSetProjectParameter(LlJob, Parameter, Value, Flags);
 	  }
 	  else
 	  {
@@ -3751,13 +3751,13 @@ public final class CmbtLL28
 	final String         Variable
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlExprContainsVariable(LlJob, (int)Expr, Variable);
+		  return LL29_32.LlExprContainsVariable(LlJob, (int)Expr, Variable);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlExprContainsVariable(LlJob, Expr, Variable);
+		  return LL29_64.LlExprContainsVariable(LlJob, Expr, Variable);
 	  }
 	  else
 	  {
@@ -3771,13 +3771,13 @@ public final class CmbtLL28
 	long                 Expr
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlExprIsConstant(LlJob, (int)Expr);
+		  return LL29_32.LlExprIsConstant(LlJob, (int)Expr);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlExprIsConstant(LlJob, Expr);
+		  return LL29_64.LlExprIsConstant(LlJob, Expr);
 	  }
 	  else
 	  {
@@ -3793,13 +3793,13 @@ public final class CmbtLL28
 	int                  TicksMS
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlProfileStart((int)Thread, Descr, Filename, TicksMS);
+		  return LL29_32.LlProfileStart((int)Thread, Descr, Filename, TicksMS);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlProfileStart(Thread, Descr, Filename, TicksMS);
+		  return LL29_64.LlProfileStart(Thread, Descr, Filename, TicksMS);
 	  }
 	  else
 	  {
@@ -3812,13 +3812,13 @@ public final class CmbtLL28
 	long                  Thread
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  LL28_32.LlProfileEnd((int)Thread);
+		  LL29_32.LlProfileEnd((int)Thread);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  LL28_64.LlProfileEnd(Thread);
+		  LL29_64.LlProfileEnd(Thread);
 	  }
 	  else
 	  {
@@ -3833,13 +3833,13 @@ public final class CmbtLL28
 	final String         DisplayName
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDbAddTable(Job, TableID, DisplayName);
+		  return LL29_32.LlDbAddTable(Job, TableID, DisplayName);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDbAddTable(Job, TableID, DisplayName);
+		  return LL29_64.LlDbAddTable(Job, TableID, DisplayName);
 	  }
 	  else
 	  {
@@ -3855,13 +3855,13 @@ public final class CmbtLL28
 	int					 Options
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDbAddTableEx(Job, TableID, DisplayName, Options);
+		  return LL29_32.LlDbAddTableEx(Job, TableID, DisplayName, Options);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDbAddTableEx(Job, TableID, DisplayName, Options);
+		  return LL29_64.LlDbAddTableEx(Job, TableID, DisplayName, Options);
 	  }
 	  else
 	  {
@@ -3878,13 +3878,13 @@ public final class CmbtLL28
 	final String         RelationDisplayName
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDbAddTableRelation(Job, TableID, ParentTableID, RelationID, RelationDisplayName);
+		  return LL29_32.LlDbAddTableRelation(Job, TableID, ParentTableID, RelationID, RelationDisplayName);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDbAddTableRelation(Job, TableID, ParentTableID, RelationID, RelationDisplayName);
+		  return LL29_64.LlDbAddTableRelation(Job, TableID, ParentTableID, RelationID, RelationDisplayName);
 	  }
 	  else
 	  {
@@ -3900,13 +3900,13 @@ public final class CmbtLL28
 	final String         SortOrderDisplayName
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDbAddTableSortOrder(Job, TableID, SortOrderID, SortOrderDisplayName);
+		  return LL29_32.LlDbAddTableSortOrder(Job, TableID, SortOrderID, SortOrderDisplayName);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDbAddTableSortOrder(Job, TableID, SortOrderID, SortOrderDisplayName);
+		  return LL29_64.LlDbAddTableSortOrder(Job, TableID, SortOrderID, SortOrderDisplayName);
 	  }
 	  else
 	  {
@@ -3921,13 +3921,13 @@ public final class CmbtLL28
 	boolean              CompletePath
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintDbGetCurrentTable(Job, TableID, CompletePath);
+		  return LL29_32.LlPrintDbGetCurrentTable(Job, TableID, CompletePath);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintDbGetCurrentTable(Job, TableID, CompletePath);
+		  return LL29_64.LlPrintDbGetCurrentTable(Job, TableID, CompletePath);
 	  }
 	  else
 	  {
@@ -3941,13 +3941,13 @@ public final class CmbtLL28
 	StringBuffer         RelationID
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintDbGetCurrentTableRelation(Job, RelationID);
+		  return LL29_32.LlPrintDbGetCurrentTableRelation(Job, RelationID);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintDbGetCurrentTableRelation(Job, RelationID);
+		  return LL29_64.LlPrintDbGetCurrentTableRelation(Job, RelationID);
 	  }
 	  else
 	  {
@@ -3961,13 +3961,13 @@ public final class CmbtLL28
 	StringBuffer         SortOrderID
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintDbGetCurrentTableSortOrder(Job, SortOrderID);
+		  return LL29_32.LlPrintDbGetCurrentTableSortOrder(Job, SortOrderID);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintDbGetCurrentTableSortOrder(Job, SortOrderID);
+		  return LL29_64.LlPrintDbGetCurrentTableSortOrder(Job, SortOrderID);
 	  }
 	  else
 	  {
@@ -3980,13 +3980,13 @@ public final class CmbtLL28
 	int                  Job
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDbDumpStructure(Job);
+		  return LL29_32.LlDbDumpStructure(Job);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDbDumpStructure(Job);
+		  return LL29_64.LlDbDumpStructure(Job);
 	  }
 	  else
 	  {
@@ -3999,13 +3999,13 @@ public final class CmbtLL28
 	int                  Job
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlPrintDbGetRootTableCount(Job);
+		  return LL29_32.LlPrintDbGetRootTableCount(Job);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlPrintDbGetRootTableCount(Job);
+		  return LL29_64.LlPrintDbGetRootTableCount(Job);
 	  }
 	  else
 	  {
@@ -4019,13 +4019,13 @@ public final class CmbtLL28
 	final String         TableID
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDbSetMasterTable(Job, TableID);
+		  return LL29_32.LlDbSetMasterTable(Job, TableID);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDbSetMasterTable(Job, TableID);
+		  return LL29_64.LlDbSetMasterTable(Job, TableID);
 	  }
 	  else
 	  {
@@ -4039,13 +4039,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDbGetMasterTable(Job, Buffer);
+		  return LL29_32.LlDbGetMasterTable(Job, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDbGetMasterTable(Job, Buffer);
+		  return LL29_64.LlDbGetMasterTable(Job, Buffer);
 	  }
 	  else
 	  {
@@ -4061,13 +4061,13 @@ public final class CmbtLL28
 	final String         Value
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlXSetExportParameter(LlJob, ExtensionName, Key, Value);
+		  return LL29_32.LlXSetExportParameter(LlJob, ExtensionName, Key, Value);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlXSetExportParameter(LlJob, ExtensionName, Key, Value);
+		  return LL29_64.LlXSetExportParameter(LlJob, ExtensionName, Key, Value);
 	  }
 	  else
 	  {
@@ -4083,13 +4083,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlXGetExportParameter(LlJob, ExtensionName, Key, Buffer);
+		  return LL29_32.LlXGetExportParameter(LlJob, ExtensionName, Key, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlXGetExportParameter(LlJob, ExtensionName, Key, Buffer);
+		  return LL29_64.LlXGetExportParameter(LlJob, ExtensionName, Key, Buffer);
 	  }
 	  else
 	  {
@@ -4104,13 +4104,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlXlatName(LlJob, Name, Buffer);
+		  return LL29_32.LlXlatName(LlJob, Name, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlXlatName(LlJob, Name, Buffer);
+		  return LL29_64.LlXlatName(LlJob, Name, Buffer);
 	  }
 	  else
 	  {
@@ -4124,13 +4124,13 @@ public final class CmbtLL28
 	final String         Object
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDesignerProhibitEditingObject(LlJob, Object);
+		  return LL29_32.LlDesignerProhibitEditingObject(LlJob, Object);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDesignerProhibitEditingObject(LlJob, Object);
+		  return LL29_64.LlDesignerProhibitEditingObject(LlJob, Object);
 	  }
 	  else
 	  {
@@ -4145,13 +4145,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetUsedIdentifiers(LlJob, ProjectName, Buffer);
+		  return LL29_32.LlGetUsedIdentifiers(LlJob, ProjectName, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetUsedIdentifiers(LlJob, ProjectName, Buffer);
+		  return LL29_64.LlGetUsedIdentifiers(LlJob, ProjectName, Buffer);
 	  }
 	  else
 	  {
@@ -4167,13 +4167,13 @@ public final class CmbtLL28
 	boolean              OrgName
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlExprGetUsedVarsEx(LlJob, (int)Expr, Buffer, OrgName);
+		  return LL29_32.LlExprGetUsedVarsEx(LlJob, (int)Expr, Buffer, OrgName);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlExprGetUsedVarsEx(LlJob, Expr, Buffer, OrgName);
+		  return LL29_64.LlExprGetUsedVarsEx(LlJob, Expr, Buffer, OrgName);
 	  }
 	  else
 	  {
@@ -4187,13 +4187,13 @@ public final class CmbtLL28
 	long                 DOMObj
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDomGetProject(LlJob, (int)DOMObj);
+		  return LL29_32.LlDomGetProject(LlJob, (int)DOMObj);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDomGetProject(LlJob, DOMObj);
+		  return LL29_64.LlDomGetProject(LlJob, DOMObj);
 	  }
 	  else
 	  {
@@ -4208,13 +4208,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDomGetProperty((int)DOMObj, Name, Buffer);
+		  return LL29_32.LlDomGetProperty((int)DOMObj, Name, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDomGetProperty(DOMObj, Name, Buffer);
+		  return LL29_64.LlDomGetProperty(DOMObj, Name, Buffer);
 	  }
 	  else
 	  {
@@ -4229,13 +4229,13 @@ public final class CmbtLL28
 	final String         Value
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDomSetProperty((int)DOMObj, Name, Value);
+		  return LL29_32.LlDomSetProperty((int)DOMObj, Name, Value);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDomSetProperty(DOMObj, Name, Value);
+		  return LL29_64.LlDomSetProperty(DOMObj, Name, Value);
 	  }
 	  else
 	  {
@@ -4250,13 +4250,13 @@ public final class CmbtLL28
 	long                 DOMSubObj
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDomGetObject((int)DOMObj, Name, (int)DOMSubObj);
+		  return LL29_32.LlDomGetObject((int)DOMObj, Name, (int)DOMSubObj);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDomGetObject(DOMObj, Name, DOMSubObj);
+		  return LL29_64.LlDomGetObject(DOMObj, Name, DOMSubObj);
 	  }
 	  else
 	  {
@@ -4270,13 +4270,13 @@ public final class CmbtLL28
 	long                 Count
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDomGetSubobjectCount((int)DOMObj, (int)Count);
+		  return LL29_32.LlDomGetSubobjectCount((int)DOMObj, (int)Count);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDomGetSubobjectCount(DOMObj, Count);
+		  return LL29_64.LlDomGetSubobjectCount(DOMObj, Count);
 	  }
 	  else
 	  {
@@ -4291,13 +4291,13 @@ public final class CmbtLL28
 	long                 DOMSubObj
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDomGetSubobject((int)DOMObj, Position, (int)DOMSubObj);
+		  return LL29_32.LlDomGetSubobject((int)DOMObj, Position, (int)DOMSubObj);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDomGetSubobject(DOMObj, Position, DOMSubObj);
+		  return LL29_64.LlDomGetSubobject(DOMObj, Position, DOMSubObj);
 	  }
 	  else
 	  {
@@ -4313,13 +4313,13 @@ public final class CmbtLL28
 	long                 DOMSubObj
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDomCreateSubobject((int)DOMObj, Position, Type, (int)DOMSubObj);
+		  return LL29_32.LlDomCreateSubobject((int)DOMObj, Position, Type, (int)DOMSubObj);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDomCreateSubobject(DOMObj, Position, Type, DOMSubObj);
+		  return LL29_64.LlDomCreateSubobject(DOMObj, Position, Type, DOMSubObj);
 	  }
 	  else
 	  {
@@ -4333,13 +4333,13 @@ public final class CmbtLL28
 	int                  Position
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDomDeleteSubobject((int)DOMObj, Position);
+		  return LL29_32.LlDomDeleteSubobject((int)DOMObj, Position);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDomDeleteSubobject(DOMObj, Position);
+		  return LL29_64.LlDomDeleteSubobject(DOMObj, Position);
 	  }
 	  else
 	  {
@@ -4355,13 +4355,13 @@ public final class CmbtLL28
 	int                  OpenMode
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlProjectOpen(LlJob, ObjType, ObjName, OpenMode);
+		  return LL29_32.LlProjectOpen(LlJob, ObjType, ObjName, OpenMode);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlProjectOpen(LlJob, ObjType, ObjName, OpenMode);
+		  return LL29_64.LlProjectOpen(LlJob, ObjType, ObjName, OpenMode);
 	  }
 	  else
 	  {
@@ -4375,13 +4375,13 @@ public final class CmbtLL28
 	final String         ObjName
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlProjectSave(LlJob, ObjName);
+		  return LL29_32.LlProjectSave(LlJob, ObjName);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlProjectSave(LlJob, ObjName);
+		  return LL29_64.LlProjectSave(LlJob, ObjName);
 	  }
 	  else
 	  {
@@ -4394,13 +4394,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlProjectClose(LlJob);
+		  return LL29_32.LlProjectClose(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlProjectClose(LlJob);
+		  return LL29_64.LlProjectClose(LlJob);
 	  }
 	  else
 	  {
@@ -4415,13 +4415,13 @@ public final class CmbtLL28
 	int                  Flags
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlAssociatePreviewControl(LlJob, (int)WndControl, Flags);
+		  return LL29_32.LlAssociatePreviewControl(LlJob, (int)WndControl, Flags);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlAssociatePreviewControl(LlJob, WndControl, Flags);
+		  return LL29_64.LlAssociatePreviewControl(LlJob, WndControl, Flags);
 	  }
 	  else
 	  {
@@ -4435,13 +4435,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetErrortext(Error, Buffer);
+		  return LL29_32.LlGetErrortext(Error, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetErrortext(Error, Buffer);
+		  return LL29_64.LlGetErrortext(Error, Buffer);
 	  }
 	  else
 	  {
@@ -4455,13 +4455,13 @@ public final class CmbtLL28
 	int                  MenuID
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDesignerInvokeAction(LlJob, MenuID);
+		  return LL29_32.LlDesignerInvokeAction(LlJob, MenuID);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDesignerInvokeAction(LlJob, MenuID);
+		  return LL29_64.LlDesignerInvokeAction(LlJob, MenuID);
 	  }
 	  else
 	  {
@@ -4474,13 +4474,13 @@ public final class CmbtLL28
 	int                  LlJob
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDesignerRefreshWorkspace(LlJob);
+		  return LL29_32.LlDesignerRefreshWorkspace(LlJob);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDesignerRefreshWorkspace(LlJob);
+		  return LL29_64.LlDesignerRefreshWorkspace(LlJob);
 	  }
 	  else
 	  {
@@ -4495,13 +4495,13 @@ public final class CmbtLL28
 	int                  Flags
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDesignerFileOpen(LlJob, Filename, Flags);
+		  return LL29_32.LlDesignerFileOpen(LlJob, Filename, Flags);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDesignerFileOpen(LlJob, Filename, Flags);
+		  return LL29_64.LlDesignerFileOpen(LlJob, Filename, Flags);
 	  }
 	  else
 	  {
@@ -4515,13 +4515,13 @@ public final class CmbtLL28
 	int                  Flags
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDesignerFileSave(LlJob, Flags);
+		  return LL29_32.LlDesignerFileSave(LlJob, Flags);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDesignerFileSave(LlJob, Flags);
+		  return LL29_64.LlDesignerFileSave(LlJob, Flags);
 	  }
 	  else
 	  {
@@ -4541,13 +4541,13 @@ public final class CmbtLL28
 	long                 Reserved
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDesignerAddAction(LlJob, ID, Flags, MenuText, MenuHierarchy, TooltipText, Icon, (int)Reserved);
+		  return LL29_32.LlDesignerAddAction(LlJob, ID, Flags, MenuText, MenuHierarchy, TooltipText, Icon, (int)Reserved);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDesignerAddAction(LlJob, ID, Flags, MenuText, MenuHierarchy, TooltipText, Icon, Reserved);
+		  return LL29_64.LlDesignerAddAction(LlJob, ID, Flags, MenuText, MenuHierarchy, TooltipText, Icon, Reserved);
 	  }
 	  else
 	  {
@@ -4562,13 +4562,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDesignerGetOptionString(LlJob, Index, Buffer);
+		  return LL29_32.LlDesignerGetOptionString(LlJob, Index, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDesignerGetOptionString(LlJob, Index, Buffer);
+		  return LL29_64.LlDesignerGetOptionString(LlJob, Index, Buffer);
 	  }
 	  else
 	  {
@@ -4583,13 +4583,13 @@ public final class CmbtLL28
 	final String         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDesignerSetOptionString(LlJob, Index, Buffer);
+		  return LL29_32.LlDesignerSetOptionString(LlJob, Index, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDesignerSetOptionString(LlJob, Index, Buffer);
+		  return LL29_64.LlDesignerSetOptionString(LlJob, Index, Buffer);
 	  }
 	  else
 	  {
@@ -4602,13 +4602,13 @@ public final class CmbtLL28
 	int                  Job
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlJobOpenCopy(Job);
+		  return LL29_32.LlJobOpenCopy(Job);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlJobOpenCopy(Job);
+		  return LL29_64.LlJobOpenCopy(Job);
 	  }
 	  else
 	  {
@@ -4624,13 +4624,13 @@ public final class CmbtLL28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetProjectParameter(LlJob, ProjectName, Parameter, Buffer);
+		  return LL29_32.LlGetProjectParameter(LlJob, ProjectName, Parameter, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetProjectParameter(LlJob, ProjectName, Parameter, Buffer);
+		  return LL29_64.LlGetProjectParameter(LlJob, ProjectName, Parameter, Buffer);
 	  }
 	  else
 	  {
@@ -4644,13 +4644,13 @@ public final class CmbtLL28
       combit.callbacks.Callback callback
   	)
   	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlSetNotificationCallback(LlJob, callback);
+		  return LL29_32.LlSetNotificationCallback(LlJob, callback);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlSetNotificationCallback(LlJob, callback);
+		  return LL29_64.LlSetNotificationCallback(LlJob, callback);
 	  }
 	  else
 	  {
@@ -4662,13 +4662,13 @@ public final class CmbtLL28
   	(
     )
   	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetDebug();
+		  return LL29_32.LlGetDebug();
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetDebug();
+		  return LL29_64.LlGetDebug();
 	  }
 	  else
 	  {
@@ -4684,13 +4684,13 @@ public final class CmbtLL28
   	int 				Options
 	)
   	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetTempFileName(Prefix, Extension, Buffer, Options);
+		  return LL29_32.LlGetTempFileName(Prefix, Extension, Buffer, Options);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetTempFileName(Prefix, Extension, Buffer, Options);
+		  return LL29_64.LlGetTempFileName(Prefix, Extension, Buffer, Options);
 	  }
 	  else
 	  {
@@ -4706,13 +4706,13 @@ public final class CmbtLL28
 	StringBuffer		Buffer
 	)
   	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlGetUsedIdentifiersEx(LlJob, ProjectName, IdentifierTypes, Buffer);
+		  return LL29_32.LlGetUsedIdentifiersEx(LlJob, ProjectName, IdentifierTypes, Buffer);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlGetUsedIdentifiersEx(LlJob, ProjectName, IdentifierTypes, Buffer);
+		  return LL29_64.LlGetUsedIdentifiersEx(LlJob, ProjectName, IdentifierTypes, Buffer);
 	  }
 	  else
 	  {
@@ -4731,13 +4731,13 @@ public final class CmbtLL28
     final String      	ParentKeyField
     )
   	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDbAddTableRelationEx(Job, TableID, ParentTableID, RelationID, RelationDisplayName, KeyField, ParentKeyField);
+		  return LL29_32.LlDbAddTableRelationEx(Job, TableID, ParentTableID, RelationID, RelationDisplayName, KeyField, ParentKeyField);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDbAddTableRelationEx(Job, TableID, ParentTableID, RelationID, RelationDisplayName, KeyField, ParentKeyField);
+		  return LL29_64.LlDbAddTableRelationEx(Job, TableID, ParentTableID, RelationID, RelationDisplayName, KeyField, ParentKeyField);
 	  }
 	  else
 	  {
@@ -4754,13 +4754,13 @@ public final class CmbtLL28
     final String		Field
     )
   	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlDbAddTableSortOrderEx(Job, TableID, SortOrderID, SortOrderDisplayName, Field);
+		  return LL29_32.LlDbAddTableSortOrderEx(Job, TableID, SortOrderID, SortOrderDisplayName, Field);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlDbAddTableSortOrderEx(Job, TableID, SortOrderID, SortOrderDisplayName, Field);
+		  return LL29_64.LlDbAddTableSortOrderEx(Job, TableID, SortOrderID, SortOrderDisplayName, Field);
 	  }
 	  else
 	  {
@@ -4777,13 +4777,13 @@ public final class CmbtLL28
 	final String		PrinterName
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlSetPrinterInPrinterFile(Job, ObjectType, ObjectName, PrinterIndex, PrinterName);
+		  return LL29_32.LlSetPrinterInPrinterFile(Job, ObjectType, ObjectName, PrinterIndex, PrinterName);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlSetPrinterInPrinterFile(Job, ObjectType, ObjectName, PrinterIndex, PrinterName);
+		  return LL29_64.LlSetPrinterInPrinterFile(Job, ObjectType, ObjectName, PrinterIndex, PrinterName);
 	  }
 	  else
 	  {
@@ -4800,13 +4800,13 @@ public final class CmbtLL28
 	int					Type
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlLocAddDictionaryEntry(Job, LCID, Key, Value, Type);
+		  return LL29_32.LlLocAddDictionaryEntry(Job, LCID, Key, Value, Type);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlLocAddDictionaryEntry(Job, LCID, Key, Value, Type);
+		  return LL29_64.LlLocAddDictionaryEntry(Job, LCID, Key, Value, Type);
 	  }
 	  else
 	  {
@@ -4820,13 +4820,13 @@ public final class CmbtLL28
 	int					LCID
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlLocAddDesignLCID(Job, LCID);
+		  return LL29_32.LlLocAddDesignLCID(Job, LCID);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlLocAddDesignLCID(Job, LCID);
+		  return LL29_64.LlLocAddDesignLCID(Job, LCID);
 	  }
 	  else
 	  {
@@ -4840,13 +4840,13 @@ public final class CmbtLL28
 	final String		ProjectFilename
 	)
 	{
-	  if(LL28_32 != null)
+	  if(LL29_32 != null)
 	  {
-		  return LL28_32.LlUtilsGetProjectType(Job, ProjectFilename);
+		  return LL29_32.LlUtilsGetProjectType(Job, ProjectFilename);
 	  }
-	  else if(LL28_64 != null)
+	  else if(LL29_64 != null)
 	  {
-		  return LL28_64.LlUtilsGetProjectType(Job, ProjectFilename);
+		  return LL29_64.LlUtilsGetProjectType(Job, ProjectFilename);
 	  }
 	  else
 	  {
@@ -4854,16 +4854,16 @@ public final class CmbtLL28
 	  }
 	}
   
-  public CmbtLL28()
+  public CmbtLL29()
   {
 	String vmArch = System.getProperty("sun.arch.data.model");
 	if(vmArch.compareTo("32") == 0)
 	{
-		LL28_32 = new CmbtLL2832();
+		LL29_32 = new CmbtLL2932();
 	}
 	else if(vmArch.compareTo("64") == 0)
 	{
-		LL28_64 = new CmbtLL2864();
+		LL29_64 = new CmbtLL2964();
 	}
 	else
 	{

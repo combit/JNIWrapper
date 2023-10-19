@@ -1,13 +1,13 @@
 //
 // Java Declaration File
-// constants and function definitions for combit List & Label 28
+// constants and function definitions for combit List & Label 29
 // Copyright (c) combit Software GmbH, Konstanz, Germany
-// Version: 28.000
+// Version: 29.000
 //
 
 package combit.x86;
 
-public final class CmbtLS2832
+public final class CmbtLS2932
   {
   
   public native int LlStgsysStorageOpen
@@ -331,6 +331,6 @@ public final class CmbtLS2832
 
   static
   {
-	  System.loadLibrary("ListLabel28JNI_x86"); // use List & Label JNI x86
+	  System.loadLibrary("ListLabel29JNI_x86"); // use List & Label JNI x86
   }
 };

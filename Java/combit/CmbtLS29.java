@@ -1,8 +1,8 @@
 //
 // Java Declaration File
-// constants and function definitions for combit List & Label 28
+// constants and function definitions for combit List & Label 29
 // Copyright (c) combit Software GmbH, Konstanz, Germany
-// Version: 28.000
+// Version: 29.000
 //
 
 package combit;
@@ -10,7 +10,7 @@ package combit;
 import combit.x86.*;
 import combit.x64.*;
 
-public final class CmbtLS28
+public final class CmbtLS29
   {
   // language constants
   public final static int CMBTLANG_DEFAULT     = -1;
@@ -397,8 +397,8 @@ public final class CmbtLS28
   public final static int LS_STGPRINTEX_OPTION_FORCE_LOGPAGE = 0x00000008;
   public final static int LS_STGPRINTEX_OPTIONMASK_PAGEAREA = 0x0000000C;
   
-  private CmbtLS2832 LS28_32 = null;
-  private CmbtLS2864 LS28_64 = null;
+  private CmbtLS2932 LS29_32 = null;
+  private CmbtLS2964 LS29_64 = null;
   
   public long LlStgsysStorageOpen
 	(
@@ -408,13 +408,13 @@ public final class CmbtLS28
 		boolean              OneJobTranslation
 	)
 	{
-		if(LS28_32 != null)
+		if(LS29_32 != null)
 		{
-			return LS28_32.LlStgsysStorageOpen(Filename, TempPath, ReadOnly, OneJobTranslation);
+			return LS29_32.LlStgsysStorageOpen(Filename, TempPath, ReadOnly, OneJobTranslation);
 		}
-		else if(LS28_64 != null)
+		else if(LS29_64 != null)
 		{
-			return LS28_64.LlStgsysStorageOpen(Filename, TempPath, ReadOnly, OneJobTranslation);
+			return LS29_64.LlStgsysStorageOpen(Filename, TempPath, ReadOnly, OneJobTranslation);
 		}
 		else
 		{
@@ -427,13 +427,13 @@ public final class CmbtLS28
 	long                  Stg
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  LS28_32.LlStgsysStorageClose((int)Stg);
+		  LS29_32.LlStgsysStorageClose((int)Stg);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  LS28_64.LlStgsysStorageClose(Stg);
+		  LS29_64.LlStgsysStorageClose(Stg);
 	  }
 	  else
 	  {
@@ -446,13 +446,13 @@ public final class CmbtLS28
 	long                  Stg
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysGetAPIVersion((int)Stg);
+		  return LS29_32.LlStgsysGetAPIVersion((int)Stg);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysGetAPIVersion(Stg);
+		  return LS29_64.LlStgsysGetAPIVersion(Stg);
 	  }
 	  else
 	  {
@@ -465,13 +465,13 @@ public final class CmbtLS28
 	long                  Stg
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysGetFileVersion((int)Stg);
+		  return LS29_32.LlStgsysGetFileVersion((int)Stg);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysGetFileVersion(Stg);
+		  return LS29_64.LlStgsysGetFileVersion(Stg);
 	  }
 	  else
 	  {
@@ -487,13 +487,13 @@ public final class CmbtLS28
 	StringBuffer        Buffer
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysGetFilename((int)Stg, Job, File, Buffer);
+		  return LS29_32.LlStgsysGetFilename((int)Stg, Job, File, Buffer);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysGetFilename(Stg, Job, File, Buffer);
+		  return LS29_64.LlStgsysGetFilename(Stg, Job, File, Buffer);
 	  }
 	  else
 	  {
@@ -506,13 +506,13 @@ public final class CmbtLS28
 	long                  Stg
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysGetJobCount((int)Stg);
+		  return LS29_32.LlStgsysGetJobCount((int)Stg);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysGetJobCount(Stg);
+		  return LS29_64.LlStgsysGetJobCount(Stg);
 	  }
 	  else
 	  {
@@ -526,13 +526,13 @@ public final class CmbtLS28
 	int                  Job
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysSetJob((int)Stg, Job);
+		  return LS29_32.LlStgsysSetJob((int)Stg, Job);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysSetJob(Stg, Job);
+		  return LS29_64.LlStgsysSetJob(Stg, Job);
 	  }
 	  else
 	  {
@@ -545,13 +545,13 @@ public final class CmbtLS28
 	long                  Stg
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysGetJob((int)Stg);
+		  return LS29_32.LlStgsysGetJob((int)Stg);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysGetJob(Stg);
+		  return LS29_64.LlStgsysGetJob(Stg);
 	  }
 	  else
 	  {
@@ -564,13 +564,13 @@ public final class CmbtLS28
 	long                  Stg
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysGetPageCount((int)Stg);
+		  return LS29_32.LlStgsysGetPageCount((int)Stg);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysGetPageCount(Stg);
+		  return LS29_64.LlStgsysGetPageCount(Stg);
 	  }
 	  else
 	  {
@@ -584,13 +584,13 @@ public final class CmbtLS28
 	int                  Option
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysGetJobOptionValue((int)Stg, Option);
+		  return LS29_32.LlStgsysGetJobOptionValue((int)Stg, Option);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysGetJobOptionValue(Stg, Option);
+		  return LS29_64.LlStgsysGetJobOptionValue(Stg, Option);
 	  }
 	  else
 	  {
@@ -605,13 +605,13 @@ public final class CmbtLS28
 	int                  Option
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysGetPageOptionValue((int)Stg, PageIndex, Option);
+		  return LS29_32.LlStgsysGetPageOptionValue((int)Stg, PageIndex, Option);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysGetPageOptionValue(Stg, PageIndex, Option);
+		  return LS29_64.LlStgsysGetPageOptionValue(Stg, PageIndex, Option);
 	  }
 	  else
 	  {
@@ -627,13 +627,13 @@ public final class CmbtLS28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysGetPageOptionString((int)Stg, PageIndex, Option, Buffer);
+		  return LS29_32.LlStgsysGetPageOptionString((int)Stg, PageIndex, Option, Buffer);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysGetPageOptionString(Stg, PageIndex, Option, Buffer);
+		  return LS29_64.LlStgsysGetPageOptionString(Stg, PageIndex, Option, Buffer);
 	  }
 	  else
 	  {
@@ -649,13 +649,13 @@ public final class CmbtLS28
 	final String         Buffer
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysSetPageOptionString((int)Stg, PageIndex, Option, Buffer);
+		  return LS29_32.LlStgsysSetPageOptionString((int)Stg, PageIndex, Option, Buffer);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysSetPageOptionString(Stg, PageIndex, Option, Buffer);
+		  return LS29_64.LlStgsysSetPageOptionString(Stg, PageIndex, Option, Buffer);
 	  }
 	  else
 	  {
@@ -669,13 +669,13 @@ public final class CmbtLS28
 	long                  StgToAppend
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysAppend((int)Stg, (int)StgToAppend);
+		  return LS29_32.LlStgsysAppend((int)Stg, (int)StgToAppend);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysAppend(Stg, StgToAppend);
+		  return LS29_64.LlStgsysAppend(Stg, StgToAppend);
 	  }
 	  else
 	  {
@@ -689,13 +689,13 @@ public final class CmbtLS28
 	int                  PageIndex
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysDeleteJob((int)Stg, PageIndex);
+		  return LS29_32.LlStgsysDeleteJob((int)Stg, PageIndex);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysDeleteJob(Stg, PageIndex);
+		  return LS29_64.LlStgsysDeleteJob(Stg, PageIndex);
 	  }
 	  else
 	  {
@@ -709,13 +709,13 @@ public final class CmbtLS28
 	int                  PageIndex
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysDeletePage((int)Stg, PageIndex);
+		  return LS29_32.LlStgsysDeletePage((int)Stg, PageIndex);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysDeletePage(Stg, PageIndex);
+		  return LS29_64.LlStgsysDeletePage(Stg, PageIndex);
 	  }
 	  else
 	  {
@@ -729,13 +729,13 @@ public final class CmbtLS28
 	int                  PageIndex
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysGetPageMetafile((int)Stg, PageIndex);
+		  return LS29_32.LlStgsysGetPageMetafile((int)Stg, PageIndex);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysGetPageMetafile(Stg, PageIndex);
+		  return LS29_64.LlStgsysGetPageMetafile(Stg, PageIndex);
 	  }
 	  else
 	  {
@@ -748,13 +748,13 @@ public final class CmbtLS28
 	long                  MF
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysDestroyMetafile((int)MF);
+		  return LS29_32.LlStgsysDestroyMetafile((int)MF);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysDestroyMetafile(MF);
+		  return LS29_64.LlStgsysDestroyMetafile(MF);
 	  }
 	  else
 	  {
@@ -767,13 +767,13 @@ public final class CmbtLS28
 	long                  Stg
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysGetLastError((int)Stg);
+		  return LS29_32.LlStgsysGetLastError((int)Stg);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysGetLastError(Stg);
+		  return LS29_64.LlStgsysGetLastError(Stg);
 	  }
 	  else
 	  {
@@ -786,13 +786,13 @@ public final class CmbtLS28
 	long                  Stg
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysDeleteFiles((int)Stg);
+		  return LS29_32.LlStgsysDeleteFiles((int)Stg);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysDeleteFiles(Stg);
+		  return LS29_64.LlStgsysDeleteFiles(Stg);
 	  }
 	  else
 	  {
@@ -813,13 +813,13 @@ public final class CmbtLS28
 	long				WndParent
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysPrint((int)Stg, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, (int)WndParent);
+		  return LS29_32.LlStgsysPrint((int)Stg, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, (int)WndParent);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysPrint(Stg, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, WndParent);
+		  return LS29_64.LlStgsysPrint(Stg, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, WndParent);
 	  }
 	  else
 	  {
@@ -841,13 +841,13 @@ public final class CmbtLS28
 	long                 WndParent
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysStoragePrint(Filename, TempPath, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, (int)WndParent);
+		  return LS29_32.LlStgsysStoragePrint(Filename, TempPath, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, (int)WndParent);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysStoragePrint(Filename, TempPath, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, WndParent);
+		  return LS29_64.LlStgsysStoragePrint(Filename, TempPath, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, WndParent);
 	  }
 	  else
 	  {
@@ -860,13 +860,13 @@ public final class CmbtLS28
 	boolean              On
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  LS28_32.LsSetDebug(On);
+		  LS29_32.LsSetDebug(On);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  LS28_64.LsSetDebug(On);
+		  LS29_64.LsSetDebug(On);
 	  }
 	  else
 	  {
@@ -878,13 +878,13 @@ public final class CmbtLS28
 	(
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsGetViewerControlClassName();
+		  return LS29_32.LsGetViewerControlClassName();
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsGetViewerControlClassName();
+		  return LS29_64.LsGetViewerControlClassName();
 	  }
 	  else
 	  {
@@ -896,13 +896,13 @@ public final class CmbtLS28
 	(
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsGetViewerControlDefaultMessage();
+		  return LS29_32.LsGetViewerControlDefaultMessage();
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsGetViewerControlDefaultMessage();
+		  return LS29_64.LsGetViewerControlDefaultMessage();
 	  }
 	  else
 	  {
@@ -916,13 +916,13 @@ public final class CmbtLS28
 	long                 ParentControl
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsCreateViewerControlOverParent((int)Stg, (int)ParentControl);
+		  return LS29_32.LsCreateViewerControlOverParent((int)Stg, (int)ParentControl);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsCreateViewerControlOverParent(Stg, ParentControl);
+		  return LS29_64.LsCreateViewerControlOverParent(Stg, ParentControl);
 	  }
 	  else
 	  {
@@ -937,13 +937,13 @@ public final class CmbtLS28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysGetJobOptionStringEx((int)Stg, Key, Buffer);
+		  return LS29_32.LlStgsysGetJobOptionStringEx((int)Stg, Key, Buffer);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysGetJobOptionStringEx(Stg, Key, Buffer);
+		  return LS29_64.LlStgsysGetJobOptionStringEx(Stg, Key, Buffer);
 	  }
 	  else
 	  {
@@ -958,13 +958,13 @@ public final class CmbtLS28
 	final String         Buffer
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysSetJobOptionStringEx((int)Stg, Key, Buffer);
+		  return LS29_32.LlStgsysSetJobOptionStringEx((int)Stg, Key, Buffer);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysSetJobOptionStringEx(Stg, Key, Buffer);
+		  return LS29_64.LlStgsysSetJobOptionStringEx(Stg, Key, Buffer);
 	  }
 	  else
 	  {
@@ -979,13 +979,13 @@ public final class CmbtLS28
 	final String         Format
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsConversionJobOpen((int)WndParent, Language, Format);
+		  return LS29_32.LsConversionJobOpen((int)WndParent, Language, Format);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsConversionJobOpen(WndParent, Language, Format);
+		  return LS29_64.LsConversionJobOpen(WndParent, Language, Format);
 	  }
 	  else
 	  {
@@ -998,13 +998,13 @@ public final class CmbtLS28
 	long                  CnvJob
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsConversionJobClose((int)CnvJob);
+		  return LS29_32.LsConversionJobClose((int)CnvJob);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsConversionJobClose(CnvJob);
+		  return LS29_64.LsConversionJobClose(CnvJob);
 	  }
 	  else
 	  {
@@ -1018,13 +1018,13 @@ public final class CmbtLS28
 	long                 WndParent
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsConversionConfigurationDlg((int)CnvJob, (int)WndParent);
+		  return LS29_32.LsConversionConfigurationDlg((int)CnvJob, (int)WndParent);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsConversionConfigurationDlg(CnvJob, WndParent);
+		  return LS29_64.LsConversionConfigurationDlg(CnvJob, WndParent);
 	  }
 	  else
 	  {
@@ -1039,13 +1039,13 @@ public final class CmbtLS28
 	final String         Data
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsConversionSetOptionString((int)CnvJob, Key, Data);
+		  return LS29_32.LsConversionSetOptionString((int)CnvJob, Key, Data);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsConversionSetOptionString(CnvJob, Key, Data);
+		  return LS29_64.LsConversionSetOptionString(CnvJob, Key, Data);
 	  }
 	  else
 	  {
@@ -1060,13 +1060,13 @@ public final class CmbtLS28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsConversionGetOptionString((int)CnvJob, Key, Buffer);
+		  return LS29_32.LsConversionGetOptionString((int)CnvJob, Key, Buffer);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsConversionGetOptionString(CnvJob, Key, Buffer);
+		  return LS29_64.LsConversionGetOptionString(CnvJob, Key, Buffer);
 	  }
 	  else
 	  {
@@ -1081,13 +1081,13 @@ public final class CmbtLS28
 	final String         Filename
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsConversionConvertEMFToFile((int)CnvJob, (int)EMF, Filename);
+		  return LS29_32.LsConversionConvertEMFToFile((int)CnvJob, (int)EMF, Filename);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsConversionConvertEMFToFile(CnvJob, EMF, Filename);
+		  return LS29_64.LsConversionConvertEMFToFile(CnvJob, EMF, Filename);
 	  }
 	  else
 	  {
@@ -1102,13 +1102,13 @@ public final class CmbtLS28
 	final String		Filename
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsConversionConvertStgToFile((int)CnvJob, (int)Stg, Filename);
+		  return LS29_32.LsConversionConvertStgToFile((int)CnvJob, (int)Stg, Filename);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsConversionConvertStgToFile(CnvJob, Stg, Filename);
+		  return LS29_64.LsConversionConvertStgToFile(CnvJob, Stg, Filename);
 	  }
 	  else
 	  {
@@ -1123,13 +1123,13 @@ public final class CmbtLS28
 	final String         Format
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysStorageConvert(StgFilename, DstFilename, Format);
+		  return LS29_32.LlStgsysStorageConvert(StgFilename, DstFilename, Format);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysStorageConvert(StgFilename, DstFilename, Format);
+		  return LS29_64.LlStgsysStorageConvert(StgFilename, DstFilename, Format);
 	  }
 	  else
 	  {
@@ -1144,13 +1144,13 @@ public final class CmbtLS28
 	final String         Format
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LlStgsysConvert((int)Stg, DstFilename, Format);
+		  return LS29_32.LlStgsysConvert((int)Stg, DstFilename, Format);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LlStgsysConvert(Stg, DstFilename, Format);
+		  return LS29_64.LlStgsysConvert(Stg, DstFilename, Format);
 	  }
 	  else
 	  {
@@ -1166,13 +1166,13 @@ public final class CmbtLS28
 	int                  Language
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsMailConfigurationDialog((int)WndParent, Subkey, Flags, Language);
+		  return LS29_32.LsMailConfigurationDialog((int)WndParent, Subkey, Flags, Language);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsMailConfigurationDialog(WndParent, Subkey, Flags, Language);
+		  return LS29_64.LsMailConfigurationDialog(WndParent, Subkey, Flags, Language);
 	  }
 	  else
 	  {
@@ -1185,13 +1185,13 @@ public final class CmbtLS28
 	int                  Language
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsMailJobOpen(Language);
+		  return LS29_32.LsMailJobOpen(Language);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsMailJobOpen(Language);
+		  return LS29_64.LsMailJobOpen(Language);
 	  }
 	  else
 	  {
@@ -1204,13 +1204,13 @@ public final class CmbtLS28
 	long                  Job
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsMailJobClose((int)Job);
+		  return LS29_32.LsMailJobClose((int)Job);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsMailJobClose(Job);
+		  return LS29_64.LsMailJobClose(Job);
 	  }
 	  else
 	  {
@@ -1225,13 +1225,13 @@ public final class CmbtLS28
 	final String         Value
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsMailSetOptionString((int)Job, Key, Value);
+		  return LS29_32.LsMailSetOptionString((int)Job, Key, Value);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsMailSetOptionString(Job, Key, Value);
+		  return LS29_64.LsMailSetOptionString(Job, Key, Value);
 	  }
 	  else
 	  {
@@ -1246,13 +1246,13 @@ public final class CmbtLS28
 	StringBuffer         Buffer
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsMailGetOptionString((int)Job, Key, Buffer);
+		  return LS29_32.LsMailGetOptionString((int)Job, Key, Buffer);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsMailGetOptionString(Job, Key, Buffer);
+		  return LS29_64.LsMailGetOptionString(Job, Key, Buffer);
 	  }
 	  else
 	  {
@@ -1266,13 +1266,13 @@ public final class CmbtLS28
 	long                  WndParent
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsMailSendFile((int)Job, (int)WndParent);
+		  return LS29_32.LsMailSendFile((int)Job, (int)WndParent);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsMailSendFile(Job, WndParent);
+		  return LS29_64.LsMailSendFile(Job, WndParent);
 	  }
 	  else
 	  {
@@ -1288,13 +1288,13 @@ public final class CmbtLS28
 	int                  TicksMS
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsProfileStart((int)Thread, Descr, Filename, TicksMS);
+		  return LS29_32.LsProfileStart((int)Thread, Descr, Filename, TicksMS);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsProfileStart(Thread, Descr, Filename, TicksMS);
+		  return LS29_64.LsProfileStart(Thread, Descr, Filename, TicksMS);
 	  }
 	  else
 	  {
@@ -1307,13 +1307,13 @@ public final class CmbtLS28
 	long                  Thread
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  LS28_32.LsProfileEnd((int)Thread);
+		  LS29_32.LsProfileEnd((int)Thread);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  LS28_64.LsProfileEnd(Thread);
+		  LS29_64.LsProfileEnd(Thread);
 	  }
 	  else
 	  {
@@ -1329,13 +1329,13 @@ public final class CmbtLS28
 	int                  Language
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsMailView((int)WndParent, MailFile, Rights, Language);
+		  return LS29_32.LsMailView((int)WndParent, MailFile, Rights, Language);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsMailView(WndParent, MailFile, Rights, Language);
+		  return LS29_64.LsMailView(WndParent, MailFile, Rights, Language);
 	  }
 	  else
 	  {
@@ -1349,13 +1349,13 @@ public final class CmbtLS28
 	int                  Flags
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsInternalCreateViewerControlOverParent13((int)ParentControl, Flags);
+		  return LS29_32.LsInternalCreateViewerControlOverParent13((int)ParentControl, Flags);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsInternalCreateViewerControlOverParent13(ParentControl, Flags);
+		  return LS29_64.LsInternalCreateViewerControlOverParent13(ParentControl, Flags);
 	  }
 	  else
 	  {
@@ -1368,13 +1368,13 @@ public final class CmbtLS28
 	long                 ParentControl
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsInternalGetViewerControlFromParent13((int)ParentControl);
+		  return LS29_32.LsInternalGetViewerControlFromParent13((int)ParentControl);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsInternalGetViewerControlFromParent13(ParentControl);
+		  return LS29_64.LsInternalGetViewerControlFromParent13(ParentControl);
 	  }
 	  else
 	  {
@@ -1387,13 +1387,13 @@ public final class CmbtLS28
 	int                  Mode
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  LS28_32.LsSetDlgboxMode(Mode);
+		  LS29_32.LsSetDlgboxMode(Mode);
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  LS28_64.LsSetDlgboxMode(Mode);
+		  LS29_64.LsSetDlgboxMode(Mode);
 	  }
 	  else
 	  {
@@ -1405,13 +1405,13 @@ public final class CmbtLS28
 	(
 	)
 	{
-	  if(LS28_32 != null)
+	  if(LS29_32 != null)
 	  {
-		  return LS28_32.LsGetDlgboxMode();
+		  return LS29_32.LsGetDlgboxMode();
 	  }
-	  else if(LS28_64 != null)
+	  else if(LS29_64 != null)
 	  {
-		  return LS28_64.LsGetDlgboxMode();
+		  return LS29_64.LsGetDlgboxMode();
 	  }
 	  else
 	  {
@@ -1419,16 +1419,16 @@ public final class CmbtLS28
 	  }
 	}
 
-  public CmbtLS28()
+  public CmbtLS29()
   {
 	String vmArch = System.getProperty("sun.arch.data.model");
 	if(vmArch.compareTo("32") == 0)
 	{
-		LS28_32 = new CmbtLS2832();
+		LS29_32 = new CmbtLS2932();
 	}
 	else if(vmArch.compareTo("64") == 0)
 	{
-		LS28_64 = new CmbtLS2864();
+		LS29_64 = new CmbtLS2964();
 	}
 	else
 	{

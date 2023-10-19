@@ -3,14 +3,14 @@
 package combit.callbacks;
 
 // imports
-import combit.CmbtLL28;
+import combit.CmbtLL29;
 
 /**
 * Description: Using this callback, List & Label asks the application about button states of the real data preview's toolbar buttons. For more information look at Programmer's Manual.
 * <p>Hint: This function will be called by the real data preview by List & Label. The IDs of the menu items in List & Label can be found in the file MENUID.TXT of your List & Label installation.</p>
 *
 * @author Copyright (c) combit Software GmbH
-* @version 28.0
+* @version 29.0
 */
 
 public class GetViewerButtonStateCallback extends CallbackInfo
@@ -40,7 +40,7 @@ public class GetViewerButtonStateCallback extends CallbackInfo
   */
   public GetViewerButtonStateCallback(int hLlJob, int buttonID, int buttonState)
   {
-    super(hLlJob, CmbtLL28.LL_CMND_GETVIEWERBUTTONSTATE);
+    super(hLlJob, CmbtLL29.LL_CMND_GETVIEWERBUTTONSTATE);
     buttonID_ = buttonID;
     buttonState_ = buttonState;
     lResult_ = 0;
