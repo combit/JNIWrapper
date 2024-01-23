@@ -101,7 +101,9 @@ public final class CmbtLL29
   public final static int LL_PRINTJOB_FINALIZE = 3;
   public final static int LL_JOBOPENFLAG_NOLLXPRELOAD              = 0x00001000; //
   public final static int LL_JOBOPENFLAG_ONLYEXACTLANGUAGE         = 0x00002000; // do not look for '@@' LNG file
-  public final static int LL_DEBUG_CMBTLL                          = 0x0001; // debug CMBTLLnn.DLL
+  public final static int LL_JOBHANDLE_FLAG_NOTHREADCHECK 	= 0x40000000;
+  public final static int LL_JOBHANDLE_IDMASK            		= 0x00000fff;
+  public final static int LL_DEBUG_CMBTLL                          	= 0x0001; // debug CMBTLLnn.DLL
   public final static int LL_DEBUG_CMBTDWG                         = 0x0002; // debug CMBTDWnn.DLL
   public final static int LL_DEBUG_CMBTLL_NOCALLBACKS              = 0x0004; //
   public final static int LL_DEBUG_CMBTLL_NOSTORAGE                = 0x0008; //
@@ -983,6 +985,12 @@ public final class CmbtLL29
   public final static int LL_OPTION_PROJECTPARAMETER_PRINTLANGUAGE_SHOW = 373; // default: false
   public final static int LL_OPTION_TABLENAMETRANSLATION_NOT_DISTINCT = 374; // default: false
   public final static int LL_OPTION_PRINTERLESS = 375; // default: false
+  public final static int LL_OPTION_WEBDESIGNER_STATEFLAGS = 376; /* internal */
+  public final static int LL_WEBDESIGNER_STATEFLAGS_ACTIVE  = 0x1;
+  public final static int LL_WEBDESIGNER_STATEFLAGS_PRINTING = 0x2;
+  public final static int LL_WEBDESIGNER_STATEFLAGS_SAVE_REBUILDDBSTRUCT = 0x4;
+  public final static int LL_WEBDESIGNER_STATEFLAGS_INTERNAL_MASK = 0xffff0000;
+  public final static int LL_WEBDESIGNER_STATEFLAGS_INTERNAL_TOCIDXATROOT = 0x10000;
   public final static int LL_OPTION_DOM_IGNORE_EXPRESSIONERRORS = 377; // internal
   public final static int LL_OPTION_SUPPRESS_EMPTY_PAGES_ON_PRINT = 378; // default: false % nyi 
   public final static int LL_OPTION_VIRTUALDEVICE_SCALINGOPTIONS = 379; 
@@ -1000,7 +1008,20 @@ public final class CmbtLL29
   public final static int LL_OPTION_INTENTIONAL_USER_ABORT = 386; /* internal, R/O */
   public final static int LL_OPTION_PROHIBIT_OLE_OBJECTS_IN_RTF = 387;
   public final static int LL_OPTION_COMPAT_ENABLE_EMF_OPTIMIZATION_IN_PDF_OBJECT = 388; /* default: false, LL28: true */
-  public final static int LL_OPTION_USESIMPLEWINDOWSPENSTYLE_FRAMEDRAWING = 389; /* default: false */
+  public final static int LL_OPTION_USESIMPLEWINDOWSPENSTYLE_FRAMEDRAWING = 389; /* default: false */  
+  public final static int LL_OPTION_DISABLE_GDIPLUS_PATHS_IN_EMFDRAWINGS = 390; /* default: false */
+  public final static int LL_OPTION_KEEP_EXPORTER_CONTROL_FILES_IN_MEMORY = 391; /* default: false */
+  public final static int LL_OPTION_ALLOW_EMBEDDING_OF_PICTURES = 392; /* default: true */
+  public final static int LL_OPTION_COMPAT_ALLOW_NEGATIVE_DISTANCE_BEFORE = 393; /* default: false */
+  public final static int LL_OPTION_COMPAT_NULLSAFE_PRE_26_003 = 394; /* default: false */
+  public final static int LL_OPTION_DEFAULT_DATE_FORMAT_INCLUDES_TIME = 395; /* default: false */
+  public final static int LL_OPTION_SVG_TO_DIB_RESOLUTION = 396; /* default: 150 DPI. 0 to fit to printer resolution */
+  public final static int LL_OPTION_SVG_TO_DIB_MAX_SIZE  = 397; /* max area in pixel, default: x * y < 5 MB */
+  public final static int LL_OPTION_TRIM_ALSO_EXTENDEDSPACECHARS = 398; /* default: false */
+  public final static int LL_OPTION_HIDE_EXTENDED_PRINTMODES = 399; /* default: false */
+  public final static int LL_OPTION_REPOSITORY_CREATE_ITEM_RECURSIVE = 400; /* default: TRUE! */
+  public final static int LL_OPTION_GAUGE_SIZE_REDUCTION = 402; /* default: false */
+  public final static int LL_OPTION_FCT_EMPTYTABLEFILTERCORRECTION = 403; /* default: true */
   public final static int LL_OPTIONSTR_LABEL_PRJEXT                = 0; // internal... = compatibility to L6)
   public final static int LL_OPTIONSTR_LABEL_PRVEXT                = 1; // internal... = compatibility to L6)
   public final static int LL_OPTIONSTR_LABEL_PRNEXT                = 2; // internal... = compatibility to L6)
@@ -1088,6 +1109,7 @@ public final class CmbtLL29
   public final static int LL_OPTIONSTR_DEFAULTVARHINT = 91; /* hint to be displayed in the function wizard if no variable or function is selected */
   public final static int LL_OPTIONSTR_REPORTPARAMDLGTITLE = 92; /* title for the report parameter value dialog that is displayed on exporting */
   public final static int LL_OPTIONSTR_DEFAULTIMAGEPATH_FOR_REPOSITORY = 93;
+  public final static int LL_OPTIONSTR_DEFAULTCHARTSCHEME = 94; /* default: combit2 (empty equals use of project scheme) */
   public final static int LL_SYSCOMMAND_MINIMIZE                   = -1; //
   public final static int LL_SYSCOMMAND_MAXIMIZE                   = -2; //
   public final static int LL_PHFG_AGGREGATE              = 0x01;
