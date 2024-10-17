@@ -3,7 +3,7 @@
 package combit.callbacks;
 
 // imports
-import combit.CmbtLL29;
+import combit.CmbtLL30;
 
 /**
 * Description: Asks the program for the interpretation of the contents of the designer function 'External$()' in an expression.
@@ -13,7 +13,7 @@ import combit.CmbtLL29;
 * </p>
 *
 * @author Copyright (c) combit Software GmbH
-* @version 29.0
+* @version 30.0
 */
 
 public class EvaluateCallback extends CallbackInfo
@@ -60,7 +60,7 @@ public class EvaluateCallback extends CallbackInfo
   */
   public EvaluateCallback(int hLlJob, String contents, boolean evaluate, String newValue, boolean error, String errorText)
   {
-    super(hLlJob, CmbtLL29.LL_CMND_EVALUATE);
+    super(hLlJob, CmbtLL30.LL_CMND_EVALUATE);
     contents_ = contents;
 	evaluate_ = evaluate;
 	newValue_ = newValue;

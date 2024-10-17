@@ -1,8 +1,8 @@
 //
 // Java Declaration File
-// constants and function definitions for combit List & Label 29
+// constants and function definitions for combit List & Label 30
 // Copyright (c) combit Software GmbH, Konstanz, Germany
-// Version: 29.000
+// Version: 30.000
 //
 
 package combit;

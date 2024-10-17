@@ -1,11 +1,11 @@
-/**** C/C++ constants and function definitions for LL29.DLL ****/
+/**** C/C++ constants and function definitions for LL30.DLL ****/
 /****  (c) combit GmbH ****/
-/****  [build of 2023-07-25 23:07:13] ****/
+/****  [build of 2024-08-30 23:08:33] ****/
 
-#ifndef _LL29_H /* include header only once */
-#define _LL29_H
+#ifndef _LL30_H /* include header only once */
+#define _LL30_H
 
-#if !defined(_LL29_DONT_INCLUDE_OLE2_H) && !defined(_RC_INVOKED_) && !defined(RC_INVOKED)
+#if !defined(_LL30_DONT_INCLUDE_OLE2_H) && !defined(_RC_INVOKED_) && !defined(RC_INVOKED)
   #if defined(WIN32)
     #include <ole2.h>
   #endif
@@ -479,6 +479,7 @@
 #define LL_NTFY_JOBWILLCHANGE          (114                 ) /* internal */
 #define LL_NTFY_COMBINATIONPRINTSTEP   (115                 ) /* lParam = &scLlCombinationPrintStep, return 0 on OK, 1 to reset the page number, 2 to reset the page number and total pages or error code on error */
 #define LL_NTFY_LOADERROR_DATABASESTRUCTURE (116                 ) /* lParam = @scLlNtfyDatabaseError */
+#define LL_NTFY_KEEP_FILE              (117                 ) /* lParam = (LPCWSTR)filename of file to be kept until the end of the (print) job */
 #define LL_PROJECT_LABEL               (1                   ) /* new names... */
 #define LL_PROJECT_LIST                (2                   )
 #define LL_PROJECT_CARD                (3                   )
@@ -508,12 +509,10 @@
 #define LL_TYPEMASK                    (0x7fff0000          )
 #define LL_ANYTYPE                     (0x7fff0000          )
 #define LL_TABLE_FIELDTYPEMASK         (0x0000f800          ) /* internal use */
-#define LL_SUBTYPEMASK                 (0x000003ff          )
+#define LL_SUBTYPEMASK                 (0x000000ff          )
 #define LL_TYPEFLAGS                   (0x8000f800          )
-#define LL_HANDLESTREAM_TYPE_MASK      (0x00000400          )
-#define LL_HANDLESTREAM_BLOB           (0x00000000          ) /* binary data (images only) */
-#define LL_HANDLESTREAM_UTF8           (0x00000000          ) /* UTF8-encoded string (non-images only) */
-#define LL_HANDLESTREAM_UTF16          (0x00000400          ) /* UTF16-encoded string (non-images only) */
+#define LL_CONTENTSFLAG_SOURCE_IS_NULL (0x00000400          ) /* for cRM */
+#define LL_VARTYPEFLAGSMASK            (0x00000400          )
 #define LL_TABLE_FOOTERFIELD           (0x00008000          ) /* 'or'ed for footline-only fields // reserved also for Variables (see "$$xx$$")!!!! */
 #define LL_TABLE_GROUPFIELD            (0x00004000          ) /* 'or'ed for groupline-only fields */
 #define LL_TABLE_HEADERFIELD           (0x00002000          ) /* 'or'ed for headline-only fields */
@@ -585,6 +584,7 @@
 #define LL_BARCODE_DATAMATRIX_PREMIUMADRESS (0x40000047          )
 #define LL_BARCODE_MICROPDF417         (0x40000048          )
 #define LL_BARCODE_QR_EPC              (0x40000049          )
+#define LL_BARCODE_QR_DESIGN           (0x40000050          )
 #define LL_DRAWING                     (0x20000000          )
 #define LL_DRAWING_METHODMASK          (0x000000ff          )
 #define LL_DRAWING_HMETA               (0x20000001          )
@@ -618,6 +618,7 @@
 #define LL_DATE_JULIAN                 (0x04000009          ) /* variant 'date' is a julian date */
 #define LL_DATE_CLARION                (0x0400000a          ) /* days since 1800-12-28 (what's so special about that day?) */
 #define LL_DATE_YMD_AUTO               (0x04000010          ) /* wither DMY, MDY or YMD, automatically detected */
+#define LL_DATE_ISO8601                (0x04000011          ) /* ISO 8601 date format (but without time zone *names* except 'Z') */
 #define LL_BOOLEAN                     (0x02000000          )
 #define LL_RTF                         (0x01000000          )
 #define LL_HTML                        (0x00800000          )
@@ -1247,7 +1248,7 @@
 #define LL_OPTION_COMPAT_FORCE_PRNOPT_PAGE (385                 ) /* internal */
 #define LL_OPTION_INTENTIONAL_USER_ABORT (386                 ) /* internal, R/O */
 #define LL_OPTION_PROHIBIT_OLE_OBJECTS_IN_RTF (387                 )
-#define LL_OPTION_COMPAT_ENABLE_EMF_OPTIMIZATION_IN_PDF_OBJECT (388                 ) /* default: false, LL28: true */
+#define LL_OPTION_COMPAT_ENABLE_EMF_OPTIMIZATION_IN_PDF_OBJECT (388                 ) /* default: true */
 #define LL_OPTION_USESIMPLEWINDOWSPENSTYLE_FRAMEDRAWING (389                 ) /* default: false */
 #define LL_OPTION_DISABLE_GDIPLUS_PATHS_IN_EMFDRAWINGS (390                 ) /* default: false */
 #define LL_OPTION_KEEP_EXPORTER_CONTROL_FILES_IN_MEMORY (391                 ) /* default: false */
@@ -1260,11 +1261,34 @@
 #define LL_OPTION_TRIM_ALSO_EXTENDEDSPACECHARS (398                 ) /* default: false */
 #define LL_OPTION_HIDE_EXTENDED_PRINTMODES (399                 ) /* default: false */
 #define LL_OPTION_REPOSITORY_CREATE_ITEM_RECURSIVE (400                 ) /* default: TRUE! */
-#define LL_RTF_OPTIMIZATION_FLAG_TOM   (0x01                )
-#define LL_RTF_OPTIMIZATION_FLAG_PLAINTEXTREPLACEMENT (0x02                ) /* nyi */
-#define LL_OPTION_RTF_OPTIMIZATION_FLAGS (401                 ) /* default: LL_RTF_OPTIMIZATION_FLAG_TOM = 0x01 */
 #define LL_OPTION_GAUGE_SIZE_REDUCTION (402                 ) /* default: false */
 #define LL_OPTION_FCT_EMPTYTABLEFILTERCORRECTION (403                 ) /* default: true */
+#define LL_OPTION_CHARTDLG_CONTAINERUPDATE (404                 ) /* default: LL_OPTION_CHARTDLG_CONTAINERUPDATE_AUTO */
+#define LL_OPTION_CHARTDLG_CONTAINERUPDATE_NEVER (0                   )
+#define LL_OPTION_CHARTDLG_CONTAINERUPDATE_AUTO (1                   )
+#define LL_OPTION_CHARTDLG_CONTAINERUPDATE_ALWAYS (-1                  )
+#define LL_OPTION_INTELLISENSE_MAXNESTINGDEPTH (405                 ) /* default: 200 */
+#define LL_OPTION_INTELLISENSE_INNERTIMEOUT (406                 ) /* default: 200 */
+#define LL_OPTION_MERGE_REPORT_PARAMETERS_WITH_THE_SAME_NAME (407                 ) /* default: true */
+#define LL_OPTION_PERCENTAGEFORMAT_INCLUDES_NBSPACE (408                 ) /* default: false */
+#define LL_OPTION_INCLUDE_QUERIED_VARS_IN_USED_VARIABLES (409                 ) /* default: false */
+#define LL_OPTION_USE_SVG2BMP          (410                 ) /* default: true (old SVG code...) */
+#define LL_OPTION_FORCE_LS_REPORTPARAM_VISIBILITYCHECK (411                 ) /* default: false */
+#define LL_OPTION_SUPPRESS_FUNCTION_POPUP_WITHDEFAULTVALUE (412                 ) /* default: false */
+#define LL_OPTION_SUPPRESS_REPORTPARAMETER_POPUP_WITHDEFAULTVALUE (413                 ) /* default: false */
+#define LL_OPTION_PRINTERLESS_FORCE_FIT_LAYOUT_ORIENTATION (414                 ) /* default: false */
+#define LL_OPTION_COMPAT_DO_NOT_REPEAT_LINKED_OBJECTS (415                 ) /* default: false */
+#define LL_OPTION_EVALUATEISVOLATILE   (416                 ) /* default: false */
+#define LL_OPTION_BITMAP_OUTOFMEMORY_FORCETHROW (417                 ) /* default: 0 */
+#define LL_OPTION_REPEAT_GROUPHEADER_ONLY_IF_FORCED (418                 ) /* default: false */
+#define LL_OPTION_COMPAT_SHOWMAILPROVIDER (419                 ) /* default: false */
+#define LL_OPTION_COMPAT_ALLOW_BASELEVEL_CROSSTABS (420                 ) /* default: false */
+#define LL_OPTION_AUTODEFINE_PATCH     (421                 ) /* default: 0 */
+#define LL_OPTION_BASE64TEMPFILECACHESIZE (422                 ) /* default: 200 */
+#define LL_OPTION_COMPAT_ZUGFERDXMLPATH_PREVIEWEMBEDDING (423                 ) /* default: false */
+#define LL_OPTION_SUPPRESS_LOADERRORMESSAGES_WRITELOG (424                 ) /* default: 0 */
+#define LL_OPTION_CHARTLEGEND_ALLOWMIXEDLINETYPESYMBOLS (425                 ) /* default: false */
+#define LL_OPTION_USEDIDENTIFIERS_SCANFORFILENAMES (426                 ) /* default: false */
 #define LL_OPTIONSTR_LABEL_PRJEXT      (0                   ) /* internal... (compatibility to L6) */
 #define LL_OPTIONSTR_LABEL_PRVEXT      (1                   ) /* internal... (compatibility to L6) */
 #define LL_OPTIONSTR_LABEL_PRNEXT      (2                   ) /* internal... (compatibility to L6) */
@@ -1354,6 +1378,8 @@
 #define LL_OPTIONSTR_REPORTPARAMDLGTITLE (92                  ) /* title for the report parameter value dialog that is displayed on exporting */
 #define LL_OPTIONSTR_DEFAULTIMAGEPATH_FOR_REPOSITORY (93                  )
 #define LL_OPTIONSTR_DEFAULTCHARTSCHEME (94                  ) /* default: combit2 (empty equals use of project scheme) */
+#define LL_OPTIONSTR_TIMEZONE_DATABASE (95                  )
+#define LL_OPTIONSTR_TIMEZONE_CLIENT   (96                  )
 #define LL_SYSCOMMAND_MINIMIZE         (-1                  )
 #define LL_SYSCOMMAND_MAXIMIZE         (-2                  )
 #define LL_PHFG_AGGREGATE              (0x01                )
@@ -2105,6 +2131,17 @@
   HANDLE  _hContents;
   VARIANT* _pvContents;
   } scLlDelayedValueW;
+ 
+ typedef struct
+  {
+  INT   _nSize;
+  LPCWSTR  _pszVarName;
+  LPWSTR  _pszContents;
+  UINT  _nBufSize; // size of buffer '_pszContents' points to. If a larger buffer is needed, _pszContents must be changed to point to that (static) buffer in the host application
+  HANDLE  _hContents;
+  VARIANT* _pvContents;
+   BOOL        _isReallyNullForInternalUse;
+  } scLlDelayedValue2W;
  
  typedef struct
   {
@@ -2862,7 +2899,7 @@ CMBT_LL_WINAPI FARPROC  DLLPROC  LlSetNotificationCallback
 	FARPROC              lpfnNotify
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDefineField LlDefineFieldW
        #define LlDefineFieldO LlDefineFieldA
@@ -2870,7 +2907,7 @@ CMBT_LL_WINAPI FARPROC  DLLPROC  LlSetNotificationCallback
        #define LlDefineField LlDefineFieldA
        #define LlDefineFieldO LlDefineFieldW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldA
 	(
@@ -2880,8 +2917,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldW
 	(
@@ -2891,7 +2928,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDefineFieldExt LlDefineFieldExtW
        #define LlDefineFieldExtO LlDefineFieldExtA
@@ -2899,7 +2936,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldW
        #define LlDefineFieldExt LlDefineFieldExtA
        #define LlDefineFieldExtO LlDefineFieldExtW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldExtA
 	(
@@ -2911,8 +2948,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldExtA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldExtW
 	(
@@ -2924,7 +2961,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldExtW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDefineFieldExtHandle LlDefineFieldExtHandleW
        #define LlDefineFieldExtHandleO LlDefineFieldExtHandleA
@@ -2932,7 +2969,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldExtW
        #define LlDefineFieldExtHandle LlDefineFieldExtHandleA
        #define LlDefineFieldExtHandleO LlDefineFieldExtHandleW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldExtHandleA
 	(
@@ -2944,8 +2981,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldExtHandleA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldExtHandleW
 	(
@@ -2962,7 +2999,7 @@ CMBT_LL_WINAPI void     DLLPROC  LlDefineFieldStart
 	HLLJOB               hLlJob
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDefineVariable LlDefineVariableW
        #define LlDefineVariableO LlDefineVariableA
@@ -2970,7 +3007,7 @@ CMBT_LL_WINAPI void     DLLPROC  LlDefineFieldStart
        #define LlDefineVariable LlDefineVariableA
        #define LlDefineVariableO LlDefineVariableW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableA
 	(
@@ -2980,8 +3017,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableW
 	(
@@ -2991,7 +3028,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDefineVariableExt LlDefineVariableExtW
        #define LlDefineVariableExtO LlDefineVariableExtA
@@ -2999,7 +3036,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableW
        #define LlDefineVariableExt LlDefineVariableExtA
        #define LlDefineVariableExtO LlDefineVariableExtW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableExtA
 	(
@@ -3011,8 +3048,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableExtA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableExtW
 	(
@@ -3024,7 +3061,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableExtW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDefineVariableExtHandle LlDefineVariableExtHandleW
        #define LlDefineVariableExtHandleO LlDefineVariableExtHandleA
@@ -3032,7 +3069,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableExtW
        #define LlDefineVariableExtHandle LlDefineVariableExtHandleA
        #define LlDefineVariableExtHandleO LlDefineVariableExtHandleW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableExtHandleA
 	(
@@ -3044,8 +3081,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableExtHandleA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableExtHandleW
 	(
@@ -3057,7 +3094,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableExtHandleW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDefineVariableName LlDefineVariableNameW
        #define LlDefineVariableNameO LlDefineVariableNameA
@@ -3065,7 +3102,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableExtHandleW
        #define LlDefineVariableName LlDefineVariableNameA
        #define LlDefineVariableNameO LlDefineVariableNameW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableNameA
 	(
@@ -3074,8 +3111,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableNameA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableNameW
 	(
@@ -3089,7 +3126,7 @@ CMBT_LL_WINAPI void     DLLPROC  LlDefineVariableStart
 	HLLJOB               hLlJob
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDefineSumVariable LlDefineSumVariableW
        #define LlDefineSumVariableO LlDefineSumVariableA
@@ -3097,7 +3134,7 @@ CMBT_LL_WINAPI void     DLLPROC  LlDefineVariableStart
        #define LlDefineSumVariable LlDefineSumVariableA
        #define LlDefineSumVariableO LlDefineSumVariableW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineSumVariableA
 	(
@@ -3107,8 +3144,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineSumVariableA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineSumVariableW
 	(
@@ -3118,7 +3155,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineSumVariableW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDefineLayout LlDefineLayoutW
        #define LlDefineLayoutO LlDefineLayoutA
@@ -3126,7 +3163,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineSumVariableW
        #define LlDefineLayout LlDefineLayoutA
        #define LlDefineLayoutO LlDefineLayoutW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineLayoutA
 	(
@@ -3138,8 +3175,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineLayoutA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineLayoutW
 	(
@@ -3151,7 +3188,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineLayoutW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDlgEditLine LlDlgEditLineW
        #define LlDlgEditLineO LlDlgEditLineA
@@ -3159,7 +3196,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineLayoutW
        #define LlDlgEditLine LlDlgEditLineA
        #define LlDlgEditLineO LlDlgEditLineW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDlgEditLineA
 	(
@@ -3170,8 +3207,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDlgEditLineA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDlgEditLineW
 	(
@@ -3182,7 +3219,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDlgEditLineW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDlgEditLineEx LlDlgEditLineExW
        #define LlDlgEditLineExO LlDlgEditLineExA
@@ -3190,7 +3227,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDlgEditLineW
        #define LlDlgEditLineEx LlDlgEditLineExA
        #define LlDlgEditLineExO LlDlgEditLineExW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDlgEditLineExA
 	(
@@ -3205,8 +3242,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDlgEditLineExA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDlgEditLineExW
 	(
@@ -3221,7 +3258,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDlgEditLineExW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPreviewSetTempPath LlPreviewSetTempPathW
        #define LlPreviewSetTempPathO LlPreviewSetTempPathA
@@ -3229,7 +3266,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDlgEditLineExW
        #define LlPreviewSetTempPath LlPreviewSetTempPathA
        #define LlPreviewSetTempPathO LlPreviewSetTempPathW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPreviewSetTempPathA
 	(
@@ -3238,8 +3275,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPreviewSetTempPathA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPreviewSetTempPathW
 	(
@@ -3248,7 +3285,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPreviewSetTempPathW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPreviewDeleteFiles LlPreviewDeleteFilesW
        #define LlPreviewDeleteFilesO LlPreviewDeleteFilesA
@@ -3256,7 +3293,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPreviewSetTempPathW
        #define LlPreviewDeleteFiles LlPreviewDeleteFilesA
        #define LlPreviewDeleteFilesO LlPreviewDeleteFilesW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPreviewDeleteFilesA
 	(
@@ -3266,8 +3303,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPreviewDeleteFilesA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPreviewDeleteFilesW
 	(
@@ -3277,7 +3314,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPreviewDeleteFilesW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPreviewDisplay LlPreviewDisplayW
        #define LlPreviewDisplayO LlPreviewDisplayA
@@ -3285,7 +3322,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPreviewDeleteFilesW
        #define LlPreviewDisplay LlPreviewDisplayA
        #define LlPreviewDisplayO LlPreviewDisplayW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPreviewDisplayA
 	(
@@ -3296,8 +3333,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPreviewDisplayA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPreviewDisplayW
 	(
@@ -3308,7 +3345,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPreviewDisplayW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPreviewDisplayEx LlPreviewDisplayExW
        #define LlPreviewDisplayExO LlPreviewDisplayExA
@@ -3316,7 +3353,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPreviewDisplayW
        #define LlPreviewDisplayEx LlPreviewDisplayExA
        #define LlPreviewDisplayExO LlPreviewDisplayExW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPreviewDisplayExA
 	(
@@ -3329,8 +3366,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPreviewDisplayExA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPreviewDisplayExW
 	(
@@ -3389,7 +3426,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetItemsPerTable
 	HLLJOB               hLlJob
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintGetRemainingItemsPerTable LlPrintGetRemainingItemsPerTableW
        #define LlPrintGetRemainingItemsPerTableO LlPrintGetRemainingItemsPerTableA
@@ -3397,7 +3434,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetItemsPerTable
        #define LlPrintGetRemainingItemsPerTable LlPrintGetRemainingItemsPerTableA
        #define LlPrintGetRemainingItemsPerTableO LlPrintGetRemainingItemsPerTableW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetRemainingItemsPerTableA
 	(
@@ -3406,8 +3443,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetRemainingItemsPerTableA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetRemainingItemsPerTableW
 	(
@@ -3416,7 +3453,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetRemainingItemsPerTableW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintGetRemItemsPerTable LlPrintGetRemItemsPerTableW
        #define LlPrintGetRemItemsPerTableO LlPrintGetRemItemsPerTableA
@@ -3424,7 +3461,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetRemainingItemsPerTableW
        #define LlPrintGetRemItemsPerTable LlPrintGetRemItemsPerTableA
        #define LlPrintGetRemItemsPerTableO LlPrintGetRemItemsPerTableW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetRemItemsPerTableA
 	(
@@ -3433,8 +3470,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetRemItemsPerTableA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetRemItemsPerTableW
 	(
@@ -3449,7 +3486,7 @@ CMBT_LL_WINAPI INT_PTR  DLLPROC  LlPrintGetOption
 	INT                  nIndex
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintGetPrinterInfo LlPrintGetPrinterInfoW
        #define LlPrintGetPrinterInfoO LlPrintGetPrinterInfoA
@@ -3457,7 +3494,7 @@ CMBT_LL_WINAPI INT_PTR  DLLPROC  LlPrintGetOption
        #define LlPrintGetPrinterInfo LlPrintGetPrinterInfoA
        #define LlPrintGetPrinterInfoO LlPrintGetPrinterInfoW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetPrinterInfoA
 	(
@@ -3469,8 +3506,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetPrinterInfoA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetPrinterInfoW
 	(
@@ -3482,7 +3519,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetPrinterInfoW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintOptionsDialog LlPrintOptionsDialogW
        #define LlPrintOptionsDialogO LlPrintOptionsDialogA
@@ -3490,7 +3527,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetPrinterInfoW
        #define LlPrintOptionsDialog LlPrintOptionsDialogA
        #define LlPrintOptionsDialogO LlPrintOptionsDialogW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintOptionsDialogA
 	(
@@ -3500,8 +3537,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintOptionsDialogA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintOptionsDialogW
 	(
@@ -3517,7 +3554,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintSelectOffsetEx
 	HWND                 hWnd
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintSetBoxText LlPrintSetBoxTextW
        #define LlPrintSetBoxTextO LlPrintSetBoxTextA
@@ -3525,7 +3562,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintSelectOffsetEx
        #define LlPrintSetBoxText LlPrintSetBoxTextA
        #define LlPrintSetBoxTextO LlPrintSetBoxTextW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintSetBoxTextA
 	(
@@ -3535,8 +3572,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintSetBoxTextA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintSetBoxTextW
 	(
@@ -3558,7 +3595,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintUpdateBox
 	HLLJOB               hLlJob
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintStart LlPrintStartW
        #define LlPrintStartO LlPrintStartA
@@ -3566,7 +3603,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintUpdateBox
        #define LlPrintStart LlPrintStartA
        #define LlPrintStartO LlPrintStartW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintStartA
 	(
@@ -3578,8 +3615,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintStartA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintStartW
 	(
@@ -3591,7 +3628,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintStartW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintWithBoxStart LlPrintWithBoxStartW
        #define LlPrintWithBoxStartO LlPrintWithBoxStartA
@@ -3599,7 +3636,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintStartW
        #define LlPrintWithBoxStart LlPrintWithBoxStartA
        #define LlPrintWithBoxStartO LlPrintWithBoxStartW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintWithBoxStartA
 	(
@@ -3613,8 +3650,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintWithBoxStartA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintWithBoxStartW
 	(
@@ -3628,7 +3665,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintWithBoxStartW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrinterSetup LlPrinterSetupW
        #define LlPrinterSetupO LlPrinterSetupA
@@ -3636,7 +3673,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintWithBoxStartW
        #define LlPrinterSetup LlPrinterSetupA
        #define LlPrinterSetupO LlPrinterSetupW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrinterSetupA
 	(
@@ -3647,8 +3684,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrinterSetupA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrinterSetupW
 	(
@@ -3659,7 +3696,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrinterSetupW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlSelectFileDlgTitleEx LlSelectFileDlgTitleExW
        #define LlSelectFileDlgTitleExO LlSelectFileDlgTitleExA
@@ -3667,7 +3704,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrinterSetupW
        #define LlSelectFileDlgTitleEx LlSelectFileDlgTitleExA
        #define LlSelectFileDlgTitleExO LlSelectFileDlgTitleExW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlSelectFileDlgTitleExA
 	(
@@ -3681,8 +3718,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlSelectFileDlgTitleExA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlSelectFileDlgTitleExW
 	(
@@ -3706,7 +3743,7 @@ CMBT_LL_WINAPI UINT     DLLPROC  LlGetDlgboxMode
 	void
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlExprParse LlExprParseW
        #define LlExprParseO LlExprParseA
@@ -3714,7 +3751,7 @@ CMBT_LL_WINAPI UINT     DLLPROC  LlGetDlgboxMode
        #define LlExprParse LlExprParseA
        #define LlExprParseO LlExprParseW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI HLLEXPR  DLLPROC  LlExprParseA
 	(
@@ -3724,8 +3761,8 @@ CMBT_LL_WINAPI HLLEXPR  DLLPROC  LlExprParseA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI HLLEXPR  DLLPROC  LlExprParseW
 	(
@@ -3741,7 +3778,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprType
 	HLLEXPR              lpExpr
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlExprError LlExprErrorW
        #define LlExprErrorO LlExprErrorA
@@ -3749,7 +3786,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprType
        #define LlExprError LlExprErrorA
        #define LlExprErrorO LlExprErrorW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI void     DLLPROC  LlExprErrorA
 	(
@@ -3759,8 +3796,8 @@ CMBT_LL_WINAPI void     DLLPROC  LlExprErrorA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI void     DLLPROC  LlExprErrorW
 	(
@@ -3776,7 +3813,7 @@ CMBT_LL_WINAPI void     DLLPROC  LlExprFree
 	HLLEXPR              lpExpr
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlExprEvaluate LlExprEvaluateW
        #define LlExprEvaluateO LlExprEvaluateA
@@ -3784,7 +3821,7 @@ CMBT_LL_WINAPI void     DLLPROC  LlExprFree
        #define LlExprEvaluate LlExprEvaluateA
        #define LlExprEvaluateO LlExprEvaluateW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlExprEvaluateA
 	(
@@ -3795,8 +3832,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprEvaluateA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlExprEvaluateW
 	(
@@ -3807,7 +3844,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprEvaluateW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlExprGetUsedVars LlExprGetUsedVarsW
        #define LlExprGetUsedVarsO LlExprGetUsedVarsA
@@ -3815,7 +3852,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprEvaluateW
        #define LlExprGetUsedVars LlExprGetUsedVarsA
        #define LlExprGetUsedVarsO LlExprGetUsedVarsW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlExprGetUsedVarsA
 	(
@@ -3826,8 +3863,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprGetUsedVarsA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlExprGetUsedVarsW
 	(
@@ -3851,7 +3888,7 @@ CMBT_LL_WINAPI INT_PTR  DLLPROC  LlGetOption
 	INT                  nMode
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlSetOptionString LlSetOptionStringW
        #define LlSetOptionStringO LlSetOptionStringA
@@ -3859,7 +3896,7 @@ CMBT_LL_WINAPI INT_PTR  DLLPROC  LlGetOption
        #define LlSetOptionString LlSetOptionStringA
        #define LlSetOptionStringO LlSetOptionStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlSetOptionStringA
 	(
@@ -3869,8 +3906,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlSetOptionStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlSetOptionStringW
 	(
@@ -3880,7 +3917,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlSetOptionStringW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetOptionString LlGetOptionStringW
        #define LlGetOptionStringO LlGetOptionStringA
@@ -3888,7 +3925,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlSetOptionStringW
        #define LlGetOptionString LlGetOptionStringA
        #define LlGetOptionStringO LlGetOptionStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetOptionStringA
 	(
@@ -3899,8 +3936,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetOptionStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetOptionStringW
 	(
@@ -3911,7 +3948,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetOptionStringW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintSetOptionString LlPrintSetOptionStringW
        #define LlPrintSetOptionStringO LlPrintSetOptionStringA
@@ -3919,7 +3956,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetOptionStringW
        #define LlPrintSetOptionString LlPrintSetOptionStringA
        #define LlPrintSetOptionStringO LlPrintSetOptionStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintSetOptionStringA
 	(
@@ -3929,8 +3966,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintSetOptionStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintSetOptionStringW
 	(
@@ -3940,7 +3977,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintSetOptionStringW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintGetOptionString LlPrintGetOptionStringW
        #define LlPrintGetOptionStringO LlPrintGetOptionStringA
@@ -3948,7 +3985,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintSetOptionStringW
        #define LlPrintGetOptionString LlPrintGetOptionStringA
        #define LlPrintGetOptionStringO LlPrintGetOptionStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetOptionStringA
 	(
@@ -3959,8 +3996,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetOptionStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetOptionStringW
 	(
@@ -3977,7 +4014,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerProhibitAction
 	INT                  nMenuID
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDesignerProhibitFunction LlDesignerProhibitFunctionW
        #define LlDesignerProhibitFunctionO LlDesignerProhibitFunctionA
@@ -3985,7 +4022,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerProhibitAction
        #define LlDesignerProhibitFunction LlDesignerProhibitFunctionA
        #define LlDesignerProhibitFunctionO LlDesignerProhibitFunctionW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDesignerProhibitFunctionA
 	(
@@ -3994,8 +4031,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerProhibitFunctionA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDesignerProhibitFunctionW
 	(
@@ -4012,7 +4049,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerProhibitFunctionGroup
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintEnableObject LlPrintEnableObjectW
        #define LlPrintEnableObjectO LlPrintEnableObjectA
@@ -4020,7 +4057,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerProhibitFunctionGroup
        #define LlPrintEnableObject LlPrintEnableObjectA
        #define LlPrintEnableObjectO LlPrintEnableObjectW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintEnableObjectA
 	(
@@ -4030,8 +4067,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintEnableObjectA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintEnableObjectW
 	(
@@ -4041,7 +4078,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintEnableObjectW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlSetFileExtensions LlSetFileExtensionsW
        #define LlSetFileExtensionsO LlSetFileExtensionsA
@@ -4049,7 +4086,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintEnableObjectW
        #define LlSetFileExtensions LlSetFileExtensionsA
        #define LlSetFileExtensionsO LlSetFileExtensionsW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlSetFileExtensionsA
 	(
@@ -4061,8 +4098,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlSetFileExtensionsA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlSetFileExtensionsW
 	(
@@ -4074,7 +4111,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlSetFileExtensionsW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintGetTextCharsPrinted LlPrintGetTextCharsPrintedW
        #define LlPrintGetTextCharsPrintedO LlPrintGetTextCharsPrintedA
@@ -4082,7 +4119,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlSetFileExtensionsW
        #define LlPrintGetTextCharsPrinted LlPrintGetTextCharsPrintedA
        #define LlPrintGetTextCharsPrintedO LlPrintGetTextCharsPrintedW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetTextCharsPrintedA
 	(
@@ -4091,8 +4128,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetTextCharsPrintedA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetTextCharsPrintedW
 	(
@@ -4101,7 +4138,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetTextCharsPrintedW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintGetFieldCharsPrinted LlPrintGetFieldCharsPrintedW
        #define LlPrintGetFieldCharsPrintedO LlPrintGetFieldCharsPrintedA
@@ -4109,7 +4146,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetTextCharsPrintedW
        #define LlPrintGetFieldCharsPrinted LlPrintGetFieldCharsPrintedA
        #define LlPrintGetFieldCharsPrintedO LlPrintGetFieldCharsPrintedW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetFieldCharsPrintedA
 	(
@@ -4119,8 +4156,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetFieldCharsPrintedA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetFieldCharsPrintedW
 	(
@@ -4130,7 +4167,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetFieldCharsPrintedW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintIsVariableUsed LlPrintIsVariableUsedW
        #define LlPrintIsVariableUsedO LlPrintIsVariableUsedA
@@ -4138,7 +4175,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetFieldCharsPrintedW
        #define LlPrintIsVariableUsed LlPrintIsVariableUsedA
        #define LlPrintIsVariableUsedO LlPrintIsVariableUsedW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintIsVariableUsedA
 	(
@@ -4147,8 +4184,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintIsVariableUsedA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintIsVariableUsedW
 	(
@@ -4157,7 +4194,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintIsVariableUsedW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintIsFieldUsed LlPrintIsFieldUsedW
        #define LlPrintIsFieldUsedO LlPrintIsFieldUsedA
@@ -4165,7 +4202,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintIsVariableUsedW
        #define LlPrintIsFieldUsed LlPrintIsFieldUsedA
        #define LlPrintIsFieldUsedO LlPrintIsFieldUsedW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintIsFieldUsedA
 	(
@@ -4174,8 +4211,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintIsFieldUsedA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintIsFieldUsedW
 	(
@@ -4184,7 +4221,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintIsFieldUsedW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintOptionsDialogTitle LlPrintOptionsDialogTitleW
        #define LlPrintOptionsDialogTitleO LlPrintOptionsDialogTitleA
@@ -4192,7 +4229,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintIsFieldUsedW
        #define LlPrintOptionsDialogTitle LlPrintOptionsDialogTitleA
        #define LlPrintOptionsDialogTitleO LlPrintOptionsDialogTitleW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintOptionsDialogTitleA
 	(
@@ -4203,8 +4240,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintOptionsDialogTitleA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintOptionsDialogTitleW
 	(
@@ -4215,7 +4252,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintOptionsDialogTitleW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlSetPrinterToDefault LlSetPrinterToDefaultW
        #define LlSetPrinterToDefaultO LlSetPrinterToDefaultA
@@ -4223,7 +4260,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintOptionsDialogTitleW
        #define LlSetPrinterToDefault LlSetPrinterToDefaultA
        #define LlSetPrinterToDefaultO LlSetPrinterToDefaultW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlSetPrinterToDefaultA
 	(
@@ -4233,8 +4270,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlSetPrinterToDefaultA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlSetPrinterToDefaultW
 	(
@@ -4249,7 +4286,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineSortOrderStart
 	HLLJOB               hLlJob
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDefineSortOrder LlDefineSortOrderW
        #define LlDefineSortOrderO LlDefineSortOrderA
@@ -4257,7 +4294,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineSortOrderStart
        #define LlDefineSortOrder LlDefineSortOrderA
        #define LlDefineSortOrderO LlDefineSortOrderW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineSortOrderA
 	(
@@ -4267,8 +4304,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineSortOrderA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineSortOrderW
 	(
@@ -4278,7 +4315,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineSortOrderW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintGetSortOrder LlPrintGetSortOrderW
        #define LlPrintGetSortOrderO LlPrintGetSortOrderA
@@ -4286,7 +4323,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineSortOrderW
        #define LlPrintGetSortOrder LlPrintGetSortOrderA
        #define LlPrintGetSortOrderO LlPrintGetSortOrderW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetSortOrderA
 	(
@@ -4296,8 +4333,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetSortOrderA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetSortOrderW
 	(
@@ -4307,7 +4344,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetSortOrderW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDefineGrouping LlDefineGroupingW
        #define LlDefineGroupingO LlDefineGroupingA
@@ -4315,7 +4352,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetSortOrderW
        #define LlDefineGrouping LlDefineGroupingA
        #define LlDefineGroupingO LlDefineGroupingW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineGroupingA
 	(
@@ -4326,8 +4363,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineGroupingA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineGroupingW
 	(
@@ -4338,7 +4375,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineGroupingW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintGetGrouping LlPrintGetGroupingW
        #define LlPrintGetGroupingO LlPrintGetGroupingA
@@ -4346,7 +4383,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineGroupingW
        #define LlPrintGetGrouping LlPrintGetGroupingA
        #define LlPrintGetGroupingO LlPrintGetGroupingW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetGroupingA
 	(
@@ -4356,8 +4393,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetGroupingA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetGroupingW
 	(
@@ -4367,7 +4404,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetGroupingW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlAddCtlSupport LlAddCtlSupportW
        #define LlAddCtlSupportO LlAddCtlSupportA
@@ -4375,7 +4412,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetGroupingW
        #define LlAddCtlSupport LlAddCtlSupportA
        #define LlAddCtlSupportO LlAddCtlSupportW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlAddCtlSupportA
 	(
@@ -4385,8 +4422,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlAddCtlSupportA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlAddCtlSupportW
 	(
@@ -4423,7 +4460,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGroupHeader
 	LPARAM               lParam
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintGetFilterExpression LlPrintGetFilterExpressionW
        #define LlPrintGetFilterExpressionO LlPrintGetFilterExpressionA
@@ -4431,7 +4468,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGroupHeader
        #define LlPrintGetFilterExpression LlPrintGetFilterExpressionA
        #define LlPrintGetFilterExpressionO LlPrintGetFilterExpressionW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetFilterExpressionA
 	(
@@ -4441,8 +4478,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetFilterExpressionA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetFilterExpressionW
 	(
@@ -4462,7 +4499,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintDidMatchFilter
 	HLLJOB               hLlJob
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetFieldContents LlGetFieldContentsW
        #define LlGetFieldContentsO LlGetFieldContentsA
@@ -4470,7 +4507,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintDidMatchFilter
        #define LlGetFieldContents LlGetFieldContentsA
        #define LlGetFieldContentsO LlGetFieldContentsW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetFieldContentsA
 	(
@@ -4481,8 +4518,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetFieldContentsA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetFieldContentsW
 	(
@@ -4493,7 +4530,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetFieldContentsW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetVariableContents LlGetVariableContentsW
        #define LlGetVariableContentsO LlGetVariableContentsA
@@ -4501,7 +4538,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetFieldContentsW
        #define LlGetVariableContents LlGetVariableContentsA
        #define LlGetVariableContentsO LlGetVariableContentsW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetVariableContentsA
 	(
@@ -4512,8 +4549,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetVariableContentsA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetVariableContentsW
 	(
@@ -4524,7 +4561,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetVariableContentsW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetSumVariableContents LlGetSumVariableContentsW
        #define LlGetSumVariableContentsO LlGetSumVariableContentsA
@@ -4532,7 +4569,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetVariableContentsW
        #define LlGetSumVariableContents LlGetSumVariableContentsA
        #define LlGetSumVariableContentsO LlGetSumVariableContentsW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetSumVariableContentsA
 	(
@@ -4543,8 +4580,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetSumVariableContentsA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetSumVariableContentsW
 	(
@@ -4555,7 +4592,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetSumVariableContentsW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetUserVariableContents LlGetUserVariableContentsW
        #define LlGetUserVariableContentsO LlGetUserVariableContentsA
@@ -4563,7 +4600,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetSumVariableContentsW
        #define LlGetUserVariableContents LlGetUserVariableContentsA
        #define LlGetUserVariableContentsO LlGetUserVariableContentsW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetUserVariableContentsA
 	(
@@ -4574,8 +4611,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetUserVariableContentsA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetUserVariableContentsW
 	(
@@ -4586,7 +4623,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetUserVariableContentsW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetVariableType LlGetVariableTypeW
        #define LlGetVariableTypeO LlGetVariableTypeA
@@ -4594,7 +4631,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetUserVariableContentsW
        #define LlGetVariableType LlGetVariableTypeA
        #define LlGetVariableTypeO LlGetVariableTypeW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetVariableTypeA
 	(
@@ -4603,8 +4640,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetVariableTypeA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetVariableTypeW
 	(
@@ -4613,7 +4650,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetVariableTypeW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetFieldType LlGetFieldTypeW
        #define LlGetFieldTypeO LlGetFieldTypeA
@@ -4621,7 +4658,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetVariableTypeW
        #define LlGetFieldType LlGetFieldTypeA
        #define LlGetFieldTypeO LlGetFieldTypeW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetFieldTypeA
 	(
@@ -4630,8 +4667,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetFieldTypeA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetFieldTypeW
 	(
@@ -4640,7 +4677,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetFieldTypeW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintGetColumnInfo LlPrintGetColumnInfoW
        #define LlPrintGetColumnInfoO LlPrintGetColumnInfoA
@@ -4648,7 +4685,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetFieldTypeW
        #define LlPrintGetColumnInfo LlPrintGetColumnInfoA
        #define LlPrintGetColumnInfoO LlPrintGetColumnInfoW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetColumnInfoA
 	(
@@ -4659,8 +4696,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetColumnInfoA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetColumnInfoW
 	(
@@ -4671,7 +4708,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetColumnInfoW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlSetPrinterDefaultsDir LlSetPrinterDefaultsDirW
        #define LlSetPrinterDefaultsDirO LlSetPrinterDefaultsDirA
@@ -4679,7 +4716,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetColumnInfoW
        #define LlSetPrinterDefaultsDir LlSetPrinterDefaultsDirA
        #define LlSetPrinterDefaultsDirO LlSetPrinterDefaultsDirW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlSetPrinterDefaultsDirA
 	(
@@ -4688,8 +4725,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlSetPrinterDefaultsDirA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlSetPrinterDefaultsDirW
 	(
@@ -4698,7 +4735,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlSetPrinterDefaultsDirW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlCreateSketch LlCreateSketchW
        #define LlCreateSketchO LlCreateSketchA
@@ -4706,7 +4743,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlSetPrinterDefaultsDirW
        #define LlCreateSketch LlCreateSketchA
        #define LlCreateSketchO LlCreateSketchW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlCreateSketchA
 	(
@@ -4716,8 +4753,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlCreateSketchA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlCreateSketchW
 	(
@@ -4733,7 +4770,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlViewerProhibitAction
 	INT                  nMenuID
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintCopyPrinterConfiguration LlPrintCopyPrinterConfigurationW
        #define LlPrintCopyPrinterConfigurationO LlPrintCopyPrinterConfigurationA
@@ -4741,7 +4778,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlViewerProhibitAction
        #define LlPrintCopyPrinterConfiguration LlPrintCopyPrinterConfigurationA
        #define LlPrintCopyPrinterConfigurationO LlPrintCopyPrinterConfigurationW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintCopyPrinterConfigurationA
 	(
@@ -4751,8 +4788,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintCopyPrinterConfigurationA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintCopyPrinterConfigurationW
 	(
@@ -4762,7 +4799,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintCopyPrinterConfigurationW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlSetPrinterInPrinterFile LlSetPrinterInPrinterFileW
        #define LlSetPrinterInPrinterFileO LlSetPrinterInPrinterFileA
@@ -4770,7 +4807,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintCopyPrinterConfigurationW
        #define LlSetPrinterInPrinterFile LlSetPrinterInPrinterFileA
        #define LlSetPrinterInPrinterFileO LlSetPrinterInPrinterFileW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlSetPrinterInPrinterFileA
 	(
@@ -4783,8 +4820,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlSetPrinterInPrinterFileA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlSetPrinterInPrinterFileW
 	(
@@ -4808,7 +4845,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlRTFDeleteObject
 	HLLRTFOBJ            hRTF
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlRTFSetText LlRTFSetTextW
        #define LlRTFSetTextO LlRTFSetTextA
@@ -4816,7 +4853,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlRTFDeleteObject
        #define LlRTFSetText LlRTFSetTextA
        #define LlRTFSetTextO LlRTFSetTextW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlRTFSetTextA
 	(
@@ -4826,8 +4863,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlRTFSetTextA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlRTFSetTextW
 	(
@@ -4844,7 +4881,7 @@ CMBT_LL_WINAPI UINT     DLLPROC  LlRTFGetTextLength
 	INT                  nFlags
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlRTFGetText LlRTFGetTextW
        #define LlRTFGetTextO LlRTFGetTextA
@@ -4852,7 +4889,7 @@ CMBT_LL_WINAPI UINT     DLLPROC  LlRTFGetTextLength
        #define LlRTFGetText LlRTFGetTextA
        #define LlRTFGetTextO LlRTFGetTextW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlRTFGetTextA
 	(
@@ -4864,8 +4901,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlRTFGetTextA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlRTFGetTextW
 	(
@@ -4919,7 +4956,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlRTFEditorInvokeAction
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDebugOutput LlDebugOutputW
        #define LlDebugOutputO LlDebugOutputA
@@ -4927,7 +4964,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlRTFEditorInvokeAction
        #define LlDebugOutput LlDebugOutputA
        #define LlDebugOutputO LlDebugOutputW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI void     DLLPROC  LlDebugOutputA
 	(
@@ -4936,8 +4973,8 @@ CMBT_LL_WINAPI void     DLLPROC  LlDebugOutputA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI void     DLLPROC  LlDebugOutputW
 	(
@@ -4971,7 +5008,7 @@ CMBT_LL_WINAPI HLISTPOS DLLPROC  LlEnumGetNextEntry
 	UINT                 nFlags
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlEnumGetEntry LlEnumGetEntryW
        #define LlEnumGetEntryO LlEnumGetEntryA
@@ -4979,7 +5016,7 @@ CMBT_LL_WINAPI HLISTPOS DLLPROC  LlEnumGetNextEntry
        #define LlEnumGetEntry LlEnumGetEntryA
        #define LlEnumGetEntryO LlEnumGetEntryW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlEnumGetEntryA
 	(
@@ -4994,8 +5031,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlEnumGetEntryA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlEnumGetEntryW
 	(
@@ -5015,7 +5052,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintResetObjectStates
 	HLLJOB               hLlJob
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlXSetParameter LlXSetParameterW
        #define LlXSetParameterO LlXSetParameterA
@@ -5023,7 +5060,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintResetObjectStates
        #define LlXSetParameter LlXSetParameterA
        #define LlXSetParameterO LlXSetParameterW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlXSetParameterA
 	(
@@ -5035,8 +5072,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlXSetParameterA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlXSetParameterW
 	(
@@ -5048,7 +5085,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlXSetParameterW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlXGetParameter LlXGetParameterW
        #define LlXGetParameterO LlXGetParameterA
@@ -5056,7 +5093,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlXSetParameterW
        #define LlXGetParameter LlXGetParameterA
        #define LlXGetParameterO LlXGetParameterW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlXGetParameterA
 	(
@@ -5069,8 +5106,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlXGetParameterA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlXGetParameterW
 	(
@@ -5093,7 +5130,7 @@ CMBT_LL_WINAPI void     DLLPROC  LlDefineChartFieldStart
 	HLLJOB               hLlJob
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDefineChartFieldExt LlDefineChartFieldExtW
        #define LlDefineChartFieldExtO LlDefineChartFieldExtA
@@ -5101,7 +5138,7 @@ CMBT_LL_WINAPI void     DLLPROC  LlDefineChartFieldStart
        #define LlDefineChartFieldExt LlDefineChartFieldExtA
        #define LlDefineChartFieldExtO LlDefineChartFieldExtW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineChartFieldExtA
 	(
@@ -5113,8 +5150,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineChartFieldExtA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineChartFieldExtW
 	(
@@ -5138,7 +5175,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetChartObjectCount
 	UINT                 nType
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintIsChartFieldUsed LlPrintIsChartFieldUsedW
        #define LlPrintIsChartFieldUsedO LlPrintIsChartFieldUsedA
@@ -5146,7 +5183,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetChartObjectCount
        #define LlPrintIsChartFieldUsed LlPrintIsChartFieldUsedA
        #define LlPrintIsChartFieldUsedO LlPrintIsChartFieldUsedW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintIsChartFieldUsedA
 	(
@@ -5155,8 +5192,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintIsChartFieldUsedA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintIsChartFieldUsedW
 	(
@@ -5165,7 +5202,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintIsChartFieldUsedW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetChartFieldContents LlGetChartFieldContentsW
        #define LlGetChartFieldContentsO LlGetChartFieldContentsA
@@ -5173,7 +5210,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintIsChartFieldUsedW
        #define LlGetChartFieldContents LlGetChartFieldContentsA
        #define LlGetChartFieldContentsO LlGetChartFieldContentsW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetChartFieldContentsA
 	(
@@ -5184,8 +5221,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetChartFieldContentsA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetChartFieldContentsW
 	(
@@ -5225,7 +5262,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprTypeVar
 	HLLEXPR              lpExpr
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetPrinterFromPrinterFile LlGetPrinterFromPrinterFileW
        #define LlGetPrinterFromPrinterFileO LlGetPrinterFromPrinterFileA
@@ -5233,7 +5270,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprTypeVar
        #define LlGetPrinterFromPrinterFile LlGetPrinterFromPrinterFileA
        #define LlGetPrinterFromPrinterFileO LlGetPrinterFromPrinterFileW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetPrinterFromPrinterFileA
 	(
@@ -5248,8 +5285,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetPrinterFromPrinterFileA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetPrinterFromPrinterFileW
 	(
@@ -5264,7 +5301,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetPrinterFromPrinterFileW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintGetRemainingSpacePerTable LlPrintGetRemainingSpacePerTableW
        #define LlPrintGetRemainingSpacePerTableO LlPrintGetRemainingSpacePerTableA
@@ -5272,7 +5309,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetPrinterFromPrinterFileW
        #define LlPrintGetRemainingSpacePerTable LlPrintGetRemainingSpacePerTableA
        #define LlPrintGetRemainingSpacePerTableO LlPrintGetRemainingSpacePerTableW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetRemainingSpacePerTableA
 	(
@@ -5282,8 +5319,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetRemainingSpacePerTableA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetRemainingSpacePerTableW
 	(
@@ -5303,7 +5340,7 @@ CMBT_LL_WINAPI void     DLLPROC  LlDrawToolbarBackground
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlSetDefaultProjectParameter LlSetDefaultProjectParameterW
        #define LlSetDefaultProjectParameterO LlSetDefaultProjectParameterA
@@ -5311,7 +5348,7 @@ CMBT_LL_WINAPI void     DLLPROC  LlDrawToolbarBackground
        #define LlSetDefaultProjectParameter LlSetDefaultProjectParameterA
        #define LlSetDefaultProjectParameterO LlSetDefaultProjectParameterW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlSetDefaultProjectParameterA
 	(
@@ -5322,8 +5359,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlSetDefaultProjectParameterA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlSetDefaultProjectParameterW
 	(
@@ -5334,7 +5371,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlSetDefaultProjectParameterW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetDefaultProjectParameter LlGetDefaultProjectParameterW
        #define LlGetDefaultProjectParameterO LlGetDefaultProjectParameterA
@@ -5342,7 +5379,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlSetDefaultProjectParameterW
        #define LlGetDefaultProjectParameter LlGetDefaultProjectParameterA
        #define LlGetDefaultProjectParameterO LlGetDefaultProjectParameterW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetDefaultProjectParameterA
 	(
@@ -5354,8 +5391,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetDefaultProjectParameterA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetDefaultProjectParameterW
 	(
@@ -5367,7 +5404,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetDefaultProjectParameterW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintSetProjectParameter LlPrintSetProjectParameterW
        #define LlPrintSetProjectParameterO LlPrintSetProjectParameterA
@@ -5375,7 +5412,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetDefaultProjectParameterW
        #define LlPrintSetProjectParameter LlPrintSetProjectParameterA
        #define LlPrintSetProjectParameterO LlPrintSetProjectParameterW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintSetProjectParameterA
 	(
@@ -5386,8 +5423,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintSetProjectParameterA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintSetProjectParameterW
 	(
@@ -5398,7 +5435,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintSetProjectParameterW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintGetProjectParameter LlPrintGetProjectParameterW
        #define LlPrintGetProjectParameterO LlPrintGetProjectParameterA
@@ -5406,7 +5443,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintSetProjectParameterW
        #define LlPrintGetProjectParameter LlPrintGetProjectParameterA
        #define LlPrintGetProjectParameterO LlPrintGetProjectParameterW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetProjectParameterA
 	(
@@ -5419,8 +5456,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetProjectParameterA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintGetProjectParameterW
 	(
@@ -5439,7 +5476,7 @@ CMBT_LL_WINAPI BOOL     DLLPROC  LlCreateObject
 	PPIUNKNOWN           ppI
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlExprContainsVariable LlExprContainsVariableW
        #define LlExprContainsVariableO LlExprContainsVariableA
@@ -5447,7 +5484,7 @@ CMBT_LL_WINAPI BOOL     DLLPROC  LlCreateObject
        #define LlExprContainsVariable LlExprContainsVariableA
        #define LlExprContainsVariableO LlExprContainsVariableW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlExprContainsVariableA
 	(
@@ -5457,8 +5494,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprContainsVariableA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlExprContainsVariableW
 	(
@@ -5476,7 +5513,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprIsConstant
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlLocSystemTimeFromLocaleString LlLocSystemTimeFromLocaleStringW
        #define LlLocSystemTimeFromLocaleStringO LlLocSystemTimeFromLocaleStringA
@@ -5484,7 +5521,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprIsConstant
        #define LlLocSystemTimeFromLocaleString LlLocSystemTimeFromLocaleStringA
        #define LlLocSystemTimeFromLocaleStringO LlLocSystemTimeFromLocaleStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlLocSystemTimeFromLocaleStringA
 	(
@@ -5495,8 +5532,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlLocSystemTimeFromLocaleStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlLocSystemTimeFromLocaleStringW
 	(
@@ -5507,7 +5544,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlLocSystemTimeFromLocaleStringW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlLocSystemTimeToLocaleString LlLocSystemTimeToLocaleStringW
        #define LlLocSystemTimeToLocaleStringO LlLocSystemTimeToLocaleStringA
@@ -5515,7 +5552,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlLocSystemTimeFromLocaleStringW
        #define LlLocSystemTimeToLocaleString LlLocSystemTimeToLocaleStringA
        #define LlLocSystemTimeToLocaleStringO LlLocSystemTimeToLocaleStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlLocSystemTimeToLocaleStringA
 	(
@@ -5526,8 +5563,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlLocSystemTimeToLocaleStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlLocSystemTimeToLocaleStringW
 	(
@@ -5538,7 +5575,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlLocSystemTimeToLocaleStringW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlLocConvertCountryTo LlLocConvertCountryToW
        #define LlLocConvertCountryToO LlLocConvertCountryToA
@@ -5546,7 +5583,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlLocSystemTimeToLocaleStringW
        #define LlLocConvertCountryTo LlLocConvertCountryToA
        #define LlLocConvertCountryToO LlLocConvertCountryToW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlLocConvertCountryToA
 	(
@@ -5558,8 +5595,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlLocConvertCountryToA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlLocConvertCountryToW
 	(
@@ -5571,7 +5608,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlLocConvertCountryToW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlProfileStart LlProfileStartW
        #define LlProfileStartO LlProfileStartA
@@ -5579,7 +5616,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlLocConvertCountryToW
        #define LlProfileStart LlProfileStartA
        #define LlProfileStartO LlProfileStartW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlProfileStartA
 	(
@@ -5590,8 +5627,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlProfileStartA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlProfileStartW
 	(
@@ -5616,7 +5653,7 @@ CMBT_LL_WINAPI void     DLLPROC  LlDumpMemory
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDbAddTable LlDbAddTableW
        #define LlDbAddTableO LlDbAddTableA
@@ -5624,7 +5661,7 @@ CMBT_LL_WINAPI void     DLLPROC  LlDumpMemory
        #define LlDbAddTable LlDbAddTableA
        #define LlDbAddTableO LlDbAddTableW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableA
 	(
@@ -5634,8 +5671,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableW
 	(
@@ -5645,7 +5682,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDbAddTableRelation LlDbAddTableRelationW
        #define LlDbAddTableRelationO LlDbAddTableRelationA
@@ -5653,7 +5690,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableW
        #define LlDbAddTableRelation LlDbAddTableRelationA
        #define LlDbAddTableRelationO LlDbAddTableRelationW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableRelationA
 	(
@@ -5665,8 +5702,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableRelationA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableRelationW
 	(
@@ -5678,7 +5715,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableRelationW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDbAddTableSortOrder LlDbAddTableSortOrderW
        #define LlDbAddTableSortOrderO LlDbAddTableSortOrderA
@@ -5686,7 +5723,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableRelationW
        #define LlDbAddTableSortOrder LlDbAddTableSortOrderA
        #define LlDbAddTableSortOrderO LlDbAddTableSortOrderW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableSortOrderA
 	(
@@ -5697,8 +5734,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableSortOrderA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableSortOrderW
 	(
@@ -5709,7 +5746,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableSortOrderW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintDbGetCurrentTable LlPrintDbGetCurrentTableW
        #define LlPrintDbGetCurrentTableO LlPrintDbGetCurrentTableA
@@ -5717,7 +5754,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableSortOrderW
        #define LlPrintDbGetCurrentTable LlPrintDbGetCurrentTableA
        #define LlPrintDbGetCurrentTableO LlPrintDbGetCurrentTableW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetCurrentTableA
 	(
@@ -5728,8 +5765,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetCurrentTableA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetCurrentTableW
 	(
@@ -5740,7 +5777,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetCurrentTableW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintDbGetCurrentTableRelation LlPrintDbGetCurrentTableRelationW
        #define LlPrintDbGetCurrentTableRelationO LlPrintDbGetCurrentTableRelationA
@@ -5748,7 +5785,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetCurrentTableW
        #define LlPrintDbGetCurrentTableRelation LlPrintDbGetCurrentTableRelationA
        #define LlPrintDbGetCurrentTableRelationO LlPrintDbGetCurrentTableRelationW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetCurrentTableRelationA
 	(
@@ -5758,8 +5795,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetCurrentTableRelationA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetCurrentTableRelationW
 	(
@@ -5769,7 +5806,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetCurrentTableRelationW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlPrintDbGetCurrentTableSortOrder LlPrintDbGetCurrentTableSortOrderW
        #define LlPrintDbGetCurrentTableSortOrderO LlPrintDbGetCurrentTableSortOrderA
@@ -5777,7 +5814,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetCurrentTableRelationW
        #define LlPrintDbGetCurrentTableSortOrder LlPrintDbGetCurrentTableSortOrderA
        #define LlPrintDbGetCurrentTableSortOrderO LlPrintDbGetCurrentTableSortOrderW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetCurrentTableSortOrderA
 	(
@@ -5787,8 +5824,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetCurrentTableSortOrderA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetCurrentTableSortOrderW
 	(
@@ -5812,7 +5849,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetRootTableCount
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDbSetMasterTable LlDbSetMasterTableW
        #define LlDbSetMasterTableO LlDbSetMasterTableA
@@ -5820,7 +5857,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetRootTableCount
        #define LlDbSetMasterTable LlDbSetMasterTableA
        #define LlDbSetMasterTableO LlDbSetMasterTableW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbSetMasterTableA
 	(
@@ -5829,8 +5866,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbSetMasterTableA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbSetMasterTableW
 	(
@@ -5839,7 +5876,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbSetMasterTableW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDbGetMasterTable LlDbGetMasterTableW
        #define LlDbGetMasterTableO LlDbGetMasterTableA
@@ -5847,7 +5884,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbSetMasterTableW
        #define LlDbGetMasterTable LlDbGetMasterTableA
        #define LlDbGetMasterTableO LlDbGetMasterTableW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbGetMasterTableA
 	(
@@ -5857,8 +5894,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbGetMasterTableA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbGetMasterTableW
 	(
@@ -5868,7 +5905,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbGetMasterTableW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlXSetExportParameter LlXSetExportParameterW
        #define LlXSetExportParameterO LlXSetExportParameterA
@@ -5876,7 +5913,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbGetMasterTableW
        #define LlXSetExportParameter LlXSetExportParameterA
        #define LlXSetExportParameterO LlXSetExportParameterW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlXSetExportParameterA
 	(
@@ -5887,8 +5924,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlXSetExportParameterA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlXSetExportParameterW
 	(
@@ -5899,7 +5936,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlXSetExportParameterW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlXGetExportParameter LlXGetExportParameterW
        #define LlXGetExportParameterO LlXGetExportParameterA
@@ -5907,7 +5944,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlXSetExportParameterW
        #define LlXGetExportParameter LlXGetExportParameterA
        #define LlXGetExportParameterO LlXGetExportParameterW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlXGetExportParameterA
 	(
@@ -5919,8 +5956,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlXGetExportParameterA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlXGetExportParameterW
 	(
@@ -5932,7 +5969,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlXGetExportParameterW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlXlatName LlXlatNameW
        #define LlXlatNameO LlXlatNameA
@@ -5940,7 +5977,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlXGetExportParameterW
        #define LlXlatName LlXlatNameA
        #define LlXlatNameO LlXlatNameW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlXlatNameA
 	(
@@ -5951,8 +5988,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlXlatNameA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlXlatNameW
 	(
@@ -5963,7 +6000,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlXlatNameW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDefineVariableVar LlDefineVariableVarW
        #define LlDefineVariableVarO LlDefineVariableVarA
@@ -5971,7 +6008,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlXlatNameW
        #define LlDefineVariableVar LlDefineVariableVarA
        #define LlDefineVariableVarO LlDefineVariableVarW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableVarA
 	(
@@ -5983,8 +6020,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableVarA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableVarW
 	(
@@ -5996,7 +6033,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableVarW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDefineFieldVar LlDefineFieldVarW
        #define LlDefineFieldVarO LlDefineFieldVarA
@@ -6004,7 +6041,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineVariableVarW
        #define LlDefineFieldVar LlDefineFieldVarA
        #define LlDefineFieldVarO LlDefineFieldVarW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldVarA
 	(
@@ -6016,8 +6053,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldVarA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldVarW
 	(
@@ -6029,7 +6066,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldVarW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDefineChartFieldVar LlDefineChartFieldVarW
        #define LlDefineChartFieldVarO LlDefineChartFieldVarA
@@ -6037,7 +6074,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineFieldVarW
        #define LlDefineChartFieldVar LlDefineChartFieldVarA
        #define LlDefineChartFieldVarO LlDefineChartFieldVarW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineChartFieldVarA
 	(
@@ -6049,8 +6086,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineChartFieldVarA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDefineChartFieldVarW
 	(
@@ -6062,7 +6099,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineChartFieldVarW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDesignerProhibitEditingObject LlDesignerProhibitEditingObjectW
        #define LlDesignerProhibitEditingObjectO LlDesignerProhibitEditingObjectA
@@ -6070,7 +6107,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDefineChartFieldVarW
        #define LlDesignerProhibitEditingObject LlDesignerProhibitEditingObjectA
        #define LlDesignerProhibitEditingObjectO LlDesignerProhibitEditingObjectW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDesignerProhibitEditingObjectA
 	(
@@ -6079,8 +6116,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerProhibitEditingObjectA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDesignerProhibitEditingObjectW
 	(
@@ -6089,7 +6126,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerProhibitEditingObjectW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetUsedIdentifiers LlGetUsedIdentifiersW
        #define LlGetUsedIdentifiersO LlGetUsedIdentifiersA
@@ -6097,7 +6134,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerProhibitEditingObjectW
        #define LlGetUsedIdentifiers LlGetUsedIdentifiersA
        #define LlGetUsedIdentifiersO LlGetUsedIdentifiersW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetUsedIdentifiersA
 	(
@@ -6108,8 +6145,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetUsedIdentifiersA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetUsedIdentifiersW
 	(
@@ -6136,7 +6173,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlInternalDetachApp
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetUserSectionData LlGetUserSectionDataW
        #define LlGetUserSectionDataO LlGetUserSectionDataA
@@ -6144,7 +6181,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlInternalDetachApp
        #define LlGetUserSectionData LlGetUserSectionDataA
        #define LlGetUserSectionDataO LlGetUserSectionDataW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetUserSectionDataA
 	(
@@ -6154,8 +6191,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetUserSectionDataA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetUserSectionDataW
 	(
@@ -6173,7 +6210,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprUpdateCollectionForLlX
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlExprGetUsedVarsEx LlExprGetUsedVarsExW
        #define LlExprGetUsedVarsExO LlExprGetUsedVarsExA
@@ -6181,7 +6218,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprUpdateCollectionForLlX
        #define LlExprGetUsedVarsEx LlExprGetUsedVarsExA
        #define LlExprGetUsedVarsExO LlExprGetUsedVarsExW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlExprGetUsedVarsExA
 	(
@@ -6193,8 +6230,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprGetUsedVarsExA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlExprGetUsedVarsExW
 	(
@@ -6214,7 +6251,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDomGetProject
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDomGetProperty LlDomGetPropertyW
        #define LlDomGetPropertyO LlDomGetPropertyA
@@ -6222,7 +6259,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDomGetProject
        #define LlDomGetProperty LlDomGetPropertyA
        #define LlDomGetPropertyO LlDomGetPropertyW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDomGetPropertyA
 	(
@@ -6233,8 +6270,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDomGetPropertyA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDomGetPropertyW
 	(
@@ -6245,7 +6282,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDomGetPropertyW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDomSetProperty LlDomSetPropertyW
        #define LlDomSetPropertyO LlDomSetPropertyA
@@ -6253,7 +6290,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDomGetPropertyW
        #define LlDomSetProperty LlDomSetPropertyA
        #define LlDomSetPropertyO LlDomSetPropertyW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDomSetPropertyA
 	(
@@ -6263,8 +6300,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDomSetPropertyA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDomSetPropertyW
 	(
@@ -6274,7 +6311,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDomSetPropertyW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDomGetObject LlDomGetObjectW
        #define LlDomGetObjectO LlDomGetObjectA
@@ -6282,7 +6319,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDomSetPropertyW
        #define LlDomGetObject LlDomGetObjectA
        #define LlDomGetObjectO LlDomGetObjectW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDomGetObjectA
 	(
@@ -6292,8 +6329,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDomGetObjectA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDomGetObjectW
 	(
@@ -6320,7 +6357,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDomGetSubobject
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDomCreateSubobject LlDomCreateSubobjectW
        #define LlDomCreateSubobjectO LlDomCreateSubobjectA
@@ -6328,7 +6365,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDomGetSubobject
        #define LlDomCreateSubobject LlDomCreateSubobjectA
        #define LlDomCreateSubobjectO LlDomCreateSubobjectW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDomCreateSubobjectA
 	(
@@ -6339,8 +6376,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDomCreateSubobjectA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDomCreateSubobjectW
 	(
@@ -6368,7 +6405,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDomMoveSubobject
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlProjectOpen LlProjectOpenW
        #define LlProjectOpenO LlProjectOpenA
@@ -6376,7 +6413,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDomMoveSubobject
        #define LlProjectOpen LlProjectOpenA
        #define LlProjectOpenO LlProjectOpenW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlProjectOpenA
 	(
@@ -6387,8 +6424,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlProjectOpenA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlProjectOpenW
 	(
@@ -6399,7 +6436,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlProjectOpenW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlProjectSave LlProjectSaveW
        #define LlProjectSaveO LlProjectSaveA
@@ -6407,7 +6444,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlProjectOpenW
        #define LlProjectSave LlProjectSaveA
        #define LlProjectSaveO LlProjectSaveW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlProjectSaveA
 	(
@@ -6416,8 +6453,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlProjectSaveA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlProjectSaveW
 	(
@@ -6426,7 +6463,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlProjectSaveW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlProjectSaveCopyAs LlProjectSaveCopyAsW
        #define LlProjectSaveCopyAsO LlProjectSaveCopyAsA
@@ -6434,7 +6471,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlProjectSaveW
        #define LlProjectSaveCopyAs LlProjectSaveCopyAsA
        #define LlProjectSaveCopyAsO LlProjectSaveCopyAsW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlProjectSaveCopyAsA
 	(
@@ -6443,8 +6480,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlProjectSaveCopyAsA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlProjectSaveCopyAsW
 	(
@@ -6486,7 +6523,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlAssociatePreviewControl
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetErrortext LlGetErrortextW
        #define LlGetErrortextO LlGetErrortextA
@@ -6494,7 +6531,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlAssociatePreviewControl
        #define LlGetErrortext LlGetErrortextA
        #define LlGetErrortextO LlGetErrortextW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetErrortextA
 	(
@@ -6504,8 +6541,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetErrortextA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetErrortextW
 	(
@@ -6548,7 +6585,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerRefreshWorkspace
 	HLLJOB               hLlJob
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDesignerFileOpen LlDesignerFileOpenW
        #define LlDesignerFileOpenO LlDesignerFileOpenA
@@ -6556,7 +6593,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerRefreshWorkspace
        #define LlDesignerFileOpen LlDesignerFileOpenA
        #define LlDesignerFileOpenO LlDesignerFileOpenW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDesignerFileOpenA
 	(
@@ -6566,8 +6603,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerFileOpenA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDesignerFileOpenW
 	(
@@ -6577,7 +6614,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerFileOpenW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDesignerFileSave LlDesignerFileSaveW
        #define LlDesignerFileSaveO LlDesignerFileSaveA
@@ -6585,7 +6622,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerFileOpenW
        #define LlDesignerFileSave LlDesignerFileSaveA
        #define LlDesignerFileSaveO LlDesignerFileSaveW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDesignerFileSaveA
 	(
@@ -6594,8 +6631,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerFileSaveA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDesignerFileSaveW
 	(
@@ -6604,7 +6641,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerFileSaveW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDesignerAddAction LlDesignerAddActionW
        #define LlDesignerAddActionO LlDesignerAddActionA
@@ -6612,7 +6649,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerFileSaveW
        #define LlDesignerAddAction LlDesignerAddActionA
        #define LlDesignerAddActionO LlDesignerAddActionW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDesignerAddActionA
 	(
@@ -6627,8 +6664,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerAddActionA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDesignerAddActionW
 	(
@@ -6643,7 +6680,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerAddActionW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDesignerGetOptionString LlDesignerGetOptionStringW
        #define LlDesignerGetOptionStringO LlDesignerGetOptionStringA
@@ -6651,7 +6688,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerAddActionW
        #define LlDesignerGetOptionString LlDesignerGetOptionStringA
        #define LlDesignerGetOptionStringO LlDesignerGetOptionStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDesignerGetOptionStringA
 	(
@@ -6662,8 +6699,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerGetOptionStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDesignerGetOptionStringW
 	(
@@ -6674,7 +6711,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerGetOptionStringW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDesignerSetOptionString LlDesignerSetOptionStringW
        #define LlDesignerSetOptionStringO LlDesignerSetOptionStringA
@@ -6682,7 +6719,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerGetOptionStringW
        #define LlDesignerSetOptionString LlDesignerSetOptionStringA
        #define LlDesignerSetOptionStringO LlDesignerSetOptionStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDesignerSetOptionStringA
 	(
@@ -6692,8 +6729,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDesignerSetOptionStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDesignerSetOptionStringW
 	(
@@ -6708,7 +6745,7 @@ CMBT_LL_WINAPI HLLJOB   DLLPROC  LlJobOpenCopy
 	HLLJOB               hJob
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetProjectParameter LlGetProjectParameterW
        #define LlGetProjectParameterO LlGetProjectParameterA
@@ -6716,7 +6753,7 @@ CMBT_LL_WINAPI HLLJOB   DLLPROC  LlJobOpenCopy
        #define LlGetProjectParameter LlGetProjectParameterA
        #define LlGetProjectParameterO LlGetProjectParameterW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetProjectParameterA
 	(
@@ -6728,8 +6765,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetProjectParameterA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetProjectParameterW
 	(
@@ -6741,7 +6778,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetProjectParameterW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlConvertBLOBToString LlConvertBLOBToStringW
        #define LlConvertBLOBToStringO LlConvertBLOBToStringA
@@ -6749,7 +6786,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetProjectParameterW
        #define LlConvertBLOBToString LlConvertBLOBToStringA
        #define LlConvertBLOBToStringO LlConvertBLOBToStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlConvertBLOBToStringA
 	(
@@ -6761,8 +6798,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertBLOBToStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlConvertBLOBToStringW
 	(
@@ -6784,7 +6821,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertBLOBToBSTR
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlConvertStringToBLOB LlConvertStringToBLOBW
        #define LlConvertStringToBLOBO LlConvertStringToBLOBA
@@ -6792,7 +6829,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertBLOBToBSTR
        #define LlConvertStringToBLOB LlConvertStringToBLOBA
        #define LlConvertStringToBLOBO LlConvertStringToBLOBW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlConvertStringToBLOBA
 	(
@@ -6802,8 +6839,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertStringToBLOBA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlConvertStringToBLOBW
 	(
@@ -6813,7 +6850,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertStringToBLOBW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlConvertStreamToString LlConvertStreamToStringW
        #define LlConvertStreamToStringO LlConvertStreamToStringA
@@ -6821,7 +6858,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertStringToBLOBW
        #define LlConvertStreamToString LlConvertStreamToStringA
        #define LlConvertStreamToStringO LlConvertStreamToStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlConvertStreamToStringA
 	(
@@ -6832,8 +6869,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertStreamToStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlConvertStreamToStringW
 	(
@@ -6853,7 +6890,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertStreamToBSTR
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlConvertStringToStream LlConvertStringToStreamW
        #define LlConvertStringToStreamO LlConvertStringToStreamA
@@ -6861,7 +6898,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertStreamToBSTR
        #define LlConvertStringToStream LlConvertStringToStreamA
        #define LlConvertStringToStreamO LlConvertStringToStreamW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlConvertStringToStreamA
 	(
@@ -6870,8 +6907,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertStringToStreamA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlConvertStringToStreamW
 	(
@@ -6880,7 +6917,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertStringToStreamW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlConvertHGLOBALToString LlConvertHGLOBALToStringW
        #define LlConvertHGLOBALToStringO LlConvertHGLOBALToStringA
@@ -6888,7 +6925,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertStringToStreamW
        #define LlConvertHGLOBALToString LlConvertHGLOBALToStringA
        #define LlConvertHGLOBALToStringO LlConvertHGLOBALToStringW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlConvertHGLOBALToStringA
 	(
@@ -6899,8 +6936,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertHGLOBALToStringA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlConvertHGLOBALToStringW
 	(
@@ -6920,7 +6957,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertHGLOBALToBSTR
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlConvertStringToHGLOBAL LlConvertStringToHGLOBALW
        #define LlConvertStringToHGLOBALO LlConvertStringToHGLOBALA
@@ -6928,7 +6965,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertHGLOBALToBSTR
        #define LlConvertStringToHGLOBAL LlConvertStringToHGLOBALA
        #define LlConvertStringToHGLOBALO LlConvertStringToHGLOBALW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlConvertStringToHGLOBALA
 	(
@@ -6937,8 +6974,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlConvertStringToHGLOBALA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlConvertStringToHGLOBALW
 	(
@@ -6956,7 +6993,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlAztecEncode
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDbAddTableRelationEx LlDbAddTableRelationExW
        #define LlDbAddTableRelationExO LlDbAddTableRelationExA
@@ -6964,7 +7001,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlAztecEncode
        #define LlDbAddTableRelationEx LlDbAddTableRelationExA
        #define LlDbAddTableRelationExO LlDbAddTableRelationExW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableRelationExA
 	(
@@ -6978,8 +7015,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableRelationExA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableRelationExW
 	(
@@ -6993,7 +7030,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableRelationExW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDbAddTableSortOrderEx LlDbAddTableSortOrderExW
        #define LlDbAddTableSortOrderExO LlDbAddTableSortOrderExA
@@ -7001,7 +7038,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableRelationExW
        #define LlDbAddTableSortOrderEx LlDbAddTableSortOrderExA
        #define LlDbAddTableSortOrderExO LlDbAddTableSortOrderExW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableSortOrderExA
 	(
@@ -7013,8 +7050,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableSortOrderExA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableSortOrderExW
 	(
@@ -7026,7 +7063,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableSortOrderExW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetUsedIdentifiersEx LlGetUsedIdentifiersExW
        #define LlGetUsedIdentifiersExO LlGetUsedIdentifiersExA
@@ -7034,7 +7071,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableSortOrderExW
        #define LlGetUsedIdentifiersEx LlGetUsedIdentifiersExA
        #define LlGetUsedIdentifiersExO LlGetUsedIdentifiersExW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetUsedIdentifiersExA
 	(
@@ -7046,8 +7083,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetUsedIdentifiersExA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetUsedIdentifiersExW
 	(
@@ -7059,7 +7096,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetUsedIdentifiersExW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetTempFileName LlGetTempFileNameW
        #define LlGetTempFileNameO LlGetTempFileNameA
@@ -7067,7 +7104,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetUsedIdentifiersExW
        #define LlGetTempFileName LlGetTempFileNameA
        #define LlGetTempFileNameO LlGetTempFileNameW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetTempFileNameA
 	(
@@ -7079,8 +7116,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetTempFileNameA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetTempFileNameW
 	(
@@ -7105,7 +7142,7 @@ CMBT_LL_WINAPI HWND     DLLPROC  LlRTFEditorGetRTFControlHandle
 	HLLRTFOBJ            hRTF
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetDefaultPrinter LlGetDefaultPrinterW
        #define LlGetDefaultPrinterO LlGetDefaultPrinterA
@@ -7113,7 +7150,7 @@ CMBT_LL_WINAPI HWND     DLLPROC  LlRTFEditorGetRTFControlHandle
        #define LlGetDefaultPrinter LlGetDefaultPrinterA
        #define LlGetDefaultPrinterO LlGetDefaultPrinterW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetDefaultPrinterA
 	(
@@ -7125,8 +7162,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetDefaultPrinterA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetDefaultPrinterW
 	(
@@ -7138,7 +7175,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetDefaultPrinterW
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlLocAddDictionaryEntry LlLocAddDictionaryEntryW
        #define LlLocAddDictionaryEntryO LlLocAddDictionaryEntryA
@@ -7146,7 +7183,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetDefaultPrinterW
        #define LlLocAddDictionaryEntry LlLocAddDictionaryEntryA
        #define LlLocAddDictionaryEntryO LlLocAddDictionaryEntryW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlLocAddDictionaryEntryA
 	(
@@ -7158,8 +7195,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlLocAddDictionaryEntryA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlLocAddDictionaryEntryW
 	(
@@ -7195,7 +7232,7 @@ CMBT_LL_WINAPI UINT     DLLPROC  LlIsUILanguageAvailableLCID
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlDbAddTableEx LlDbAddTableExW
        #define LlDbAddTableExO LlDbAddTableExA
@@ -7203,7 +7240,7 @@ CMBT_LL_WINAPI UINT     DLLPROC  LlIsUILanguageAvailableLCID
        #define LlDbAddTableEx LlDbAddTableExA
        #define LlDbAddTableExO LlDbAddTableExW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableExA
 	(
@@ -7214,8 +7251,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableExA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlDbAddTableExW
 	(
@@ -7233,7 +7270,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlRTFEditorSetEventSink
 	PIUNKNOWN            pUnkEventSink
 	);
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlRTFSetTextEx LlRTFSetTextExW
        #define LlRTFSetTextExO LlRTFSetTextExA
@@ -7241,7 +7278,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlRTFEditorSetEventSink
        #define LlRTFSetTextEx LlRTFSetTextExA
        #define LlRTFSetTextExO LlRTFSetTextExW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlRTFSetTextExA
 	(
@@ -7252,8 +7289,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlRTFSetTextExA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlRTFSetTextExW
 	(
@@ -7353,7 +7390,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlUtilsStreamFromFile
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlGetProjectDescription LlGetProjectDescriptionW
        #define LlGetProjectDescriptionO LlGetProjectDescriptionA
@@ -7361,7 +7398,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlUtilsStreamFromFile
        #define LlGetProjectDescription LlGetProjectDescriptionA
        #define LlGetProjectDescriptionO LlGetProjectDescriptionW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetProjectDescriptionA
 	(
@@ -7372,8 +7409,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlGetProjectDescriptionA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlGetProjectDescriptionW
 	(
@@ -7393,7 +7430,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetCurrentTableFilter
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlExprTranslateToHostExpression LlExprTranslateToHostExpressionW
        #define LlExprTranslateToHostExpressionO LlExprTranslateToHostExpressionA
@@ -7401,7 +7438,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlPrintDbGetCurrentTableFilter
        #define LlExprTranslateToHostExpression LlExprTranslateToHostExpressionA
        #define LlExprTranslateToHostExpressionO LlExprTranslateToHostExpressionW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlExprTranslateToHostExpressionA
 	(
@@ -7414,8 +7451,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprTranslateToHostExpressionA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlExprTranslateToHostExpressionW
 	(
@@ -7524,7 +7561,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlUtilsGetProfContentsFromVariantInternal
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
    #ifdef UNICODE
        #define LlExprGetUsedFunctions LlExprGetUsedFunctionsW
        #define LlExprGetUsedFunctionsO LlExprGetUsedFunctionsA
@@ -7532,7 +7569,7 @@ CMBT_LL_WINAPI INT      DLLPROC  LlUtilsGetProfContentsFromVariantInternal
        #define LlExprGetUsedFunctions LlExprGetUsedFunctionsA
        #define LlExprGetUsedFunctionsO LlExprGetUsedFunctionsW
    #endif // UNICODE
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlExprGetUsedFunctionsA
 	(
@@ -7543,8 +7580,8 @@ CMBT_LL_WINAPI INT      DLLPROC  LlExprGetUsedFunctionsA
 	);
 #endif // WIN32
 
-#if defined(WIN32) && !defined(_NO_CMLL29APIDEFINES)
-#endif // WIN32, _NO_CMLL29APIDEFINES
+#if defined(WIN32) && !defined(_NO_CMLL30APIDEFINES)
+#endif // WIN32, _NO_CMLL30APIDEFINES
 #ifdef WIN32
 CMBT_LL_WINAPI INT      DLLPROC  LlExprGetUsedFunctionsW
 	(
@@ -7892,6 +7929,54 @@ CMBT_LL_WINAPI HLLEXPR  DLLPROC  LlExprParseEx
 	);
 #endif // WIN32
 
+CMBT_LL_WINAPI INT      DLLPROC  LlTokenProviderAdd
+	(
+	HLLJOB               hJob,
+	LPCWSTR              id,
+	PIUNKNOWN            ppI
+	);
+
+CMBT_LL_WINAPI INT      DLLPROC  LlTokenProviderRemove
+	(
+	HLLJOB               hJob,
+	LPCWSTR              id
+	);
+
+CMBT_LL_WINAPI INT      DLLPROC  LlGetAvailableTimeZones
+	(
+	PVARIANT             pvArray
+	);
+
+CMBT_LL_WINAPI INT      DLLPROC  LlGetAvailableFonts
+	(
+	HLLJOB               hJob,
+	PVARIANT             pvArray
+	);
+
+CMBT_LL_WINAPI INT      DLLPROC  LlRepositoryGetDrilldownItemList
+	(
+	HLLJOB               hLlJob,
+	LPCWSTR              pszRootTableID,
+	LPCWSTR              pszProjectType,
+	UINT32               nDrilldownType,
+	PVARIANT             pvArray
+	);
+
+CMBT_LL_WINAPI INT      DLLPROC  LlUtilsGetReportParameterNames
+	(
+	HLLJOB               hJob,
+	LPCWSTR              pszProjectFilename,
+	PVARIANT             pvArray
+	);
+
+CMBT_LL_WINAPI INT      DLLPROC  LlGetIdentifierHelpText
+	(
+	HLLJOB               hJob,
+	LPCWSTR              pszVarName,
+	LPWSTR               pszBuffer,
+	UINT                 nBufSize
+	);
+
 
 #ifdef __cplusplus
 }  // brace of extern "C"
@@ -7908,5 +7993,5 @@ CMBT_LL_WINAPI HLLEXPR  DLLPROC  LlExprParseEx
 
 #endif  /* #ifndef _RC_INVOKED_ */
 
-#endif  /* #ifndef _LL29_H */
+#endif  /* #ifndef _LL30_H */
 

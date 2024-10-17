@@ -8,7 +8,7 @@
   #pragma message("Die DLL muﬂ als Unicode-DLL compiliert werden!")
 #endif
 
-#include "CmbtLL29.h"
+#include "CmbtLL30.h"
 
 
 #if defined(_MSC_VER)

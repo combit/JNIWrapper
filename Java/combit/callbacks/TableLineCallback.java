@@ -3,7 +3,7 @@
 package combit.callbacks;
 
 // imports
-import combit.CmbtLL29;
+import combit.CmbtLL30;
 import java.awt.*; // important for the Rectangle in rcPaint
 
 /**
@@ -18,7 +18,7 @@ import java.awt.*; // important for the Rectangle in rcPaint
 * </p>
 *
 * @author Copyright (c) combit Software GmbH
-* @version 29.0
+* @version 30.0
 */
 
 public class TableLineCallback extends CallbackInfo
@@ -91,7 +91,7 @@ public class TableLineCallback extends CallbackInfo
   */
   public TableLineCallback(int hLlJob, int type, int paintDC, int refDC, Rectangle paint, int pageLine, int line, int lineDef, boolean zebra, Rectangle spacing)
   {
-    super(hLlJob, CmbtLL29.LL_CMND_TABLELINE);
+    super(hLlJob, CmbtLL30.LL_CMND_TABLELINE);
     type_ = type;
     paintDC_ = paintDC;
     refDC_ = refDC;

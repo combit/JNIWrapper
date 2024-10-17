@@ -3,7 +3,7 @@
 package combit.callbacks;
 
 // imports
-import combit.CmbtLL29;
+import combit.CmbtLL30;
 
 /**
 * Description: Allows the programmer to place additional output on the page. This is useful for printing labels, for example, as in this way you can "paint" additional information onto a page (page number, printout time, "demo" text, individual watermarks etc...).
@@ -15,7 +15,7 @@ import combit.CmbtLL29;
 * </p>
 *
 * @author Copyright (c) combit Software GmbH
-* @version 29.0
+* @version 30.0
 */
 
 public final class PageCallback extends CallbackInfo
@@ -56,7 +56,7 @@ public final class PageCallback extends CallbackInfo
   */
   public PageCallback(int hLlJob, boolean designerPreview, boolean preDraw, int refDC, int paintDC)
   {
-    super(hLlJob, CmbtLL29.LL_CMND_PAGE);
+    super(hLlJob, CmbtLL30.LL_CMND_PAGE);
     designerPreview_ = designerPreview;
     preDraw_ = preDraw;
     refDC_ = refDC;
