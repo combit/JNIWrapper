@@ -3,14 +3,14 @@
 package combit.callbacks;
 
 // imports
-import combit.CmbtLL30;
+import combit.CmbtLL31;
 
 /**
 * Description: Via this callback List & Label informs you about the task that has to be performed. 
 * This callback will always be called up in the context of the designer thread (this is the thread, from which LlDefineLayout() was called).
 * 
 * @author Copyright (c) combit Software GmbH
-* @version 30.0
+* @version 31.0
 */
 
 public class NtfyDesignerPrintJobCallback extends CallbackInfo
@@ -95,7 +95,7 @@ public class NtfyDesignerPrintJobCallback extends CallbackInfo
   public NtfyDesignerPrintJobCallback(int hLlJob, int userParam, String projectFileName, String originalProjectFileName,
    int pages, int function, int hWnd, int hEvent, String pszExportFormat, boolean bWithoutDialog)
   {
-    super(hLlJob, CmbtLL30.LL_NTFY_DESIGNERPRINTJOB);
+    super(hLlJob, CmbtLL31.LL_NTFY_DESIGNERPRINTJOB);
   	userParam_ = userParam;
   	projectFileName_ = projectFileName;
   	originalProjectFileName_ = originalProjectFileName;

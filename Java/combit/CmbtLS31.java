@@ -1,8 +1,8 @@
 //
 // Java Declaration File
-// constants and function definitions for combit List & Label 30
+// constants and function definitions for combit List & Label 31
 // Copyright (c) combit Software GmbH, Konstanz, Germany
-// Version: 30.000
+// Version: 31.000
 //
 
 package combit;
@@ -10,7 +10,7 @@ package combit;
 import combit.x86.*;
 import combit.x64.*;
 
-public final class CmbtLS30
+public final class CmbtLS31
   {
   // language constants
   public final static int CMBTLANG_DEFAULT     = -1;
@@ -64,6 +64,7 @@ public final class CmbtLS30
 
   // other constant declarations
   public final static int WM_USER			   	 = 1024;
+  public final static int LL_STGSYS_VERSION_LL18         = 2; // Internal use only
   public final static int LL_ERR_STG_NOSTORAGE                     = -1000; //
   public final static int LL_ERR_STG_BADVERSION                    = -1001; //
   public final static int LL_ERR_STG_READ                          = -1002; //
@@ -101,6 +102,8 @@ public final class CmbtLS30
   public final static int LS_OPTION_INPUTOBJECTSFINISHED           = 212; //
   public final static int LS_OPTION_HASHYPERLINKS                  = 213; //
   public final static int LS_OPTION_USED_PRINTERCOUNT 			= 214; // count of printers actually used (compares DEVMODEs etc)
+  public final static int LS_OPTION_JOB_GTC_COUNT         			= 215; // returns number of GTC pages, use this for each job, not with bOneJobTranslation
+  public final static int LS_OPTION_PRINT_OPTIMIZE_PRINTERS  	= 216; // need to be in job 0, r/o
   public final static int LS_OPTION_PAGENUMBER                     = 0; // page number of current page
   public final static int LS_OPTION_COPIES                         = 1; // number of copies (same for all pages at the moment)
   public final static int LS_OPTION_PRN_ORIENTATION                = 2; // orientation (DMORIENT_LANDSCAPE, DMORIENT_PORTRAIT)
@@ -117,9 +120,13 @@ public final class CmbtLS30
   public final static int LS_OPTION_PRN_PAPERTYPE                  = 13; //
   public final static int LS_OPTION_PRN_PAPERSIZE_X                = 14; //
   public final static int LS_OPTION_PRN_PAPERSIZE_Y                = 15; //
-  public final static int LS_OPTION_PRN_FORCE_PAPERSIZE            = 16; //
-  public final static int LS_OPTION_STARTNEWSHEET                  = 17; //
-  public final static int LS_OPTION_ISSUEINDEX                     = 18; //
+  public final static int LS_OPTION_PRN_FORCE_PAPERSIZE          = 16; //
+  public final static int LS_OPTION_STARTNEWSHEET                  	= 17; //
+  public final static int LS_OPTION_ISSUEINDEX                     			= 18; //
+  public final static int  LS_OPTION_STARTNEWJOB          				= 19;
+  public final static int LS_OPTION_PAGETYPE             					= 20; // 0=normal, 1=GTC
+  public final static int LS_OPTION_CONBINATIONPRINT_INDEX  	= 21; // r/o
+  public final static int LS_OPTION_CONBINATIONPRINT_COUNT 	= 22; // r/o
   public final static int LS_OPTION_PROJECTNAME                    = 100; // name of the original project (not page dependent)
   public final static int LS_OPTION_JOBNAME                        = 101; // name of the job (WindowTitle of LlPrintWithBoxStart()) (not page dependent)
   public final static int LS_OPTION_PRTNAME                        = 102; // deprecated!
@@ -244,7 +251,7 @@ public final class CmbtLS30
   public final static int LS_VIEWERCONTROL_RESET_ZOOM              = WM_USER+13; //
   public final static int LS_VIEWERCONTROL_SET_ZOOM_TWICE          = WM_USER+14; //
   public final static int LS_VIEWERCONTROL_SET_PAGE                = WM_USER+20; // wParam = page# (0..n-1)
-  public final static int LS_VIEWERCONTROL_GET_PAGE                = WM_USER+21; //
+  public final static int LS_VIEWERCONTROL_GET_PAGE                = WM_USER+21; // wParam = 0: currently selected page, wParam = 1: currently viewed top page in right pane
   public final static int LS_VIEWERCONTROL_GET_PAGECOUNT           = WM_USER+22; //
   public final static int LS_VIEWERCONTROL_GET_PAGECOUNT_FAXPAGES  = WM_USER+23; //
   public final static int LS_VIEWERCONTROL_GET_JOB                 = WM_USER+24; //
@@ -253,8 +260,11 @@ public final class CmbtLS30
   public final static int LS_VIEWERCONTROL_GET_ENABLED             = WM_USER+27; // wParam = ID
   public final static int LS_VCITEM_SEARCH_FIRST                   = 0; //
   public final static int LS_VCITEM_SEARCH_NEXT                    = 1; //
-  public final static int LS_VCITEM_SEARCH_PREV                    = 2; //
+  public final static int LS_VCITEM_SEARCH_OPTS                    = 2; //
+  public final static int LS_VCITEM_SEARCHACTIONMASK      = 0x00000fff;
   public final static int LS_VCITEM_SEARCHFLAG_CASEINSENSITIVE     = 0x8000; //
+  public final static int LS_VCITEM_SEARCHFLAG_UTF16      = 0x00004000;
+  public final static int LS_VCITEM_SEARCHFLAGMASK       = 0xfffff000;
   public final static int LS_VCITEM_SAVE_AS_FILE                   = 3; //
   public final static int LS_VCITEM_SEND_AS_MAIL                   = 4; //
   public final static int LS_VCITEM_SEND_AS_FAX                    = 5; //
@@ -275,13 +285,13 @@ public final class CmbtLS30
   public final static int LS_VCITEM_MOUSEMODE_SELECT = 20;
   public final static int LS_VIEWERCONTROL_GET_SEARCHSTATE         = WM_USER+28; // returns TRUE if search in progress
   public final static int LS_VIEWERCONTROL_SEARCH                  = WM_USER+29; // wParam = BOOL(bCaseSens), lParam=SearchText (NULL to stop)
-  public final static int LS_VIEWERCONTROL_GET_ENABLED_SEARCHPREV  = WM_USER+30; //
+  public final static int LS_VIEWERCONTROL_SEARCHDLGACTIVE  = WM_USER+30; // returns HANDLE to common search dialog if it is currently being shown, otherwise NULL
   public final static int LS_VIEWERCONTROL_PRINT_CURRENT           = WM_USER+31; // wParam = 0 (default printer), 1 (with printer selection)
   public final static int LS_VIEWERCONTROL_PRINT_ALL               = WM_USER+32; // wParam = 0 (default printer), 1 (with printer selection)
   public final static int LS_VIEWERCONTROL_PRINT_TO_FAX            = WM_USER+33; //
   public final static int LS_VIEWERCONTROL_UPDATE_TOOLBAR          = WM_USER+35; // if LS_OPTION_TOOLBAR is TRUE
   public final static int LS_VIEWERCONTROL_GET_TOOLBAR             = WM_USER+36; // if LS_OPTION_TOOLBAR is TRUE, returns window handle of toolbar
-  public final static int LS_VIEWERCONTROL_SAVE_TO_FILE            = WM_USER+37; //
+  public final static int LS_VIEWERCONTROL_SAVE_TO_FILE            = WM_USER+37; // if lParam is non-NULL, it is the export type ID
   public final static int LS_VIEWERCONTROL_SEND_AS_MAIL            = WM_USER+39; //
   public final static int LS_VIEWERCONTROL_SET_OPTIONSTR           = WM_USER+40; // see docs, wParam = (LPCTSTR)key, lParam = (LPCTSTR)value
   public final static int LS_VIEWERCONTROL_GET_OPTIONSTR           = WM_USER+41; // see docs, wParam = (LPCTSTR)key, lParam = (LPCTSTR)value
@@ -325,6 +335,7 @@ public final class CmbtLS30
   public final static int LS_VIEWERCONTROL_SELECTION_COPY = WM_USER+72; // lParam == &scLSSelectionOptions (null, or _pvText == null -> to clipboard)
   public final static int LS_VIEWERCONTROL_GET_HAS_SELECTION = WM_USER+73;
   public final static int LS_VIEWERCONTROL_SELECTION_SELECT = WM_USER+74; // wParam = page index#, -1 for all; lParam = 0 (select only this), 1 (add to selection)
+  public final static int LS_VIEWERCONTROL_GET_HASUNSAVEDINPUTOBJECTS = WM_USER+75; // reserved, internal
   public final static int LS_VIEWERCONTROL_NTFY_PAGELOADED = 1; // lParam = page#
   public final static int LS_VIEWERCONTROL_NTFY_UPDATETOOLBAR = 2; // called when control does NOT have an own toolbar. lParam points to an ILSViewerToolbarInfoProxy interface
   public final static int LS_VIEWERCONTROL_NTFY_PRINT_START = 3; // lParam = &scViewerControlPrintData, return 1 to abort print
@@ -361,6 +372,7 @@ public final class CmbtLS30
   public final static int LS_VIEWERCONTROL_NTFY_RESETSEARCHSTATE = 36; //reserved, internal
   public final static int LS_VIEWERCONTROL_NTFY_SELECTION_CHANGED = 37;
   public final static int LS_VIEWERCONTROL_QUEST_DYNAMICREPORTPARAMETERS = 38;
+  public final static int LS_VIEWERCONTROL_QUEST_IENUM_AUTHTOKENPROVIDER  = 39;
   public final static int LS_VIEWERCONTROL_OPEN_STORAGE_IN_NEW_WINDOW = 32; // lParam = &scOpenStorageInNewWindow. Reply with 1 if done.
   public final static int LL_NTFY_VIEWERDRILLDOWN = 67; // defined in LL !!! reserved constant!
   public final static int LS_MAILCONFIG_GLOBAL = 0x0001;
@@ -369,6 +381,7 @@ public final class CmbtLS30
   public final static int LS_DIO_CHECKBOX = 0;
   public final static int LS_DIO_PUSHBUTTON = 1;
   public final static int LS_DIO_FLAG_READONLY = 0x0001;
+  public final static int LS_DIO_FLAG_SUPPRESS_THEMING    = 0x0002;
   public final static int LS_GOTFG_FLAG_REORDER = 0x00000001;
   public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_NONE = 0x0000;
   public final static int LSMAILVIEW_HTMLRIGHT_ALLOW_NEW_WINDOW = 0x0001;
@@ -389,6 +402,8 @@ public final class CmbtLS30
   public final static int LS_CONVERT_IS_NOPERPIXELALPHA = 0x00000010;
   public final static int LS_CONVERT_IS_SRCCOPY = 0x00000020;
   public final static int LS_CONVERT_IS_NO_JPEGCONVERSION = 0x00000040; // for PDF Conversion (PDF export handles these itself)
+  public final static int LS_CONVERT_IS_QUALITY_MASK     = 0xff000000; // 75 if not given
+  public final static int LS_CONVERT_IS_QUALITY_SHIFT     = 24;
   public final static int LS_STGPRINTEX_OPTION_FORCE_SIMPLEX = 0x00000001;
   public final static int LS_STGPRINTEX_OPTION_FORCE_DUPLEX_VERT = 0x00000002;
   public final static int LS_STGPRINTEX_OPTION_FORCE_DUPLEX_HORZ = 0x00000003;
@@ -397,8 +412,8 @@ public final class CmbtLS30
   public final static int LS_STGPRINTEX_OPTION_FORCE_LOGPAGE = 0x00000008;
   public final static int LS_STGPRINTEX_OPTIONMASK_PAGEAREA = 0x0000000C;
   
-  private CmbtLS3032 LS30_32 = null;
-  private CmbtLS3064 LS30_64 = null;
+  private CmbtLS3132 LS31_32 = null;
+  private CmbtLS3164 LS31_64 = null;
   
   public long LlStgsysStorageOpen
 	(
@@ -408,13 +423,13 @@ public final class CmbtLS30
 		boolean              OneJobTranslation
 	)
 	{
-		if(LS30_32 != null)
+		if(LS31_32 != null)
 		{
-			return LS30_32.LlStgsysStorageOpen(Filename, TempPath, ReadOnly, OneJobTranslation);
+			return LS31_32.LlStgsysStorageOpen(Filename, TempPath, ReadOnly, OneJobTranslation);
 		}
-		else if(LS30_64 != null)
+		else if(LS31_64 != null)
 		{
-			return LS30_64.LlStgsysStorageOpen(Filename, TempPath, ReadOnly, OneJobTranslation);
+			return LS31_64.LlStgsysStorageOpen(Filename, TempPath, ReadOnly, OneJobTranslation);
 		}
 		else
 		{
@@ -427,13 +442,13 @@ public final class CmbtLS30
 	long                  Stg
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  LS30_32.LlStgsysStorageClose((int)Stg);
+		  LS31_32.LlStgsysStorageClose((int)Stg);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  LS30_64.LlStgsysStorageClose(Stg);
+		  LS31_64.LlStgsysStorageClose(Stg);
 	  }
 	  else
 	  {
@@ -446,13 +461,13 @@ public final class CmbtLS30
 	long                  Stg
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysGetAPIVersion((int)Stg);
+		  return LS31_32.LlStgsysGetAPIVersion((int)Stg);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysGetAPIVersion(Stg);
+		  return LS31_64.LlStgsysGetAPIVersion(Stg);
 	  }
 	  else
 	  {
@@ -465,13 +480,13 @@ public final class CmbtLS30
 	long                  Stg
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysGetFileVersion((int)Stg);
+		  return LS31_32.LlStgsysGetFileVersion((int)Stg);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysGetFileVersion(Stg);
+		  return LS31_64.LlStgsysGetFileVersion(Stg);
 	  }
 	  else
 	  {
@@ -487,13 +502,13 @@ public final class CmbtLS30
 	StringBuffer        Buffer
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysGetFilename((int)Stg, Job, File, Buffer);
+		  return LS31_32.LlStgsysGetFilename((int)Stg, Job, File, Buffer);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysGetFilename(Stg, Job, File, Buffer);
+		  return LS31_64.LlStgsysGetFilename(Stg, Job, File, Buffer);
 	  }
 	  else
 	  {
@@ -506,13 +521,13 @@ public final class CmbtLS30
 	long                  Stg
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysGetJobCount((int)Stg);
+		  return LS31_32.LlStgsysGetJobCount((int)Stg);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysGetJobCount(Stg);
+		  return LS31_64.LlStgsysGetJobCount(Stg);
 	  }
 	  else
 	  {
@@ -526,13 +541,13 @@ public final class CmbtLS30
 	int                  Job
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysSetJob((int)Stg, Job);
+		  return LS31_32.LlStgsysSetJob((int)Stg, Job);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysSetJob(Stg, Job);
+		  return LS31_64.LlStgsysSetJob(Stg, Job);
 	  }
 	  else
 	  {
@@ -545,13 +560,13 @@ public final class CmbtLS30
 	long                  Stg
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysGetJob((int)Stg);
+		  return LS31_32.LlStgsysGetJob((int)Stg);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysGetJob(Stg);
+		  return LS31_64.LlStgsysGetJob(Stg);
 	  }
 	  else
 	  {
@@ -564,13 +579,13 @@ public final class CmbtLS30
 	long                  Stg
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysGetPageCount((int)Stg);
+		  return LS31_32.LlStgsysGetPageCount((int)Stg);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysGetPageCount(Stg);
+		  return LS31_64.LlStgsysGetPageCount(Stg);
 	  }
 	  else
 	  {
@@ -584,13 +599,13 @@ public final class CmbtLS30
 	int                  Option
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysGetJobOptionValue((int)Stg, Option);
+		  return LS31_32.LlStgsysGetJobOptionValue((int)Stg, Option);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysGetJobOptionValue(Stg, Option);
+		  return LS31_64.LlStgsysGetJobOptionValue(Stg, Option);
 	  }
 	  else
 	  {
@@ -605,13 +620,13 @@ public final class CmbtLS30
 	int                  Option
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysGetPageOptionValue((int)Stg, PageIndex, Option);
+		  return LS31_32.LlStgsysGetPageOptionValue((int)Stg, PageIndex, Option);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysGetPageOptionValue(Stg, PageIndex, Option);
+		  return LS31_64.LlStgsysGetPageOptionValue(Stg, PageIndex, Option);
 	  }
 	  else
 	  {
@@ -627,13 +642,13 @@ public final class CmbtLS30
 	StringBuffer         Buffer
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysGetPageOptionString((int)Stg, PageIndex, Option, Buffer);
+		  return LS31_32.LlStgsysGetPageOptionString((int)Stg, PageIndex, Option, Buffer);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysGetPageOptionString(Stg, PageIndex, Option, Buffer);
+		  return LS31_64.LlStgsysGetPageOptionString(Stg, PageIndex, Option, Buffer);
 	  }
 	  else
 	  {
@@ -649,13 +664,13 @@ public final class CmbtLS30
 	final String         Buffer
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysSetPageOptionString((int)Stg, PageIndex, Option, Buffer);
+		  return LS31_32.LlStgsysSetPageOptionString((int)Stg, PageIndex, Option, Buffer);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysSetPageOptionString(Stg, PageIndex, Option, Buffer);
+		  return LS31_64.LlStgsysSetPageOptionString(Stg, PageIndex, Option, Buffer);
 	  }
 	  else
 	  {
@@ -669,13 +684,13 @@ public final class CmbtLS30
 	long                  StgToAppend
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysAppend((int)Stg, (int)StgToAppend);
+		  return LS31_32.LlStgsysAppend((int)Stg, (int)StgToAppend);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysAppend(Stg, StgToAppend);
+		  return LS31_64.LlStgsysAppend(Stg, StgToAppend);
 	  }
 	  else
 	  {
@@ -689,13 +704,13 @@ public final class CmbtLS30
 	int                  PageIndex
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysDeleteJob((int)Stg, PageIndex);
+		  return LS31_32.LlStgsysDeleteJob((int)Stg, PageIndex);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysDeleteJob(Stg, PageIndex);
+		  return LS31_64.LlStgsysDeleteJob(Stg, PageIndex);
 	  }
 	  else
 	  {
@@ -709,13 +724,13 @@ public final class CmbtLS30
 	int                  PageIndex
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysDeletePage((int)Stg, PageIndex);
+		  return LS31_32.LlStgsysDeletePage((int)Stg, PageIndex);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysDeletePage(Stg, PageIndex);
+		  return LS31_64.LlStgsysDeletePage(Stg, PageIndex);
 	  }
 	  else
 	  {
@@ -729,13 +744,13 @@ public final class CmbtLS30
 	int                  PageIndex
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysGetPageMetafile((int)Stg, PageIndex);
+		  return LS31_32.LlStgsysGetPageMetafile((int)Stg, PageIndex);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysGetPageMetafile(Stg, PageIndex);
+		  return LS31_64.LlStgsysGetPageMetafile(Stg, PageIndex);
 	  }
 	  else
 	  {
@@ -748,13 +763,13 @@ public final class CmbtLS30
 	long                  MF
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysDestroyMetafile((int)MF);
+		  return LS31_32.LlStgsysDestroyMetafile((int)MF);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysDestroyMetafile(MF);
+		  return LS31_64.LlStgsysDestroyMetafile(MF);
 	  }
 	  else
 	  {
@@ -767,13 +782,13 @@ public final class CmbtLS30
 	long                  Stg
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysGetLastError((int)Stg);
+		  return LS31_32.LlStgsysGetLastError((int)Stg);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysGetLastError(Stg);
+		  return LS31_64.LlStgsysGetLastError(Stg);
 	  }
 	  else
 	  {
@@ -786,13 +801,13 @@ public final class CmbtLS30
 	long                  Stg
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysDeleteFiles((int)Stg);
+		  return LS31_32.LlStgsysDeleteFiles((int)Stg);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysDeleteFiles(Stg);
+		  return LS31_64.LlStgsysDeleteFiles(Stg);
 	  }
 	  else
 	  {
@@ -813,13 +828,13 @@ public final class CmbtLS30
 	long				WndParent
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysPrint((int)Stg, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, (int)WndParent);
+		  return LS31_32.LlStgsysPrint((int)Stg, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, (int)WndParent);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysPrint(Stg, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, WndParent);
+		  return LS31_64.LlStgsysPrint(Stg, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, WndParent);
 	  }
 	  else
 	  {
@@ -841,13 +856,13 @@ public final class CmbtLS30
 	long                 WndParent
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysStoragePrint(Filename, TempPath, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, (int)WndParent);
+		  return LS31_32.LlStgsysStoragePrint(Filename, TempPath, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, (int)WndParent);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysStoragePrint(Filename, TempPath, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, WndParent);
+		  return LS31_64.LlStgsysStoragePrint(Filename, TempPath, PrinterName1, PrinterName2, StartPageIndex, EndPageIndex, Copies, Flags, Message, WndParent);
 	  }
 	  else
 	  {
@@ -860,13 +875,13 @@ public final class CmbtLS30
 	boolean              On
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  LS30_32.LsSetDebug(On);
+		  LS31_32.LsSetDebug(On);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  LS30_64.LsSetDebug(On);
+		  LS31_64.LsSetDebug(On);
 	  }
 	  else
 	  {
@@ -878,13 +893,13 @@ public final class CmbtLS30
 	(
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsGetViewerControlClassName();
+		  return LS31_32.LsGetViewerControlClassName();
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsGetViewerControlClassName();
+		  return LS31_64.LsGetViewerControlClassName();
 	  }
 	  else
 	  {
@@ -896,13 +911,13 @@ public final class CmbtLS30
 	(
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsGetViewerControlDefaultMessage();
+		  return LS31_32.LsGetViewerControlDefaultMessage();
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsGetViewerControlDefaultMessage();
+		  return LS31_64.LsGetViewerControlDefaultMessage();
 	  }
 	  else
 	  {
@@ -916,13 +931,13 @@ public final class CmbtLS30
 	long                 ParentControl
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsCreateViewerControlOverParent((int)Stg, (int)ParentControl);
+		  return LS31_32.LsCreateViewerControlOverParent((int)Stg, (int)ParentControl);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsCreateViewerControlOverParent(Stg, ParentControl);
+		  return LS31_64.LsCreateViewerControlOverParent(Stg, ParentControl);
 	  }
 	  else
 	  {
@@ -937,13 +952,13 @@ public final class CmbtLS30
 	StringBuffer         Buffer
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysGetJobOptionStringEx((int)Stg, Key, Buffer);
+		  return LS31_32.LlStgsysGetJobOptionStringEx((int)Stg, Key, Buffer);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysGetJobOptionStringEx(Stg, Key, Buffer);
+		  return LS31_64.LlStgsysGetJobOptionStringEx(Stg, Key, Buffer);
 	  }
 	  else
 	  {
@@ -958,13 +973,13 @@ public final class CmbtLS30
 	final String         Buffer
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysSetJobOptionStringEx((int)Stg, Key, Buffer);
+		  return LS31_32.LlStgsysSetJobOptionStringEx((int)Stg, Key, Buffer);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysSetJobOptionStringEx(Stg, Key, Buffer);
+		  return LS31_64.LlStgsysSetJobOptionStringEx(Stg, Key, Buffer);
 	  }
 	  else
 	  {
@@ -979,13 +994,13 @@ public final class CmbtLS30
 	final String         Format
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsConversionJobOpen((int)WndParent, Language, Format);
+		  return LS31_32.LsConversionJobOpen((int)WndParent, Language, Format);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsConversionJobOpen(WndParent, Language, Format);
+		  return LS31_64.LsConversionJobOpen(WndParent, Language, Format);
 	  }
 	  else
 	  {
@@ -998,13 +1013,13 @@ public final class CmbtLS30
 	long                  CnvJob
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsConversionJobClose((int)CnvJob);
+		  return LS31_32.LsConversionJobClose((int)CnvJob);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsConversionJobClose(CnvJob);
+		  return LS31_64.LsConversionJobClose(CnvJob);
 	  }
 	  else
 	  {
@@ -1018,13 +1033,13 @@ public final class CmbtLS30
 	long                 WndParent
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsConversionConfigurationDlg((int)CnvJob, (int)WndParent);
+		  return LS31_32.LsConversionConfigurationDlg((int)CnvJob, (int)WndParent);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsConversionConfigurationDlg(CnvJob, WndParent);
+		  return LS31_64.LsConversionConfigurationDlg(CnvJob, WndParent);
 	  }
 	  else
 	  {
@@ -1039,13 +1054,13 @@ public final class CmbtLS30
 	final String         Data
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsConversionSetOptionString((int)CnvJob, Key, Data);
+		  return LS31_32.LsConversionSetOptionString((int)CnvJob, Key, Data);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsConversionSetOptionString(CnvJob, Key, Data);
+		  return LS31_64.LsConversionSetOptionString(CnvJob, Key, Data);
 	  }
 	  else
 	  {
@@ -1060,13 +1075,13 @@ public final class CmbtLS30
 	StringBuffer         Buffer
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsConversionGetOptionString((int)CnvJob, Key, Buffer);
+		  return LS31_32.LsConversionGetOptionString((int)CnvJob, Key, Buffer);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsConversionGetOptionString(CnvJob, Key, Buffer);
+		  return LS31_64.LsConversionGetOptionString(CnvJob, Key, Buffer);
 	  }
 	  else
 	  {
@@ -1081,13 +1096,13 @@ public final class CmbtLS30
 	final String         Filename
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsConversionConvertEMFToFile((int)CnvJob, (int)EMF, Filename);
+		  return LS31_32.LsConversionConvertEMFToFile((int)CnvJob, (int)EMF, Filename);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsConversionConvertEMFToFile(CnvJob, EMF, Filename);
+		  return LS31_64.LsConversionConvertEMFToFile(CnvJob, EMF, Filename);
 	  }
 	  else
 	  {
@@ -1102,13 +1117,13 @@ public final class CmbtLS30
 	final String		Filename
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsConversionConvertStgToFile((int)CnvJob, (int)Stg, Filename);
+		  return LS31_32.LsConversionConvertStgToFile((int)CnvJob, (int)Stg, Filename);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsConversionConvertStgToFile(CnvJob, Stg, Filename);
+		  return LS31_64.LsConversionConvertStgToFile(CnvJob, Stg, Filename);
 	  }
 	  else
 	  {
@@ -1123,13 +1138,13 @@ public final class CmbtLS30
 	final String         Format
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysStorageConvert(StgFilename, DstFilename, Format);
+		  return LS31_32.LlStgsysStorageConvert(StgFilename, DstFilename, Format);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysStorageConvert(StgFilename, DstFilename, Format);
+		  return LS31_64.LlStgsysStorageConvert(StgFilename, DstFilename, Format);
 	  }
 	  else
 	  {
@@ -1144,13 +1159,13 @@ public final class CmbtLS30
 	final String         Format
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LlStgsysConvert((int)Stg, DstFilename, Format);
+		  return LS31_32.LlStgsysConvert((int)Stg, DstFilename, Format);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LlStgsysConvert(Stg, DstFilename, Format);
+		  return LS31_64.LlStgsysConvert(Stg, DstFilename, Format);
 	  }
 	  else
 	  {
@@ -1166,13 +1181,13 @@ public final class CmbtLS30
 	int                  Language
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsMailConfigurationDialog((int)WndParent, Subkey, Flags, Language);
+		  return LS31_32.LsMailConfigurationDialog((int)WndParent, Subkey, Flags, Language);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsMailConfigurationDialog(WndParent, Subkey, Flags, Language);
+		  return LS31_64.LsMailConfigurationDialog(WndParent, Subkey, Flags, Language);
 	  }
 	  else
 	  {
@@ -1185,13 +1200,13 @@ public final class CmbtLS30
 	int                  Language
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsMailJobOpen(Language);
+		  return LS31_32.LsMailJobOpen(Language);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsMailJobOpen(Language);
+		  return LS31_64.LsMailJobOpen(Language);
 	  }
 	  else
 	  {
@@ -1204,13 +1219,13 @@ public final class CmbtLS30
 	long                  Job
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsMailJobClose((int)Job);
+		  return LS31_32.LsMailJobClose((int)Job);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsMailJobClose(Job);
+		  return LS31_64.LsMailJobClose(Job);
 	  }
 	  else
 	  {
@@ -1225,13 +1240,13 @@ public final class CmbtLS30
 	final String         Value
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsMailSetOptionString((int)Job, Key, Value);
+		  return LS31_32.LsMailSetOptionString((int)Job, Key, Value);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsMailSetOptionString(Job, Key, Value);
+		  return LS31_64.LsMailSetOptionString(Job, Key, Value);
 	  }
 	  else
 	  {
@@ -1246,13 +1261,13 @@ public final class CmbtLS30
 	StringBuffer         Buffer
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsMailGetOptionString((int)Job, Key, Buffer);
+		  return LS31_32.LsMailGetOptionString((int)Job, Key, Buffer);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsMailGetOptionString(Job, Key, Buffer);
+		  return LS31_64.LsMailGetOptionString(Job, Key, Buffer);
 	  }
 	  else
 	  {
@@ -1266,13 +1281,13 @@ public final class CmbtLS30
 	long                  WndParent
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsMailSendFile((int)Job, (int)WndParent);
+		  return LS31_32.LsMailSendFile((int)Job, (int)WndParent);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsMailSendFile(Job, WndParent);
+		  return LS31_64.LsMailSendFile(Job, WndParent);
 	  }
 	  else
 	  {
@@ -1288,13 +1303,13 @@ public final class CmbtLS30
 	int                  TicksMS
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsProfileStart((int)Thread, Descr, Filename, TicksMS);
+		  return LS31_32.LsProfileStart((int)Thread, Descr, Filename, TicksMS);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsProfileStart(Thread, Descr, Filename, TicksMS);
+		  return LS31_64.LsProfileStart(Thread, Descr, Filename, TicksMS);
 	  }
 	  else
 	  {
@@ -1307,13 +1322,13 @@ public final class CmbtLS30
 	long                  Thread
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  LS30_32.LsProfileEnd((int)Thread);
+		  LS31_32.LsProfileEnd((int)Thread);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  LS30_64.LsProfileEnd(Thread);
+		  LS31_64.LsProfileEnd(Thread);
 	  }
 	  else
 	  {
@@ -1329,13 +1344,13 @@ public final class CmbtLS30
 	int                  Language
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsMailView((int)WndParent, MailFile, Rights, Language);
+		  return LS31_32.LsMailView((int)WndParent, MailFile, Rights, Language);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsMailView(WndParent, MailFile, Rights, Language);
+		  return LS31_64.LsMailView(WndParent, MailFile, Rights, Language);
 	  }
 	  else
 	  {
@@ -1349,13 +1364,13 @@ public final class CmbtLS30
 	int                  Flags
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsInternalCreateViewerControlOverParent13((int)ParentControl, Flags);
+		  return LS31_32.LsInternalCreateViewerControlOverParent13((int)ParentControl, Flags);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsInternalCreateViewerControlOverParent13(ParentControl, Flags);
+		  return LS31_64.LsInternalCreateViewerControlOverParent13(ParentControl, Flags);
 	  }
 	  else
 	  {
@@ -1368,13 +1383,13 @@ public final class CmbtLS30
 	long                 ParentControl
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsInternalGetViewerControlFromParent13((int)ParentControl);
+		  return LS31_32.LsInternalGetViewerControlFromParent13((int)ParentControl);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsInternalGetViewerControlFromParent13(ParentControl);
+		  return LS31_64.LsInternalGetViewerControlFromParent13(ParentControl);
 	  }
 	  else
 	  {
@@ -1387,13 +1402,13 @@ public final class CmbtLS30
 	int                  Mode
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  LS30_32.LsSetDlgboxMode(Mode);
+		  LS31_32.LsSetDlgboxMode(Mode);
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  LS30_64.LsSetDlgboxMode(Mode);
+		  LS31_64.LsSetDlgboxMode(Mode);
 	  }
 	  else
 	  {
@@ -1405,13 +1420,13 @@ public final class CmbtLS30
 	(
 	)
 	{
-	  if(LS30_32 != null)
+	  if(LS31_32 != null)
 	  {
-		  return LS30_32.LsGetDlgboxMode();
+		  return LS31_32.LsGetDlgboxMode();
 	  }
-	  else if(LS30_64 != null)
+	  else if(LS31_64 != null)
 	  {
-		  return LS30_64.LsGetDlgboxMode();
+		  return LS31_64.LsGetDlgboxMode();
 	  }
 	  else
 	  {
@@ -1419,16 +1434,16 @@ public final class CmbtLS30
 	  }
 	}
 
-  public CmbtLS30()
+  public CmbtLS31()
   {
 	String vmArch = System.getProperty("sun.arch.data.model");
 	if(vmArch.compareTo("32") == 0)
 	{
-		LS30_32 = new CmbtLS3032();
+		LS31_32 = new CmbtLS3132();
 	}
 	else if(vmArch.compareTo("64") == 0)
 	{
-		LS30_64 = new CmbtLS3064();
+		LS31_64 = new CmbtLS3164();
 	}
 	else
 	{

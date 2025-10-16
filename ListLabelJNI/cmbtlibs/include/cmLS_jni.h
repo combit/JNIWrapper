@@ -7,7 +7,7 @@
 
 #if defined(_WIN64)
 	
-	#define FCT(f) __GLUE3(Java_combit_x64_CmbtLS30, 64, f)
+	#define FCT(f) __GLUE3(Java_combit_x64_CmbtLS31, 64, f)
 
 	typedef jlong jHLLSTG;			// HLLSTG
 	typedef jlong jHANDLE;			// HANDLE
@@ -19,7 +19,7 @@
 
 #else
 
-	#define FCT(f) __GLUE3(Java_combit_x86_CmbtLS30, 32, f)
+	#define FCT(f) __GLUE3(Java_combit_x86_CmbtLS31, 32, f)
 
 	typedef jint jHLLSTG;
 	typedef jint jHANDLE;			// HANDLE
