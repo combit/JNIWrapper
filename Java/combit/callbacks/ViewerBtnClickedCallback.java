@@ -3,7 +3,7 @@
 package combit.callbacks;
 
 // imports
-import combit.CmbtLL31;
+import combit.CmbtLL32;
 
 /**
 * Description: Notification that a button has been pressed in the real data preview.
@@ -12,7 +12,7 @@ import combit.CmbtLL31;
 * </p>
 *
 * @author Copyright (c) combit Software GmbH
-* @version 31.0
+* @version 32.0
 */
 
 public class ViewerBtnClickedCallback extends CallbackInfo
@@ -36,7 +36,7 @@ public class ViewerBtnClickedCallback extends CallbackInfo
   */
   public ViewerBtnClickedCallback(int hLlJob, int buttonID)
   {
-    super(hLlJob, CmbtLL31.LL_NTFY_VIEWERBTNCLICKED);
+    super(hLlJob, CmbtLL32.LL_NTFY_VIEWERBTNCLICKED);
     buttonID_ = buttonID;
     lResult_ = 0;
   }

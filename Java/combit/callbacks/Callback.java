@@ -6,7 +6,7 @@ package combit.callbacks;
 * Description: Interface for List & Label callbacks.
 *
 * @author Copyright (c) combit Software GmbH
-* @version 31.0
+* @version 32.0
 */
 
 public interface Callback
